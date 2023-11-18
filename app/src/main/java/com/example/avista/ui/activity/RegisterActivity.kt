@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         registerButton.setOnClickListener {
             val fullName = findViewById<EditText>(R.id.editTextFullName).text.toString()
             val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
-            val user = Utilizador2(fullName, password)
+            val user = Utilizador2(fullName, password, "")
             registarUtilizador(user){
                 //Toast.makeText(this,"Add " + it?.description,Toast.LENGTH_SHORT).show()
             }
@@ -46,8 +46,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     public fun registarUtilizador(user: Utilizador2, onResult: (APIResult?) -> Unit){
-        val call = RetrofitInitializer2().userService().addUser(user.userName, user.password)
-        Toast.makeText(this,"Username = " + user.userName + " Password = " + user.password,Toast.LENGTH_SHORT).show()
+        val call = RetrofitInitializer2().userService().addUser(user.userId, user.password)
+        Toast.makeText(this,"Username = " + user.userId + " Password = " + user.password,Toast.LENGTH_SHORT).show()
         call.enqueue(
             object : Callback<APIResult> {
                 override fun onFailure(call: Call<APIResult>, t: Throwable) {
