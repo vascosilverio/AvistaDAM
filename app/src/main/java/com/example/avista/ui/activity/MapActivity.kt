@@ -118,5 +118,13 @@ class MapActivity : AppCompatActivity() {
 
     }
 
+    public fun addMarker(lat: Double, long: Double, userId: Int, sightId: Int){
+
+    }
+
+    public fun getMarker(){
+
+    }
+
 
 }
