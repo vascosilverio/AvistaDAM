@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Avista</string>
+    <string name="utilizador">Nome de Utilizador</string>
+    <string name="password">Palavra-Passe</string>
+    <string name="keep_me_logged_in">Mantém-me conectado.</string>
+    <string name="Registe">Ainda não tem conta? Registe-se aqui.</string>
+    <string name="Recupere">Recupere a sua palavra-passe.</string>
+    <string name="confirmar_palavra_passe">Confirmar Palavra-Passe</string>
+    <string name="registar">Registar</string>
+    <string name="data_placeholder">Placeholder</string>
+    <string name="confirmar_password_falha">Palavras-Passe não correspondem.</string>
+    <string name="preenchimento_falha">Preencha todos os campos.</string>
+    <string name="login_falha">Houve um erro no acesso, tente novamente.</string>
 </resources>

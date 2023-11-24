@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SignupActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/bird_logo"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:drawableStart="@drawable/baseline_person_24"
+            android:id="@+id/editar_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/utilizador"/>
+
+        <EditText
+            android:drawableStart="@drawable/baseline_password_24"
+            android:id="@+id/editar_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/password"/>
+
+        <EditText
+            android:drawableStart="@drawable/baseline_password_24"
+            android:id="@+id/confirmar_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/confirmar_palavra_passe"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_logged"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/keep_me_logged_in"/>
+
+        <Button
+            android:id="@+id/button_registar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registar"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
