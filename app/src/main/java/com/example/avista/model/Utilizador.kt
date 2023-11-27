@@ -1,6 +1,6 @@
 package com.example.avista.model
 
 data class Utilizador(
-    val utilizador: String,
-    val password: String
+    val userId: String?,
+    val password: String?
 )
