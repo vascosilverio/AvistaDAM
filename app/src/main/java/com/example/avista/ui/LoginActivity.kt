@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     val servicoUtilizador: ServicoUtilizador = RetrofitInitializer().servicoUtilizador()
-    var utilizadorAutenticado = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -28,36 +28,16 @@ class LoginActivity : AppCompatActivity() {
         binding.buttonLogin.setOnClickListener {
             val utilizador = binding.editUsername.text.toString()
             val palavraPasse = binding.editarPassword.text.toString()
-            utilizadorAutenticado = ""
 
-            if(utilizador.isNotEmpty() && palavraPasse.isNotEmpty()){
-                //if(validar login com sucesso){
-
+            if(utilizador != "" && palavraPasse != "") {
                 verificarUtilizador(utilizador, palavraPasse)
-
-                if(utilizadorAutenticado != "") {
-                    startActivity(Intent(this,MainActivity::class.java))
-                } else {
-                    Toast.makeText(this, "Verifique o nome de utilizador ou a palavra-passe.", Toast.LENGTH_SHORT).show()
-                }
-                //finish()
-                //    }else{
-                //      Toast.makeText(
-                //                    applicationContext,
-                //                    getString(R.string.login_falha),
-                //                        Toast.LENGTH_SHORT
-                //                ).show()
-                //binding.editarUsername.setText("")
-                //binding.editarPpassword.setText("")
-                //}
-            }else{
+            } else {
                 Toast.makeText(
                     applicationContext,
                     getString(R.string.preenchimento_falha),
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
 
         binding.textoRegistar.setOnClickListener {
@@ -72,19 +52,29 @@ class LoginActivity : AppCompatActivity() {
     private fun verificarUtilizador(utilizador: String, palavraPasse: String) {
         val call = servicoUtilizador.listarUtilizadores()
 
+        Log.d("LoginActivity", "utilizador: ${utilizador}")
         call.enqueue(object : Callback<UtilizadorGET> {
             override fun onResponse(call: Call<UtilizadorGET>, response: Response<UtilizadorGET>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-
                     responseBody?.let {
                         for (utilizadorIterado in it.listaUtilizadores) {
+                            Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}")
+                            Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
                             if (utilizadorIterado.userId == utilizador && palavraPasse == utilizadorIterado.password) {
-                                utilizadorAutenticado = utilizador
+                                Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                return
                             }
                         }
+                        Toast.makeText(
+                            applicationContext,
+                            getString(R.string.verificar_password),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
+
             }
 
             override fun onFailure(call: Call<UtilizadorGET>, t: Throwable) {

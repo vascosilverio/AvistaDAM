@@ -11,4 +11,5 @@
     <string name="confirmar_password_falha">Palavras-Passe não correspondem.</string>
     <string name="preenchimento_falha">Preencha todos os campos.</string>
     <string name="login_falha">Houve um erro no acesso, tente novamente.</string>
+    <string name="verificar_password">Verifique o nome de utilizador ou a password.</string>
 </resources>
