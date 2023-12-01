@@ -14,7 +14,7 @@ class RetrofitInitializer {
     private val gson: Gson = GsonBuilder().setLenient().create()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.sheety.co/6c966be3aa95146fdfd60b287a41e909/aveDam/")
+        .baseUrl("https://api.sheety.co/6c966be3aa95146fdfd60b287a41e909/avistaDam/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(buildOkHttpClient())
         .build()
@@ -23,7 +23,7 @@ class RetrofitInitializer {
 
         val interceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer coiso")
+                .addHeader("Authorization", "Bearer secretkey")
                 .build()
             Log.d("RetrofitInitializer", "Corpo do pedido à API: ${request.body()?.toString()}")
             chain.proceed(request)
