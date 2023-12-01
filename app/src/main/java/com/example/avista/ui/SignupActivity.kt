@@ -1,14 +1,25 @@
 package com.example.avista.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.avista.R
 import com.example.avista.databinding.ActivitySignupBinding
+import com.example.avista.model.RespostaAPI
+import com.example.avista.model.Utilizador
+import com.example.avista.model.UtilizadorPOST
+import com.example.avista.retrofit.RetrofitInitializer
+import com.example.avista.retrofit.service.ServicoUtilizador
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
+    val servicoUtilizador: ServicoUtilizador = RetrofitInitializer().servicoUtilizador()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +35,7 @@ class SignupActivity : AppCompatActivity() {
                 if (palavraPasse == palavraPasseC) {
                     //validar signup
                     //caso falhe limpar os campos de preenchimento
+                    adicionaUtilizador(utilizador, palavraPasse)
                     finish()
                 } else {
                     Toast.makeText(
@@ -41,5 +53,40 @@ class SignupActivity : AppCompatActivity() {
                 ).show()
             }
         }
+    }
+
+    private fun adicionaUtilizador(utilizador: String, palavraPasse: String) {
+        // criar o objeto utilizador
+        val novoUtilizador = Utilizador(userId = utilizador, password = palavraPasse)
+
+        // encapsular dentro de um objecto Utilizador para construir corretamente o JSON a enviar
+        val postUtilizador = UtilizadorPOST(utilizador = novoUtilizador)
+        Log.d("LoginActivity", "JSON enviado: ${Gson().toJson(postUtilizador)}")
+
+        val call = servicoUtilizador.adicionarUtilizador(postUtilizador)
+        call.enqueue(object : Callback<RespostaAPI> {
+            override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
+                if (response.isSuccessful) {
+                    Log.d("LoginActivity", "onSucessful: ${response.body()}")
+                    Toast.makeText(
+                        applicationContext,
+                        "Registado com sucesso.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                } else {
+                    Log.e("LoginActivity", "Erro: ${response.code()}")
+                    Toast.makeText(
+                        applicationContext,
+                        "Erro. Código: ${response.code()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
+                Log.e("LoginActivity", "Erro: ${t.message}")
+            }
+        })
     }
 }

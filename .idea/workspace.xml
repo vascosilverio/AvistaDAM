@@ -10,17 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b392a16-d667-47cf-811e-c86c73c2d843" name="Changes" comment="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorPOST.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Utilizador.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Utilizador.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoUtilizador.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoUtilizador.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SignupActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SignupActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,21 +191,5 @@
     <MESSAGE value="criação de projeto" />
     <MESSAGE value="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)" />
     <option name="LAST_COMMIT_MESSAGE" value="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>
-          <line>31</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>
-          <line>32</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
