@@ -1,7 +1,7 @@
 package com.example.avista.retrofit
 
 import android.util.Log
-import com.example.avista.retrofit.service.ServicoUtilizador
+import com.example.avista.retrofit.service.ServicoAPI
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -34,5 +34,5 @@ class RetrofitInitializer {
             .build()
     }
 
-    fun servicoUtilizador(): ServicoUtilizador = retrofit.create(ServicoUtilizador::class.java)
+    fun servicoAPI(): ServicoAPI = retrofit.create(ServicoAPI::class.java)
 }

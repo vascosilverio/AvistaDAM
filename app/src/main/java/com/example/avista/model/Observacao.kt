@@ -1,11 +1,20 @@
 package com.example.avista.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Observacao(
-    val username: String,
-    val photoBase64: String,
-    val date: String,
-    val description: String,
-    val latitude: Double,
-    val longitude: Double,
-    val species: String
+    @SerializedName("utilizador")
+    val utilizador: String?,
+    @SerializedName("lat")
+    val lat: String?,
+    @SerializedName("long")
+    val long: String?,
+    @SerializedName("foto")
+    val foto: String?,
+    @SerializedName("descricao")
+    val descricao: String?,
+    @SerializedName("data")
+    val data: String?,
+    @SerializedName("especie")
+    val especie: String?
 )

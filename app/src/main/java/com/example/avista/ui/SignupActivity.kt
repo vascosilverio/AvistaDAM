@@ -10,7 +10,7 @@ import com.example.avista.model.RespostaAPI
 import com.example.avista.model.Utilizador
 import com.example.avista.model.UtilizadorPOST
 import com.example.avista.retrofit.RetrofitInitializer
-import com.example.avista.retrofit.service.ServicoUtilizador
+import com.example.avista.retrofit.service.ServicoAPI
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +19,7 @@ import retrofit2.Response
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
-    val servicoUtilizador: ServicoUtilizador = RetrofitInitializer().servicoUtilizador()
+    val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +63,7 @@ class SignupActivity : AppCompatActivity() {
         val postUtilizador = UtilizadorPOST(utilizador = novoUtilizador)
         Log.d("LoginActivity", "JSON enviado: ${Gson().toJson(postUtilizador)}")
 
-        val call = servicoUtilizador.adicionarUtilizador(postUtilizador)
+        val call = servicoAPI.adicionarUtilizador(postUtilizador)
         call.enqueue(object : Callback<RespostaAPI> {
             override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
                 if (response.isSuccessful) {

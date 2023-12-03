@@ -2,7 +2,6 @@ package com.example.avista.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,7 @@ import com.example.avista.R
 import com.example.avista.databinding.ActivityLoginBinding
 import com.example.avista.model.UtilizadorGET
 import com.example.avista.retrofit.RetrofitInitializer
-import com.example.avista.retrofit.service.ServicoUtilizador
+import com.example.avista.retrofit.service.ServicoAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +17,7 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    val servicoUtilizador: ServicoUtilizador = RetrofitInitializer().servicoUtilizador()
+    val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun verificarUtilizador(utilizador: String, palavraPasse: String) {
-        val call = servicoUtilizador.listarUtilizadores()
+        val call = servicoAPI.listarUtilizadores()
 
         Log.d("LoginActivity", "utilizador: ${utilizador}")
         call.enqueue(object : Callback<UtilizadorGET> {
@@ -58,12 +57,17 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     responseBody?.let {
+
                         for (utilizadorIterado in it.listaUtilizadores) {
                             Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}")
                             Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
+
                             if (utilizadorIterado.userId == utilizador && palavraPasse == utilizadorIterado.password) {
                                 Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
-                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                // enviar para a atividade Main o utilizador autenticado
+                                intent.putExtra("utilizador", utilizador)
+                                startActivity(intent)
                                 return
                             }
                         }
