@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avista.R
 import com.example.avista.model.Observacao
+import com.squareup.picasso.Picasso
 
 class ObservacaoListAdapter(val listaObservacoes: ArrayList<Observacao>, val onClickListener: OnClickListener) :
     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
@@ -39,9 +40,7 @@ class ObservacaoListAdapter(val listaObservacoes: ArrayList<Observacao>, val onC
     override fun onBindViewHolder(holder: ObservacaoViewHolder, position: Int) {
         val observacao = listaObservacoes[position]
         holder.textView.setText(observacao.data)
-        val imageBytes = Base64.decode(observacao.foto, Base64.DEFAULT)
-        val decode = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.size)
-        holder.image.setImageBitmap(decode)
+        Picasso.get().load(observacao.foto).into(holder.image)
         holder.itemView.setOnClickListener{
             onClickListener.onClick(observacao)
         }
