@@ -1,5 +1,6 @@
 package com.example.avista.ui
 
+import android.content.Intent
 import android.media.tv.AdResponse
 import android.os.Bundle
 import android.util.Log
@@ -33,6 +34,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.btnAdicionarObs.setOnClickListener {
+            var intent = Intent(this@MainActivity, AdicionarObsActivity::class.java)
+            // enviar para a atividade Main o utilizador autenticado
+            intent.putExtra("utilizador", utilizador)
+            startActivity(intent)
+        }
+
+
 
         getObservacoes(utilizador)
 
