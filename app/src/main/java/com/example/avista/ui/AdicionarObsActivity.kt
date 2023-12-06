@@ -15,6 +15,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import com.example.avista.model.Observacao
 import com.example.avista.model.ObservacaoPOST
@@ -57,29 +58,49 @@ class AdicionarObsActivity : AppCompatActivity() {
             verificarPermissaoCamera()
         }
 
-        binding.btnEscolherFotoGaleria.setOnClickListener{
+        binding.btnGaleria.setOnClickListener{
             abrirGaleria()
         }
 
         binding.btnAdicionarObs.setOnClickListener{
-            // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
-            EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
-                EnvioFotografiaCallback {
-                override fun onSucess(url: String) {
-                    imgURL = url
-                    var especie = binding.txtEspecie.text.toString()
-                    var data = binding.txtData.text.toString()
-                    var descricao = binding.txtDescricao.text.toString()
+            var especie = binding.txtEspecie.text.toString()
+            var data = binding.txtData.text.toString()
+            var descricao = binding.txtDescricao.text.toString()
+            // verificar se foi selecionada alguma fotografia
+            if(!::imgBitmap.isInitialized) {
+                Toast.makeText(applicationContext, "Não foi selecionada nenhuma fotografia.", Toast.LENGTH_SHORT).show()
+            } else if(especie == "") {
+                Toast.makeText(applicationContext, "Não foi especificada a espécie.", Toast.LENGTH_SHORT).show()
+            } else if(data == "") {
+                Toast.makeText(applicationContext, "Não foi especificada a data.", Toast.LENGTH_SHORT).show()
+            } else {
+                // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
+                EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
+                    EnvioFotografiaCallback {
+                    override fun onSucess(url: String) {
+                        imgURL = url
+                        // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
+                        adicionarObs(
+                            utilizador,
+                            "35.000000",
+                            "25.000000",
+                            imgURL,
+                            descricao,
+                            data,
+                            especie
+                        )
+                    }
 
-                    // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
-                    adicionarObs(utilizador, "35.000000", "25.000000", imgURL, descricao, data, especie)
-                }
-
-                override fun onError(mensagemErro: String) {
-                    Log.e("AdicionarObsActivity", "Erro ao obter o displayURL: $mensagemErro")
-                    Toast.makeText(applicationContext, "Erro ao obter o displayURL", Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onError(mensagemErro: String) {
+                        Log.e("AdicionarObsActivity", "Erro ao obter o displayURL: $mensagemErro")
+                        Toast.makeText(
+                            applicationContext,
+                            "Erro ao obter o displayURL",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
         }
     }
 
@@ -126,7 +147,7 @@ class AdicionarObsActivity : AppCompatActivity() {
                 binding.viewImagem.setImageBitmap(imgBitmap)
             } else {
                 // se for só data é porque veio de uma fotografia.
-                // da fotografia vem um Intent e temos de obter o bitmap da fotografia para o tratar.
+                // da fotografia vem um Intent e temos de obter o bitmap da fotografia para o tratar. (VERIFICAR PORQUE VEM COM POUCA QUALIDADE. THUMBNAIL?)
                 val imageBitmap = data?.extras?.get("data") as? Bitmap
                 binding.viewImagem.setImageBitmap(imageBitmap)
                 imgBitmap = imageBitmap!!
