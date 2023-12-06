@@ -1,14 +1,12 @@
 package com.example.avista.ui
 
 import android.content.Intent
-import android.media.tv.AdResponse
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.avista.adapter.ObservacaoListAdapter
-import com.example.avista.data.ObservacaoMock
 import com.example.avista.databinding.ActivityMainBinding
 import com.example.avista.model.Observacao
 import com.example.avista.model.ObservacaoGET
@@ -89,5 +87,14 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    // fazer override do método onRestart para quando voltar da actividade de adicionar nova observação, carregar a nova observação também.
+    override fun onRestart() {
+        super.onRestart()
+        finish()
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 }
