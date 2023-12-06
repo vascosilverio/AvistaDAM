@@ -3,8 +3,9 @@ package com.example.avista.retrofit;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.avista.model.ImgBBPOST;
+import com.example.avista.retrofit.service.EnvioFotografiaCallback;
 import com.example.avista.retrofit.service.ServicoFotografia;
 
 import java.io.ByteArrayOutputStream;
@@ -25,9 +26,8 @@ import retrofit2.Retrofit;
 
 // código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
 public class EnvioFotografia {
-    public static void testExecute(Bitmap bitmap, Context context) throws IOException {
-
-
+    static String urlImgBB = "";
+    public static String enviarFoto(Bitmap bitmap, Context context, EnvioFotografiaCallback callback) throws IOException {
 
         // converter bitmap para byte array
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -54,15 +54,17 @@ public class EnvioFotografia {
             @Override
             public void onResponse(Call call, Response response) {
                 if (response.isSuccessful()) {
-                    String responseBodyString = response.body().toString();
-
-                    Log.d("EnvioFotografia", "Resposta do servidor: " + responseBodyString);
+                    ImgBBPOST imgBBResponse = (ImgBBPOST) response.body();
+                    urlImgBB = imgBBResponse.getData().getDisplayUrl();
+                    Log.d("EnvioFotografia", "Resposta do servidor: " + urlImgBB);
+                    callback.onSucess(urlImgBB);
                 }
             }
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(context, "Erro: ", Toast.LENGTH_SHORT);
+                callback.onError("Erro: " + t.getMessage());
             }
         });
+        return urlImgBB;
     }
 }

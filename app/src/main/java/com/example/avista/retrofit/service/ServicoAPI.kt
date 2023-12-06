@@ -1,6 +1,7 @@
 package com.example.avista.retrofit.service
 
 import com.example.avista.model.ObservacaoGET
+import com.example.avista.model.ObservacaoPOST
 import com.example.avista.model.RespostaAPI
 import com.example.avista.model.UtilizadorGET
 import com.example.avista.model.UtilizadorPOST
@@ -18,4 +19,7 @@ interface ServicoAPI {
 
     @GET("observacao/")
     fun listarObservacoes(): Call<ObservacaoGET>
+
+    @POST("observacao/")
+    fun adicionarObservacao(@Body user: ObservacaoPOST): Call<RespostaAPI>
 }

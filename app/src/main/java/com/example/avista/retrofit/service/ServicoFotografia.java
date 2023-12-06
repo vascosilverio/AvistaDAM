@@ -1,6 +1,6 @@
 package com.example.avista.retrofit.service;
 
-import com.example.avista.model.ImgBBResponse;
+import com.example.avista.model.ImgBBPOST;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -14,5 +14,5 @@ import retrofit2.http.Query;
 public interface ServicoFotografia {
     @Multipart()
     @POST("/1/upload")
-    Call<ImgBBResponse> uploadImage(@Query("key") String key, @Part() MultipartBody.Part file);
+    Call<ImgBBPOST> uploadImage(@Query("key") String key, @Part() MultipartBody.Part file);
 }

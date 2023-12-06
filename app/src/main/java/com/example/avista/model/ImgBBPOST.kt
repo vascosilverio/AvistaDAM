@@ -2,7 +2,7 @@ package com.example.avista.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ImgBBResponse(
+data class ImgBBPOST(
     val data: ImgBBData,
     val success: Boolean,
     val status: Int
