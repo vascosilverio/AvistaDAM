@@ -2,24 +2,24 @@ package com.example.avista.ui
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.avista.databinding.ActivityAdicionarObsBinding
-import com.example.avista.retrofit.EnvioFotografia
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
+import com.example.avista.databinding.ActivityAdicionarObsBinding
 import com.example.avista.model.Observacao
 import com.example.avista.model.ObservacaoPOST
 import com.example.avista.model.RespostaAPI
+import com.example.avista.retrofit.EnvioFotografia
 import com.example.avista.retrofit.RetrofitInitializer
 import com.example.avista.retrofit.service.EnvioFotografiaCallback
 import com.example.avista.retrofit.service.ServicoAPI
@@ -39,6 +39,9 @@ class AdicionarObsActivity : AppCompatActivity() {
     private val CAMERA_PERMISSION_CODE = 101
     private val PICK_IMAGE_REQUEST = 1
     lateinit var imgBitmap: Bitmap
+    var image_uri: Uri? = null
+    private val RESULT_LOAD_IMAGE = 123
+    val IMAGE_CAPTURE_CODE = 654
     var imgURL = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,8 +113,14 @@ class AdicionarObsActivity : AppCompatActivity() {
     }
 
     private fun tirarFoto() {
-        val camera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(camera, PICK_IMAGE_REQUEST)
+        // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "Nova fotografia")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Através da aplicação Avista")
+        image_uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
     }
 
     private fun verificarPermissaoCamera() {
@@ -139,20 +148,15 @@ class AdicionarObsActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            // se o requestCode for o de selecionar image, é porque veio da galeria
+            val uriImagem = data?.data
+            imgBitmap = converterParaBitmap(uriImagem!!)!!
+            binding.viewImagem.setImageBitmap(imgBitmap)
 
-            if (data != null && data.data != null) {
-                // Se for data.data é porque a imagem foi escolhida da galeria
-                val uriImagem = data.data
-                imgBitmap = converterParaBitmap(uriImagem!!)!!
-                binding.viewImagem.setImageBitmap(imgBitmap)
-            } else {
-                // se for só data é porque veio de uma fotografia.
-                // da fotografia vem um Intent e temos de obter o bitmap da fotografia para o tratar. (VERIFICAR PORQUE VEM COM POUCA QUALIDADE. THUMBNAIL?)
-                val imageBitmap = data?.extras?.get("data") as? Bitmap
-                binding.viewImagem.setImageBitmap(imageBitmap)
-                imgBitmap = imageBitmap!!
-                Log.d("obs", "bitmap != null")
-            }
+        } else if(requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK){
+            // se o requestCode for o de capturar uma imagem, é porque veio da câmera
+            imgBitmap = converterParaBitmap(image_uri!!)!!
+            binding.viewImagem.setImageBitmap(imgBitmap)
         }
     }
     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {
