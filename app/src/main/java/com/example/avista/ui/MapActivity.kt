@@ -26,6 +26,10 @@ class MapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mapview)
 
+        // obter a latitude e longitude que foram lidas na actividade de adicionar observações
+        val latitude = intent.getStringExtra("latitude").toString()
+        val longitude = intent.getStringExtra("longitude").toString()
+
         val ctx = applicationContext
         Configuration.getInstance().load(ctx, getSharedPreferences("osmdroid", 0))
 

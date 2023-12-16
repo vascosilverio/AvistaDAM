@@ -142,6 +142,12 @@
             android:layout_height="400dp"/>
 
         <Button
+            android:id="@+id/btnMapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mapa" />
+
+        <Button
             android:id="@+id/btnAdicionarObs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

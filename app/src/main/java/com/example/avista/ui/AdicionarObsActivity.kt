@@ -1,12 +1,15 @@
 package com.example.avista.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -23,6 +26,7 @@ import com.example.avista.retrofit.EnvioFotografia
 import com.example.avista.retrofit.RetrofitInitializer
 import com.example.avista.retrofit.service.EnvioFotografiaCallback
 import com.example.avista.retrofit.service.ServicoAPI
+import com.example.avista.ui.activity.MapActivity
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,12 +41,15 @@ class AdicionarObsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdicionarObsBinding
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
     private val CAMERA_PERMISSION_CODE = 101
+    private val LOCATION_PERMISSION_CODE = 102
     private val PICK_IMAGE_REQUEST = 1
     lateinit var imgBitmap: Bitmap
     var image_uri: Uri? = null
     private val RESULT_LOAD_IMAGE = 123
     val IMAGE_CAPTURE_CODE = 654
     var imgURL = ""
+    var latitude = 0.0
+    var longitude = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,12 +64,22 @@ class AdicionarObsActivity : AppCompatActivity() {
         val currentDate = dataFormatada.format(Date())
         binding.txtData.setText(currentDate)
 
+        verificarPermissaoLocalizacao()
+
         binding.btnCamera.setOnClickListener{
             verificarPermissaoCamera()
         }
 
         binding.btnGaleria.setOnClickListener{
             abrirGaleria()
+        }
+
+        binding.btnMapa.setOnClickListener {
+            var intent = Intent(this@AdicionarObsActivity, MapActivity::class.java)
+            // enviar para a atividade Mapa a latitude e longitude atuais
+            intent.putExtra("latitude", latitude)
+            intent.putExtra("longitude", longitude)
+            startActivity(intent)
         }
 
         binding.btnAdicionarObs.setOnClickListener{
@@ -85,8 +102,8 @@ class AdicionarObsActivity : AppCompatActivity() {
                         // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
                         adicionarObs(
                             utilizador,
-                            "35.000000",
-                            "25.000000",
+                            latitude,
+                            longitude,
                             imgURL,
                             descricao,
                             data,
@@ -104,6 +121,14 @@ class AdicionarObsActivity : AppCompatActivity() {
                     }
                 })
             }
+        }
+    }
+
+    private fun verificarPermissaoLocalizacao() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE)
+        } else {
+            localizacaoAtual()
         }
     }
 
@@ -141,6 +166,32 @@ class AdicionarObsActivity : AppCompatActivity() {
                     Toast.makeText(this, "É preciso dar a permissão de acesso à câmera para poder tirar fotografias.", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            LOCATION_PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    localizacaoAtual()
+                } else {
+                    Toast.makeText(this, "É preciso dar permissão de acesso à localização para obter a latitude e longitude.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    @SuppressLint("ServiceCast")
+    private fun localizacaoAtual() {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        val gps: String = LocationManager.GPS_PROVIDER
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            val localizacao: Location? = locationManager.getLastKnownLocation(gps)
+
+            if (localizacao != null) {
+                latitude = localizacao.latitude
+                longitude = localizacao.longitude
+            } else {
+                Log.e("AdicionarObsActivity", "Erro a obter a localização.")
+            }
         }
     }
 
@@ -169,9 +220,9 @@ class AdicionarObsActivity : AppCompatActivity() {
         }
     }
 
-    private fun adicionarObs(utilizador: String, lat: String, long: String, foto: String, descricao: String, data: String, especie: String){
+    private fun adicionarObs(utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String){
         // criar o objeto Observacao
-        val novaObservacao = Observacao(utilizador = utilizador, lat = lat, long = long, foto = foto, descricao = descricao, data = data, especie = especie)
+        val novaObservacao = Observacao(utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
 
         // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar
         val postObservacao = ObservacaoPOST(observacao = novaObservacao)
