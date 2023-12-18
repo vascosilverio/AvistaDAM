@@ -1,11 +1,18 @@
 package com.example.avista.ui
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.avista.R
 import com.example.avista.adapter.ObservacaoListAdapter
 import com.example.avista.databinding.ActivityMainBinding
 import com.example.avista.model.Observacao
@@ -40,7 +47,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        binding.btnLogout.setOnClickListener{
+            val sharedPref = getSharedPreferences("utilizador", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.clear()
+            editor.apply()
+            finish()
+        }
 
         getObservacoes(utilizador)
 
@@ -48,6 +61,21 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getObservacoes(utilizador: String) {
+        // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
+        val loading = Dialog(this)
+        loading.setContentView(R.layout.loading)
+        loading.window?.setLayout((resources.displayMetrics.widthPixels * 0.5).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+        loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loading.setCancelable(false)
+
+        // usar o Glide para mostrar o GIF com movimento
+        val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+        Glide.with(this)
+            .load(R.drawable.loading)
+            .into(loadingImageView)
+
+        loading.show()
+
         val call = servicoObservacao.listarObservacoes()
 
         call.enqueue(object : Callback<ObservacaoGET> {
@@ -81,10 +109,11 @@ class MainActivity : AppCompatActivity() {
                 })
 
                 }
+                loading.dismiss()
             }
 
             override fun onFailure(call: Call<ObservacaoGET>, t: Throwable) {
-                TODO("Not yet implemented")
+                loading.dismiss()
             }
         })
     }

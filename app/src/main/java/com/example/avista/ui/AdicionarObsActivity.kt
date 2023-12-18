@@ -90,12 +90,15 @@ class AdicionarObsActivity : AppCompatActivity() {
         }
 
         binding.btnAdicionarObs.setOnClickListener{
+
+            // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
             val loading = Dialog(this)
             loading.setContentView(R.layout.loading)
-            loading.window?.setLayout((resources.displayMetrics.widthPixels * 0.9).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+            loading.window?.setLayout((resources.displayMetrics.widthPixels * 0.5).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
             loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             loading.setCancelable(false)
 
+            // usar o Glide para mostrar o GIF com movimento
             val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
             Glide.with(this)
                 .load(R.drawable.loading)

@@ -1,10 +1,12 @@
 package com.example.avista.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import at.favre.lib.crypto.bcrypt.BCrypt
 import com.example.avista.R
 import com.example.avista.databinding.ActivityLoginBinding
 import com.example.avista.model.UtilizadorGET
@@ -13,7 +15,6 @@ import com.example.avista.retrofit.service.ServicoAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import at.favre.lib.crypto.bcrypt.BCrypt
 
 
 class LoginActivity : AppCompatActivity() {
@@ -65,7 +66,12 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
 
                             if (utilizadorIterado.userId == utilizador && verificarPalavraPasse(palavraPasse, utilizadorIterado.password)) {
-                                Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
+                                if(binding.checkboxLogged.isChecked) {
+                                    val sharedPref = getSharedPreferences("utilizador", MODE_PRIVATE)
+                                    val editor = sharedPref.edit()
+                                    editor.putString("utilizador", utilizador)
+                                    editor.apply()
+                                }
                                 var intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 // enviar para a atividade Main o utilizador autenticado
                                 intent.putExtra("utilizador", utilizador)
