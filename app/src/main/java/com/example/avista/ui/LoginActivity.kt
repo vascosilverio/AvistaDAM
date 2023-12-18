@@ -13,6 +13,8 @@ import com.example.avista.retrofit.service.ServicoAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import at.favre.lib.crypto.bcrypt.BCrypt
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -62,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}")
                             Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
 
-                            if (utilizadorIterado.userId == utilizador && palavraPasse == utilizadorIterado.password) {
+                            if (utilizadorIterado.userId == utilizador && verificarPalavraPasse(palavraPasse, utilizadorIterado.password)) {
                                 Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
                                 var intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 // enviar para a atividade Main o utilizador autenticado
@@ -85,5 +87,11 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("LoginActivity", "onFailure: ${t.message}")
             }
         })
+    }
+
+    // usar o BCrypt para confirmar que a hash é a mesma da base de dados
+    private fun verificarPalavraPasse(palavraPasse: String, hashPalavraPasse: String?): Boolean {
+        val bcrypt = BCrypt.verifyer()
+        return bcrypt.verify(palavraPasse.toCharArray(), hashPalavraPasse).verified
     }
 }

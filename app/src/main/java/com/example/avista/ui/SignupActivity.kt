@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import at.favre.lib.crypto.bcrypt.BCrypt
 
 class SignupActivity : AppCompatActivity() {
 
@@ -57,7 +58,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun adicionaUtilizador(utilizador: String, palavraPasse: String) {
         // criar o objeto utilizador
-        val novoUtilizador = Utilizador(userId = utilizador, password = palavraPasse)
+        val novoUtilizador = Utilizador(userId = utilizador, password = encriptarPalavraPasse(palavraPasse))
 
         // encapsular dentro de um objecto Utilizador para construir corretamente o JSON a enviar
         val postUtilizador = UtilizadorPOST(utilizador = novoUtilizador)
@@ -88,5 +89,11 @@ class SignupActivity : AppCompatActivity() {
                 Log.e("LoginActivity", "Erro: ${t.message}")
             }
         })
+    }
+
+    // encriptar a palavra-passe com o BCrypt
+    private fun encriptarPalavraPasse(palavraPasse: String): String {
+        val bcrypt = BCrypt.withDefaults()
+        return bcrypt.hashToString(10, palavraPasse.toCharArray())
     }
 }
