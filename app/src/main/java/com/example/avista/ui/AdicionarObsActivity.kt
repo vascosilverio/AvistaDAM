@@ -3,21 +3,27 @@ package com.example.avista.ui
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.avista.R
 import com.example.avista.databinding.ActivityAdicionarObsBinding
 import com.example.avista.model.Observacao
 import com.example.avista.model.ObservacaoPOST
@@ -34,6 +40,7 @@ import retrofit2.Response
 import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.Date
+import com.bumptech.glide.Glide
 
 
 class AdicionarObsActivity : AppCompatActivity() {
@@ -83,16 +90,33 @@ class AdicionarObsActivity : AppCompatActivity() {
         }
 
         binding.btnAdicionarObs.setOnClickListener{
+            val loading = Dialog(this)
+            loading.setContentView(R.layout.loading)
+            loading.window?.setLayout((resources.displayMetrics.widthPixels * 0.9).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+            loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            loading.setCancelable(false)
+
+            val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+            Glide.with(this)
+                .load(R.drawable.loading)
+                .into(loadingImageView)
+
+            loading.show()
+
+
             var especie = binding.txtEspecie.text.toString()
             var data = binding.txtData.text.toString()
             var descricao = binding.txtDescricao.text.toString()
             // verificar se foi selecionada alguma fotografia
             if(!::imgBitmap.isInitialized) {
                 Toast.makeText(applicationContext, "Não foi selecionada nenhuma fotografia.", Toast.LENGTH_SHORT).show()
+                loading.dismiss()
             } else if(especie == "") {
                 Toast.makeText(applicationContext, "Não foi especificada a espécie.", Toast.LENGTH_SHORT).show()
+                loading.dismiss()
             } else if(data == "") {
                 Toast.makeText(applicationContext, "Não foi especificada a data.", Toast.LENGTH_SHORT).show()
+                loading.dismiss()
             } else {
                 // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
                 EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
@@ -107,7 +131,8 @@ class AdicionarObsActivity : AppCompatActivity() {
                             imgURL,
                             descricao,
                             data,
-                            especie
+                            especie,
+                            loading
                         )
                     }
 
@@ -118,6 +143,7 @@ class AdicionarObsActivity : AppCompatActivity() {
                             "Erro ao obter o displayURL",
                             Toast.LENGTH_SHORT
                         ).show()
+                        loading.dismiss()
                     }
                 })
             }
@@ -220,7 +246,7 @@ class AdicionarObsActivity : AppCompatActivity() {
         }
     }
 
-    private fun adicionarObs(utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String){
+    private fun adicionarObs(utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
         // criar o objeto Observacao
         val novaObservacao = Observacao(utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
 
@@ -247,10 +273,12 @@ class AdicionarObsActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                loading.dismiss()
             }
 
             override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
                 Log.e("AdicionarObsActivity", "Erro: ${t.message}")
+                loading.dismiss()
             }
         })
 
