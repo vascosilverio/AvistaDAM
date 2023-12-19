@@ -94,7 +94,7 @@ class AdicionarObsActivity : AppCompatActivity() {
             // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
             val loading = Dialog(this)
             loading.setContentView(R.layout.loading)
-            loading.window?.setLayout((resources.displayMetrics.widthPixels * 0.5).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+            loading.window?.setLayout((resources.displayMetrics.widthPixels).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
             loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             loading.setCancelable(false)
 
@@ -103,7 +103,6 @@ class AdicionarObsActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(R.drawable.loading)
                 .into(loadingImageView)
-
             loading.show()
 
 

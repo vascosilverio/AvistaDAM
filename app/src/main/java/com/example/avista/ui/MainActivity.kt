@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // colocar o nome de utilizador na view
+        binding.txtViewBoasVindas.setText("Olá $utilizador")
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         binding.btnAdicionarObs.setOnClickListener {
@@ -48,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnLogout.setOnClickListener{
+            // limpar o login guardado na sharedPreferences
             val sharedPref = getSharedPreferences("utilizador", MODE_PRIVATE)
             val editor = sharedPref.edit()
             editor.clear()
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
         val loading = Dialog(this)
         loading.setContentView(R.layout.loading)
-        loading.window?.setLayout((resources.displayMetrics.widthPixels * 0.5).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+        loading.window?.setLayout((resources.displayMetrics.widthPixels).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loading.setCancelable(false)
 
