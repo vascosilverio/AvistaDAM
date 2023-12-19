@@ -82,10 +82,10 @@ class AdicionarObsActivity : AppCompatActivity() {
         }
 
         binding.btnMapa.setOnClickListener {
-            var intent = Intent(this@AdicionarObsActivity, MapActivity::class.java)
+            var intent = Intent(this, MapActivity::class.java)
             // enviar para a atividade Mapa a latitude e longitude atuais
-            intent.putExtra("latitude", latitude)
-            intent.putExtra("longitude", longitude)
+            intent.putExtra("latitude", latitude.toString())
+            intent.putExtra("longitude", longitude.toString())
             startActivity(intent)
         }
 

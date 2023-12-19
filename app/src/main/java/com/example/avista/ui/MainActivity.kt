@@ -56,6 +56,9 @@ class MainActivity : AppCompatActivity() {
             val editor = sharedPref.edit()
             editor.clear()
             editor.apply()
+
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
