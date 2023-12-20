@@ -1,12 +1,15 @@
 package com.example.avista.ui.activity
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -72,7 +75,6 @@ class MapActivity : AppCompatActivity() {
             }
         })
         mapView.overlays.add(mapEventsOverlay)
-
     }
 
     private fun atualizarMarcador(posicao: GeoPoint) {

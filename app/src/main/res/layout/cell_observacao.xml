@@ -90,6 +90,12 @@
                     android:textColor="#757575"
                     android:textSize="14sp" />
 
+                <Button
+                    android:id="@+id/btnAbreDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:text="Detalhes" />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

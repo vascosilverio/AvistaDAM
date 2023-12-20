@@ -3,9 +3,11 @@ package com.example.avista.adapter;
 
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +21,7 @@ class ObservacaoListAdapter(val listaObservacoes: ArrayList<Observacao>, val onC
     class ObservacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.card_Data_Observacao)
         val image: ImageView = itemView.findViewById(R.id.card_thumbnail_Observacao)
+        val btnDetalhes: Button = itemView.findViewById(R.id.btnAbreDialog)
 
     }
 
@@ -41,8 +44,14 @@ class ObservacaoListAdapter(val listaObservacoes: ArrayList<Observacao>, val onC
         val observacao = listaObservacoes[position]
         holder.textView.setText(observacao.data)
         Picasso.get().load(observacao.foto).into(holder.image)
-        holder.itemView.setOnClickListener{
+
+        /*holder.itemView.setOnClickListener{
+            Log.d("Entrou","yeah")
             onClickListener.onClick(observacao)
+        }*/
+
+        holder.btnDetalhes.setOnClickListener{
+            Log.d("Clique",observacao.especie.toString())
         }
     }
 }

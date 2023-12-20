@@ -108,13 +108,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
-
-                    // construir a recycle view com as observacoes do utilizador com autenticação
-                    binding.recyclerView.adapter = ObservacaoListAdapter(listaObservacoes, ObservacaoListAdapter.OnClickListener{
-                        Toast.makeText(applicationContext,it.data, Toast.LENGTH_SHORT).show()
-
-                })
-
+                    construirRecycleView()
                 }
                 loading.dismiss()
             }
@@ -122,6 +116,13 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<ObservacaoGET>, t: Throwable) {
                 loading.dismiss()
             }
+        })
+    }
+
+    fun construirRecycleView(){
+        // construir a recycle view com as observacoes do utilizador com autenticação
+        binding.recyclerView.adapter = ObservacaoListAdapter(listaObservacoes, ObservacaoListAdapter.OnClickListener{
+            Toast.makeText(applicationContext,it.data, Toast.LENGTH_SHORT).show()
         })
     }
 
