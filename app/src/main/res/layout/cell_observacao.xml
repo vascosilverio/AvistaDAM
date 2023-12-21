@@ -49,7 +49,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/card_Especie_Observacao"
+                    android:id="@+id/txtEspecie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -74,10 +74,10 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="8dp"
                     android:background="#2d2d2d"
-                    app:layout_constraintBottom_toTopOf="@id/card_descricao_Observacao" />
+                    app:layout_constraintBottom_toTopOf="@id/txtDescricao" />
 
                 <TextView
-                    android:id="@+id/card_descricao_Observacao"
+                    android:id="@+id/txtDescricao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
