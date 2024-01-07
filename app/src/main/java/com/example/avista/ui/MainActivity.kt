@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val servicoObservacao: ServicoAPI = RetrofitInitializer().servicoAPI()
     private val listaObservacoes = ArrayList<Observacao>()
+    private var observacaoAdapter: ObservacaoListAdapter? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        observacaoAdapter = ObservacaoListAdapter(listaObservacoes, ObservacaoListAdapter.OnClickListener{
+            Toast.makeText(applicationContext,it.data, Toast.LENGTH_SHORT).show()
+        })
 
         // colocar o nome de utilizador na view
         binding.txtViewBoasVindas.setText("Olá $utilizador")
@@ -96,6 +102,7 @@ class MainActivity : AppCompatActivity() {
 
                                 // para cada observacao deste utilizador, construir um objecto "Observacao" para adicionar à ArrayList
                                 val observacaoCurrente = Observacao(
+                                    id = observacao.id,
                                     utilizador = observacao.utilizador,
                                     lat = observacao.lat,
                                     long = observacao.long,
@@ -121,9 +128,7 @@ class MainActivity : AppCompatActivity() {
 
     fun construirRecycleView(){
         // construir a recycle view com as observacoes do utilizador com autenticação
-        binding.recyclerView.adapter = ObservacaoListAdapter(listaObservacoes, ObservacaoListAdapter.OnClickListener{
-            Toast.makeText(applicationContext,it.data, Toast.LENGTH_SHORT).show()
-        })
+        binding.recyclerView.adapter = observacaoAdapter
     }
 
     // fazer override do método onRestart para quando voltar da actividade de adicionar nova observação, carregar a nova observação também.

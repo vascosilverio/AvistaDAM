@@ -109,6 +109,7 @@ class AdicionarObsActivity : AppCompatActivity() {
             var especie = binding.txtEspecie.text.toString()
             var data = binding.txtData.text.toString()
             var descricao = binding.txtDescricao.text.toString()
+            var id = ""
             // verificar se foi selecionada alguma fotografia
             if(!::imgBitmap.isInitialized) {
                 Toast.makeText(applicationContext, "Não foi selecionada nenhuma fotografia.", Toast.LENGTH_SHORT).show()
@@ -127,6 +128,7 @@ class AdicionarObsActivity : AppCompatActivity() {
                         imgURL = url
                         // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
                         adicionarObs(
+                            id,
                             utilizador,
                             latitude,
                             longitude,
@@ -248,9 +250,9 @@ class AdicionarObsActivity : AppCompatActivity() {
         }
     }
 
-    private fun adicionarObs(utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
+    private fun adicionarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
         // criar o objeto Observacao
-        val novaObservacao = Observacao(utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
+        val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
 
         // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar
         val postObservacao = ObservacaoPOST(observacao = novaObservacao)

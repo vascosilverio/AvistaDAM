@@ -3,6 +3,8 @@ package com.example.avista.model
 import com.google.gson.annotations.SerializedName
 
 data class Observacao(
+    @SerializedName("id")
+    val id: String?,
     @SerializedName("utilizador")
     val utilizador: String?,
     @SerializedName("lat")
