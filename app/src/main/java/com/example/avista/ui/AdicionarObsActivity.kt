@@ -49,6 +49,7 @@ class AdicionarObsActivity : AppCompatActivity() {
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
     private val CAMERA_PERMISSION_CODE = 101
     private val LOCATION_PERMISSION_CODE = 102
+    private val PICK_MARKER_CODE = 103
     private val PICK_IMAGE_REQUEST = 1
     lateinit var imgBitmap: Bitmap
     var image_uri: Uri? = null
@@ -86,7 +87,7 @@ class AdicionarObsActivity : AppCompatActivity() {
             // enviar para a atividade Mapa a latitude e longitude atuais
             intent.putExtra("latitude", latitude.toString())
             intent.putExtra("longitude", longitude.toString())
-            startActivity(intent)
+            startActivityForResult(intent, PICK_MARKER_CODE)
         }
 
         binding.btnAdicionarObs.setOnClickListener{
@@ -238,6 +239,9 @@ class AdicionarObsActivity : AppCompatActivity() {
             // se o requestCode for o de capturar uma imagem, é porque veio da câmera
             imgBitmap = converterParaBitmap(image_uri!!)!!
             binding.viewImagem.setImageBitmap(imgBitmap)
+        } else if(requestCode == PICK_MARKER_CODE && resultCode == RESULT_OK){
+            latitude = data?.getStringExtra("latitudeAtualizada")!!.toDouble()
+            longitude = data?.getStringExtra("longitudeAtualizada")!!.toDouble()
         }
     }
     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {

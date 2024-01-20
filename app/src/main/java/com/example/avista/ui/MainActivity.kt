@@ -29,13 +29,14 @@ class MainActivity : AppCompatActivity() {
     val servicoObservacao: ServicoAPI = RetrofitInitializer().servicoAPI()
     private val listaObservacoes = ArrayList<Observacao>()
     private var observacaoAdapter: ObservacaoListAdapter? = null
+    private lateinit var utilizador: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //receber o utilizador da atividade de Login
-        val utilizador = intent.getStringExtra("utilizador").toString()
+        utilizador = intent.getStringExtra("utilizador").toString()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

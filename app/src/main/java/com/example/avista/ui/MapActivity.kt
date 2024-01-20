@@ -29,14 +29,16 @@ class MapActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var mapEventsOverlay: MapEventsOverlay
+    lateinit var latitude: String
+    lateinit var longitude: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mapview)
 
         // obter a latitude e longitude que foram lidas na actividade de adicionar observações
-        val latitude = intent.getStringExtra("latitude").toString()
-        val longitude = intent.getStringExtra("longitude").toString()
+        latitude = intent.getStringExtra("latitude").toString()
+        longitude = intent.getStringExtra("longitude").toString()
 
         Log.d("Latitude: ", latitude)
         Log.d("Longitude: ", longitude)
@@ -75,6 +77,16 @@ class MapActivity : AppCompatActivity() {
             }
         })
         mapView.overlays.add(mapEventsOverlay)
+
+        val btnObterCoordenadas = findViewById<Button>(R.id.btnObterCoordenadas)
+        btnObterCoordenadas.setOnClickListener {
+            // atualizar a latitude e longitude na atividade anterior
+            val intent = Intent()
+            intent.putExtra("latitudeAtualizada", latitude)
+            intent.putExtra("longitudeAtualizada", longitude)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 
     private fun atualizarMarcador(posicao: GeoPoint) {
@@ -82,6 +94,9 @@ class MapActivity : AppCompatActivity() {
         val marcador = Marker(mapView)
         marcador.position = posicao
         marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        latitude = marcador.position.latitude.toString()
+        longitude = marcador.position.longitude.toString()
+        Log.d("NOVA LATITUDE, LONGITUDE","$latitude, $longitude")
         mapView.overlays.removeAll { it is Marker }  // limpar o marcador anterior
         mapView.overlays.add(marcador)
     }
