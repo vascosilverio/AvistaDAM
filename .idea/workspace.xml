@@ -35,6 +35,11 @@
           <theme>@style/Theme.Avista</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/detalhes_observacao.xml">
+        <config>
+          <theme>@style/Theme.Avista</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/loading.xml">
         <config>
           <theme>@style/Theme.Avista</theme>
@@ -53,9 +58,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8b392a16-d667-47cf-811e-c86c73c2d843" name="Changes" comment="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MapActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MapActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/detalhes_observacao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/detalhes_observacao.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,21 +256,5 @@
     <MESSAGE value="criação de projeto" />
     <MESSAGE value="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)" />
     <option name="LAST_COMMIT_MESSAGE" value="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>
-          <line>74</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>
-          <line>80</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

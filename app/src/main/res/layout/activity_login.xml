@@ -7,67 +7,84 @@
     android:background="@color/white"
     tools:context=".ui.LoginActivity">
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_margin="20dp"
-        android:src="@drawable/bird_logo"
-        />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
-
-        <EditText
-            android:drawableStart="@drawable/baseline_person_24"
-            android:id="@+id/edit_username"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/utilizador"/>
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:drawableStart="@drawable/baseline_password_24"
-            android:id="@+id/editar_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/password"
-            android:inputType="textPassword"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/checkbox_logged"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/keep_me_logged_in"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/bird_logo" />
 
-       <Button
-           android:id="@+id/button_login"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="Entrar"/>
+                <EditText
+                    android:drawableStart="@drawable/baseline_person_24"
+                    android:id="@+id/edit_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/utilizador"/>
 
-    </LinearLayout>
+                <EditText
+                    android:drawableStart="@drawable/baseline_password_24"
+                    android:id="@+id/editar_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"/>
 
-    <TextView
-        android:id="@+id/texto_registar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:text="@string/Registe" />
+                <CheckBox
+                    android:id="@+id/checkbox_logged"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/keep_me_logged_in"/>
 
-    <TextView
-        android:id="@+id/texto_recuperar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/texto_registar"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:text="@string/Recupere" />
+               <Button
+                   android:id="@+id/button_login"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="70dp"
+                   android:text="Entrar"/>
 
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/texto_registar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:textAlignment="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingBottom="20dp"
+                android:text="@string/Registe" />
+
+            <TextView
+                android:id="@+id/texto_recuperar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/texto_registar"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="@string/Recupere" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
