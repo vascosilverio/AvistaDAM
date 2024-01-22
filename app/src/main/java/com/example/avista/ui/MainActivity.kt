@@ -41,9 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        observacaoAdapter = ObservacaoListAdapter(listaObservacoes, ObservacaoListAdapter.OnClickListener{
-            Toast.makeText(applicationContext,it.data, Toast.LENGTH_SHORT).show()
-        })
+        observacaoAdapter = ObservacaoListAdapter(listaObservacoes)
 
         // colocar o nome de utilizador na view
         binding.txtViewBoasVindas.setText("Olá $utilizador")
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnLogout.setOnClickListener{
             // limpar o login guardado na sharedPreferences
-            val sharedPref = getSharedPreferences("utilizador", MODE_PRIVATE)
+            val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
             val editor = sharedPref.edit()
             editor.clear()
             editor.apply()

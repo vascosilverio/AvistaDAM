@@ -14,8 +14,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avista.R
 import com.example.avista.model.Observacao
@@ -33,7 +35,6 @@ import retrofit2.Response
 
 class ObservacaoListAdapter(
     val listaObservacoes: ArrayList<Observacao>,
-    val onClickListener: OnClickListener
 ) :
     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
 
@@ -42,7 +43,7 @@ class ObservacaoListAdapter(
         val txtDescricao: TextView = itemView.findViewById(R.id.txtDescricao)
         val txtEspecie: TextView = itemView.findViewById(R.id.txtEspecie)
         val image: ImageView = itemView.findViewById(R.id.card_thumbnail_Observacao)
-        val btnDetalhes: Button = itemView.findViewById(R.id.btnAbreDialog)
+        val cartao: LinearLayout = itemView.findViewById(R.id.card_layout)
 
     }
 
@@ -62,21 +63,23 @@ class ObservacaoListAdapter(
     }
 
     override fun onBindViewHolder(holder: ObservacaoViewHolder, position: Int) {
+
+        // construir um objeto onde vão estar todos os dados referentes à observação selecionada
         val observacao = listaObservacoes[position]
         holder.textView.setText(observacao.data)
         holder.txtEspecie.setText(observacao.especie)
         holder.txtDescricao.setText(observacao.descricao)
         Picasso.get().load(observacao.foto).into(holder.image)
 
-        holder.btnDetalhes.setOnClickListener {
-
+        // evento no cartão selecionado para ficar à escuta de um clique
+        holder.cartao.setOnClickListener{
             // Ao abrir os detalhes de uma observação, construir uma Dialog com recurso ao detalhes_observacao.xml
             val detalhes = Dialog(holder.itemView.context)
             detalhes.setContentView(R.layout.detalhes_observacao)
             detalhes.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+
             // colocar a dialog com 90% do tamanho horizontal
-            val largura =
-                (holder.itemView.context.resources.displayMetrics.widthPixels * 0.90).toInt()
+            val largura = (holder.itemView.context.resources.displayMetrics.widthPixels * 0.90).toInt()
             detalhes.window?.setLayout(largura, ViewGroup.LayoutParams.WRAP_CONTENT)
             detalhes.setCancelable(true)
 
@@ -90,11 +93,9 @@ class ObservacaoListAdapter(
             mapView.overlays.add(marcador)
             mapView.controller.setZoom(12.0)
             mapView.controller.setCenter(
-                GeoPoint(
-                    observacao.lat!!.toDouble(),
-                    observacao.long!!.toDouble()
-                )
+                GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())
             )
+
 
             val txtdDescricao = detalhes.findViewById<TextView>(R.id.txtDescricao)
             val txtEspecie = detalhes.findViewById<TextView>(R.id.txtEspecie)
@@ -112,7 +113,9 @@ class ObservacaoListAdapter(
                 detalhes.dismiss()
             }
 
+            // botão para remover a observação que foi selecionada
             remover.setOnClickListener {
+                // é preciso confirmar o dialog para certificar que o utilizador pretende mesmo remover a observação
                 val dialogConfirmacao = AlertDialog.Builder(holder.itemView.context)
                 dialogConfirmacao.setTitle("Remover observação")
                 dialogConfirmacao.setMessage("Tem a certeza de que pretende remover esta observação?")
@@ -131,24 +134,21 @@ class ObservacaoListAdapter(
                                 detalhes.dismiss()
                                 listaObservacoes.remove(observacao)
 
-                                // construir novamente a MainActivity
+                                // construir novamente a MainActivity para recarregar as observações sem a que foi removida
                                 val intent =
                                     Intent(holder.itemView.context, MainActivity::class.java)
                                 (holder.itemView.context as? AppCompatActivity)?.finish()
                                 intent.putExtra("utilizador", observacao.utilizador)
                                 holder.itemView.context.startActivity(intent)
-
                             } else {
                                 Log.e("Estado: ", "Falha ao remover observação")
                             }
                         }
-
                         override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
                             Log.e("ObservacaoListAdapter", "Erro ao remover observação", t)
                         }
                     })
 
-                    ///////////
                 }
                 dialogConfirmacao.setNegativeButton("Não", null)
                 dialogConfirmacao.show()
