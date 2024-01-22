@@ -67,9 +67,10 @@ class LoginActivity : AppCompatActivity() {
 
                             if (utilizadorIterado.userId == utilizador && verificarPalavraPasse(palavraPasse, utilizadorIterado.password)) {
                                 if(binding.checkboxLogged.isChecked) {
-                                    val sharedPref = getSharedPreferences("utilizador", MODE_PRIVATE)
+                                    val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
                                     val editor = sharedPref.edit()
-                                    editor.putString("utilizador", utilizador)
+                                    editor.putString("utilizador", utilizadorIterado.userId)
+                                    editor.putString("pwEncriptada", utilizadorIterado.password)
                                     editor.apply()
                                 }
                                 var intent = Intent(this@LoginActivity, MainActivity::class.java)

@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Olá utilizador"
             android:textAlignment="center"
-            android:textSize="12pt" />
+            android:textSize="10pt" />
 
     </LinearLayout>
 
@@ -45,9 +45,9 @@
             android:layout_height="wrap_content"
             android:text="As suas observações"
             android:textAlignment="center"
-            android:paddingTop="5pt"
-            android:paddingBottom="5pt"
-            android:textSize="16pt" />
+            android:paddingTop="3pt"
+            android:paddingBottom="3pt"
+            android:textSize="12pt" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
