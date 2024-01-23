@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.AdicionarObsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="30pt"
+            android:paddingTop="6pt"
+            android:paddingBottom="4pt"
+            android:text="Editar observação"
+            android:textAlignment="center"
+            android:textSize="12pt" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="6pt"
+            android:paddingEnd="6pt">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/txtViewEspecie"
+                    android:layout_width="145dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="Espécie:"
+                    android:textSize="10pt"
+                    tools:layout_editor_absoluteX="19dp"
+                    tools:layout_editor_absoluteY="96dp" />
+
+                <EditText
+                    android:id="@+id/txtEspecie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:text=""
+                    tools:layout_editor_absoluteX="144dp"
+                    tools:layout_editor_absoluteY="92dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtViewDescricao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="Descrição:"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/txtDescricao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:text="" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtViewData"
+                    android:layout_weight="0.2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data:"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/txtData"
+                    android:layout_weight="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="1dp">
+
+                <TextView
+                    android:id="@+id/txtViewEscolherFoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10pt"
+                    android:layout_weight="0.2"
+                    android:paddingBottom="5pt"
+                    android:text="Fotografia:" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.8">
+
+                    <ImageButton
+                        android:id="@+id/btnGaleria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+                    <ImageButton
+                        android:id="@+id/btnCamera"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/viewImagem"
+            android:layout_width="wrap_content"
+            android:src="@drawable/foto_template"
+            android:layout_height="400dp"/>
+
+        <Button
+            android:id="@+id/btnMapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mapa" />
+
+        <Button
+            android:id="@+id/btnGuardarObs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar alterações" />
+
+    </LinearLayout>
+
+
+</ScrollView>
+

@@ -22,6 +22,7 @@ import com.example.avista.R
 import com.example.avista.model.Observacao
 import com.example.avista.model.RespostaAPI
 import com.example.avista.retrofit.RetrofitInitializer
+import com.example.avista.ui.EditarObsActivity
 import com.example.avista.ui.FullscreenObservacaoActivity
 import com.example.avista.ui.MainActivity
 import com.squareup.picasso.Picasso
@@ -105,6 +106,7 @@ class ObservacaoListAdapter(
             val txtdData = detalhes.findViewById<TextView>(R.id.txtData)
             val aveImg = detalhes.findViewById<ImageView>(R.id.imgAve)
             val fechar = detalhes.findViewById<Button>(R.id.btnFecharDialog)
+            val editar = detalhes.findViewById<Button>(R.id.btnEditar)
             val remover = detalhes.findViewById<Button>(R.id.btnRemoverObservacao)
             Picasso.get().load(observacao.foto).into(aveImg)
             txtEspecie.text = observacao.especie
@@ -117,6 +119,22 @@ class ObservacaoListAdapter(
             aveImg.setOnClickListener {
                 val intent = Intent(holder.itemView.context, FullscreenObservacaoActivity::class.java)
                 intent.putExtra("imageUri", observacao.foto!!)
+                holder.itemView.context.startActivity(intent)
+            }
+
+            editar.setOnClickListener {
+                val intent =
+                    Intent(holder.itemView.context, EditarObsActivity::class.java)
+                (holder.itemView.context as? AppCompatActivity)?.finish()
+                intent.putExtra("idObs", observacao.id)
+                intent.putExtra("utilizador", observacao.utilizador)
+                intent.putExtra("data", observacao.data)
+                intent.putExtra("especie", observacao.especie)
+                intent.putExtra("foto", observacao.foto)
+                intent.putExtra("descricao", observacao.descricao)
+                intent.putExtra("latitude", observacao.lat)
+                intent.putExtra("longitude", observacao.long)
+                detalhes.dismiss()
                 holder.itemView.context.startActivity(intent)
             }
 
