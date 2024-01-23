@@ -45,6 +45,7 @@
             android:id="@+id/imgAve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             app:layout_constraintTop_toBottomOf="@id/txtEspecie"
             app:layout_constraintBottom_toTopOf="@id/mapa"
             app:layout_constraintStart_toStartOf="parent"

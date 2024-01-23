@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avista.R
 import com.example.avista.model.Observacao
 import com.example.avista.model.RespostaAPI
 import com.example.avista.retrofit.RetrofitInitializer
+import com.example.avista.ui.FullscreenObservacaoActivity
 import com.example.avista.ui.MainActivity
 import com.squareup.picasso.Picasso
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -29,6 +32,7 @@ import org.osmdroid.views.overlay.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class ObservacaoListAdapter(
     val listaObservacoes: ArrayList<Observacao>,
@@ -41,7 +45,6 @@ class ObservacaoListAdapter(
         val txtEspecie: TextView = itemView.findViewById(R.id.txtEspecie)
         val image: ImageView = itemView.findViewById(R.id.card_thumbnail_Observacao)
         val cartao: LinearLayout = itemView.findViewById(R.id.card_layout)
-
     }
 
     class OnClickListener(val clickListener: (observacao: Observacao) -> Unit) {
@@ -63,10 +66,13 @@ class ObservacaoListAdapter(
 
         // construir um objeto onde vão estar todos os dados referentes à observação selecionada
         val observacao = listaObservacoes[position]
+
         holder.textView.setText(observacao.data)
         holder.txtEspecie.setText(observacao.especie)
         holder.txtDescricao.setText(observacao.descricao)
         Picasso.get().load(observacao.foto).into(holder.image)
+
+
 
         // evento no cartão selecionado para ficar à escuta de um clique
         holder.cartao.setOnClickListener{
@@ -105,6 +111,14 @@ class ObservacaoListAdapter(
             txtdDescricao.text = observacao.descricao
             txtdData.text = observacao.data
             detalhes.show()
+
+
+
+            aveImg.setOnClickListener {
+                val intent = Intent(holder.itemView.context, FullscreenObservacaoActivity::class.java)
+                intent.putExtra("imageUri", observacao.foto!!)
+                holder.itemView.context.startActivity(intent)
+            }
 
             fechar.setOnClickListener {
                 detalhes.dismiss()

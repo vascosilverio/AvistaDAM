@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -23,6 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private val listaObservacoes = ArrayList<Observacao>()
     private var observacaoAdapter: ObservacaoListAdapter? = null
     private lateinit var utilizador: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         getObservacoes(utilizador)
-
     }
 
 
