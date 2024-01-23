@@ -56,39 +56,64 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
+    private fun isValidPassword(password: String): Boolean {
+        if (password.length < 8) return false
+        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
+        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
+
+        return true
+    }
+
     private fun adicionaUtilizador(utilizador: String, palavraPasse: String) {
-        // criar o objeto utilizador
-        val novoUtilizador = Utilizador(userId = utilizador, password = encriptarPalavraPasse(palavraPasse))
+        if(utilizador.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(utilizador).matches()){
+        Toast.makeText(
+            applicationContext,
+            "Email Inválido.",
+            Toast.LENGTH_SHORT
+        ).show()}
+        else if(!isValidPassword(palavraPasse)){
+            Toast.makeText(
+                applicationContext,
+                "A palavra passe deve ter pelo menos 8 caracteres, um dígito, um caráter maiúsculo, um minúsculo e um caráter especial.",
+                Toast.LENGTH_LONG
+            ).show()
+        }else {
+            // criar o objeto utilizador
+            val novoUtilizador =
+                Utilizador(userId = utilizador, password = encriptarPalavraPasse(palavraPasse))
 
-        // encapsular dentro de um objecto Utilizador para construir corretamente o JSON a enviar
-        val postUtilizador = UtilizadorPOST(utilizador = novoUtilizador)
-        Log.d("LoginActivity", "JSON enviado: ${Gson().toJson(postUtilizador)}")
+            // encapsular dentro de um objecto Utilizador para construir corretamente o JSON a enviar
+            val postUtilizador = UtilizadorPOST(utilizador = novoUtilizador)
+            Log.d("LoginActivity", "JSON enviado: ${Gson().toJson(postUtilizador)}")
 
-        val call = servicoAPI.adicionarUtilizador(postUtilizador)
-        call.enqueue(object : Callback<RespostaAPI> {
-            override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
-                if (response.isSuccessful) {
-                    Log.d("LoginActivity", "onSucessful: ${response.body()}")
-                    Toast.makeText(
-                        applicationContext,
-                        "Registado com sucesso.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    finish()
-                } else {
-                    Log.e("LoginActivity", "Erro: ${response.code()}")
-                    Toast.makeText(
-                        applicationContext,
-                        "Erro. Código: ${response.code()}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            val call = servicoAPI.adicionarUtilizador(postUtilizador)
+            call.enqueue(object : Callback<RespostaAPI> {
+                override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
+                    if (response.isSuccessful) {
+                        Log.d("LoginActivity", "onSucessful: ${response.body()}")
+                        Toast.makeText(
+                            applicationContext,
+                            "Registado com sucesso.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    } else {
+                        Log.e("LoginActivity", "Erro: ${response.code()}")
+                        Toast.makeText(
+                            applicationContext,
+                            "Erro. Código: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
-                Log.e("LoginActivity", "Erro: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
+                    Log.e("LoginActivity", "Erro: ${t.message}")
+                }
+            })
+        }
     }
 
     // encriptar a palavra-passe com o BCrypt

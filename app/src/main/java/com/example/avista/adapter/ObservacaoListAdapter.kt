@@ -4,10 +4,8 @@ package com.example.avista.adapter;
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avista.R
 import com.example.avista.model.Observacao
