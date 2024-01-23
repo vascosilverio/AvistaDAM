@@ -13,13 +13,16 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationManager
+import android.net.ParseException
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -41,6 +44,11 @@ import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.Date
 import com.bumptech.glide.Glide
+import java.lang.Exception
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import java.util.Locale
 
 
 class AdicionarObsActivity : AppCompatActivity() {
@@ -59,6 +67,7 @@ class AdicionarObsActivity : AppCompatActivity() {
     var latitude = 0.0
     var longitude = 0.0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdicionarObsBinding.inflate(layoutInflater)
@@ -90,68 +99,107 @@ class AdicionarObsActivity : AppCompatActivity() {
             startActivityForResult(intent, PICK_MARKER_CODE)
         }
 
-        binding.btnAdicionarObs.setOnClickListener{
-
-            // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
-            val loading = Dialog(this)
-            loading.setContentView(R.layout.loading)
-            loading.window?.setLayout((resources.displayMetrics.widthPixels).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
-            loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            loading.setCancelable(false)
-
-            // usar o Glide para mostrar o GIF com movimento
-            val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
-            Glide.with(this)
-                .load(R.drawable.loading)
-                .into(loadingImageView)
-            loading.show()
-
+        binding.btnAdicionarObs.setOnClickListener {
 
             var especie = binding.txtEspecie.text.toString()
             var data = binding.txtData.text.toString()
             var descricao = binding.txtDescricao.text.toString()
             var id = ""
-            // verificar se foi selecionada alguma fotografia
-            if(!::imgBitmap.isInitialized) {
-                Toast.makeText(applicationContext, "Não foi selecionada nenhuma fotografia.", Toast.LENGTH_SHORT).show()
-                loading.dismiss()
-            } else if(especie == "") {
-                Toast.makeText(applicationContext, "Não foi especificada a espécie.", Toast.LENGTH_SHORT).show()
-                loading.dismiss()
-            } else if(data == "") {
-                Toast.makeText(applicationContext, "Não foi especificada a data.", Toast.LENGTH_SHORT).show()
-                loading.dismiss()
-            } else {
-                // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
-                EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
-                    EnvioFotografiaCallback {
-                    override fun onSucess(url: String) {
-                        imgURL = url
-                        // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
-                        adicionarObs(
-                            id,
-                            utilizador,
-                            latitude,
-                            longitude,
-                            imgURL,
-                            descricao,
-                            data,
-                            especie,
-                            loading
-                        )
-                    }
 
-                    override fun onError(mensagemErro: String) {
-                        Log.e("AdicionarObsActivity", "Erro ao obter o displayURL: $mensagemErro")
-                        Toast.makeText(
-                            applicationContext,
-                            "Erro ao obter o displayURL",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        loading.dismiss()
-                    }
-                })
+            // verifica se a data está no formato dd/mm/aaaa
+            if (validarData(data)) {
+                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
+                val loading = Dialog(this)
+                loading.setContentView(R.layout.loading)
+                loading.window?.setLayout(
+                    (resources.displayMetrics.widthPixels).toInt(),
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                loading.setCancelable(false)
+
+                // usar o Glide para mostrar o GIF com movimento
+                val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+                Glide.with(this)
+                    .load(R.drawable.loading)
+                    .into(loadingImageView)
+                loading.show()
+
+
+                // verificar se foi selecionada alguma fotografia
+                if (!::imgBitmap.isInitialized) {
+                    Toast.makeText(
+                        applicationContext,
+                        "Não foi selecionada nenhuma fotografia.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    loading.dismiss()
+                } else if (especie == "") {
+                    Toast.makeText(
+                        applicationContext,
+                        "Não foi especificada a espécie.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    loading.dismiss()
+                } else if (data == "") {
+                    Toast.makeText(
+                        applicationContext,
+                        "Não foi especificada a data.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    loading.dismiss()
+                } else {
+                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
+                    EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
+                        EnvioFotografiaCallback {
+                        override fun onSucess(url: String) {
+                            imgURL = url
+                            // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
+                            adicionarObs(
+                                id,
+                                utilizador,
+                                latitude,
+                                longitude,
+                                imgURL,
+                                descricao,
+                                data,
+                                especie,
+                                loading
+                            )
+                        }
+
+                        override fun onError(mensagemErro: String) {
+                            Log.e(
+                                "AdicionarObsActivity",
+                                "Erro ao obter o displayURL: $mensagemErro"
+                            )
+                            Toast.makeText(
+                                applicationContext,
+                                "Erro ao obter o displayURL",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            loading.dismiss()
+                        }
+                    })
+                }
             }
+        }
+    }
+
+    // função para validar que a data inserida é válida
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun validarData(data: String): Boolean {
+        try {
+            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            val localDate = LocalDate.parse(data, formatter)
+            return true
+        } catch (e: DateTimeParseException) {
+            Toast.makeText(
+                applicationContext,
+                "Data inválida. O formato da data deve ser dd/MM/aaaa.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return false
         }
     }
 
