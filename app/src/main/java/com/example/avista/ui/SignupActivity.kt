@@ -1,5 +1,6 @@
 package com.example.avista.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -16,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import at.favre.lib.crypto.bcrypt.BCrypt
+import com.example.avista.model.UtilizadorGET
 
 class SignupActivity : AppCompatActivity() {
 
@@ -36,8 +38,7 @@ class SignupActivity : AppCompatActivity() {
                 if (palavraPasse == palavraPasseC) {
                     //validar signup
                     //caso falhe limpar os campos de preenchimento
-                    adicionaUtilizador(utilizador, palavraPasse)
-                    finish()
+                    verificarUtilizador(utilizador, palavraPasse)
                 } else {
                     Toast.makeText(
                         applicationContext,
@@ -114,6 +115,40 @@ class SignupActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun verificarUtilizador(utilizador: String, palavraPasse: String) {
+        val call = servicoAPI.listarUtilizadores()
+
+        Log.d("LoginActivity", "utilizador: ${utilizador}")
+        call.enqueue(object : Callback<UtilizadorGET> {
+            override fun onResponse(call: Call<UtilizadorGET>, response: Response<UtilizadorGET>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    responseBody?.let {
+
+                        for (utilizadorIterado in it.listaUtilizadores) {
+                            Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}")
+
+                            if (utilizadorIterado.userId == utilizador) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "O nome de utilizador ${utilizador} já existe.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                return
+                            }
+                        }
+                        adicionaUtilizador(utilizador, palavraPasse)
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<UtilizadorGET>, t: Throwable) {
+                Log.d("LoginActivity", "onFailure: ${t.message}")
+            }
+        })
     }
 
     // encriptar a palavra-passe com o BCrypt
