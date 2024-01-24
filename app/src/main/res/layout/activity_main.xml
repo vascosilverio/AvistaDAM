@@ -49,6 +49,18 @@
             android:paddingBottom="3pt"
             android:textSize="12pt" />
 
+
+            <Button
+                android:id="@+id/btnFiltros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filtros"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/btnAdicionarObs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"

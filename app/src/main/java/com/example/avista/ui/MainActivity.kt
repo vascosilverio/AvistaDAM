@@ -7,8 +7,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.avista.R
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     val servicoObservacao: ServicoAPI = RetrofitInitializer().servicoAPI()
     private val listaObservacoes = ArrayList<Observacao>()
     private var observacaoAdapter: ObservacaoListAdapter? = null
+    private var observacaoAdapterOri: ObservacaoListAdapter? = null
     private lateinit var utilizador: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +51,32 @@ class MainActivity : AppCompatActivity() {
         binding.txtViewBoasVindas.setText("Olá $utilizador")
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // ordenações
+        binding.btnFiltros.setOnClickListener {
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.filtros_observacao)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+
+            // obter os objectos da view
+            val btnAplicarFiltros = dialog.findViewById<Button>(R.id.btnAplicar)
+            val radioGroupEspecie = dialog.findViewById<RadioGroup>(R.id.radioGroupEspecie)
+            val radioGroupData = dialog.findViewById<RadioGroup>(R.id.radioGroupData)
+            val txtFiltro = dialog.findViewById<EditText>(R.id.txtEspecie)
+
+            // verificar qual a filtragem a aplicar
+            btnAplicarFiltros.setOnClickListener {
+
+                val especieAsc = radioGroupEspecie.checkedRadioButtonId == R.id.radioEspecieAsc
+                val dataAsc = radioGroupData.checkedRadioButtonId == R.id.radioDataAsc
+
+                observacaoAdapter?.ordenarObs("especie", especieAsc)
+                observacaoAdapter?.ordenarObs("data", dataAsc)
+
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
 
         binding.btnAdicionarObs.setOnClickListener {
             var intent = Intent(this@MainActivity, AdicionarObsActivity::class.java)
@@ -68,7 +99,6 @@ class MainActivity : AppCompatActivity() {
 
         getObservacoes(utilizador)
     }
-
 
     private fun getObservacoes(utilizador: String) {
         // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
@@ -136,4 +166,5 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         overridePendingTransition(0, 0)
     }
+
 }

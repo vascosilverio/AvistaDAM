@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Espécie:" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupEspecie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioEspecieAsc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ascendente" />
+
+        <RadioButton
+            android:id="@+id/radioEspecieDescDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descendente" />
+    </RadioGroup>
+
+    <TextView
+        android:text="Data:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <RadioGroup
+        android:id="@+id/radioGroupData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioDataAsc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ascendente" />
+
+        <RadioButton
+            android:id="@+id/radioDataDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descendente" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnAplicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aplicar Filtros"/>
+</LinearLayout>

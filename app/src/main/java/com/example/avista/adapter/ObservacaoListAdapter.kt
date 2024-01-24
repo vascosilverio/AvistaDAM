@@ -48,6 +48,50 @@ class ObservacaoListAdapter(
         val cartao: LinearLayout = itemView.findViewById(R.id.card_layout)
     }
 
+    // ordenar a lista por data ou espécie
+    public fun ordenarObs(tipo: String, asc: Boolean) {
+        when (tipo) {
+            "data" -> {
+                ordData(asc)
+            }
+            "especie" -> {
+                ordEspecie(asc)
+            }
+            else -> {
+                return
+            }
+        }
+    }
+
+    // ordenar por data
+    fun ordData(asc: Boolean) {
+        listaObservacoes.sortWith(compareBy { it.dataOrd() })
+        if (!asc) {
+            listaObservacoes.reverse()
+        }
+        notifyDataSetChanged()
+    }
+
+    // extrair o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa
+    private fun Observacao.dataOrd(): Long {
+        val data = this.data!!.split("/")
+        if (data.size == 3) {
+            val ano = data[2].toInt()
+            val mes = data[1].toInt()
+            val dia = data[0].toInt()
+            return ano * 10000.toLong() + mes * 100.toLong() + dia
+        }
+        return 0
+    }
+
+    // ordenar por espécie
+    fun ordEspecie(ascendente: Boolean) {
+        listaObservacoes.sortedWith(compareBy { it.especie })
+        if (!ascendente) {
+            listaObservacoes.reverse()
+        }
+        notifyDataSetChanged()
+    }
     class OnClickListener(val clickListener: (observacao: Observacao) -> Unit) {
         fun onClick(observacao: Observacao) = clickListener(observacao)
     }

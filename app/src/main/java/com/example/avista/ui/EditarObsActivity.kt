@@ -334,4 +334,12 @@ class EditarObsActivity : AppCompatActivity() {
 
     }
 
+    // ao retroceder, para a aplicação não fechar, voltar à MainActivity
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this@EditarObsActivity, MainActivity::class.java)
+        intent.putExtra("utilizador", utilizador)
+        startActivity(intent)
+    }
+
 }
