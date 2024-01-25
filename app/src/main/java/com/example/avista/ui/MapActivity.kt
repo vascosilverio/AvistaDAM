@@ -10,8 +10,6 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.avista.R
@@ -41,8 +39,8 @@ class MapActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mapview)
 
-        listaObservacoes = (intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>?)!!
-        populateMap(mapView,listaObservacoes)
+        listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
+
 
         // obter a latitude e longitude que foram lidas na actividade de adicionar observações
         Obslatitude = intent.getStringExtra("latitude").toString()
@@ -95,6 +93,7 @@ class MapActivity : BaseActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
+        populateMap(mapView,listaObservacoes)
     }
 
     private fun atualizarMarcador(posicao: GeoPoint) {

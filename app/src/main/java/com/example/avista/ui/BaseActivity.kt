@@ -6,18 +6,17 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.os.Build
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.avista.R
 import com.example.avista.model.Observacao
+import com.example.avista.model.ObservacaoSharedModel
 import com.example.avista.ui.activity.MapActivity
 
 
@@ -26,6 +25,7 @@ open class BaseActivity : AppCompatActivity() {
     private val LOCATION_PERMISSION_CODE = 102
     private lateinit var utilizador: String
     private var listaObservacoes = ArrayList<Observacao>()
+    private lateinit var viewModel: ObservacaoSharedModel
     private val PICK_MARKER_CODE = 103
     open var latitude = 0.0
     open var longitude = 0.0
@@ -33,6 +33,7 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val menuInflater: MenuInflater = menuInflater
         menuInflater.inflate(R.menu.bottom_nav, menu)
+        viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
         return true
     }
 
@@ -41,7 +42,7 @@ open class BaseActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.item_mapa -> {
                 utilizador = intent.getStringExtra("utilizador").toString()
-                listaObservacoes = (intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>?)!!
+                listaObservacoes = viewModel.listaObservacoes!!
                 var intent = Intent(this, MapActivity::class.java)
                 // enviar para a atividade Mapa a latitude e longitude atuais
                 intent.putExtra("latitude", latitude.toString())

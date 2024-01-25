@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
         android:id="@+id/item_Info"
         android:icon="@drawable/information_icon_svgrepo_com"
@@ -25,6 +26,8 @@
         android:icon="@drawable/logout"
         android:title="Logout"
         app:showAsAction="always|withText"/>
+
+
 
 
 </menu>

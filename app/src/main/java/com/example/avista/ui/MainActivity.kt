@@ -11,8 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.avista.R
@@ -20,11 +19,17 @@ import com.example.avista.adapter.ObservacaoListAdapter
 import com.example.avista.databinding.ActivityMainBinding
 import com.example.avista.model.Observacao
 import com.example.avista.model.ObservacaoGET
+import com.example.avista.model.ObservacaoSharedModel
 import com.example.avista.retrofit.RetrofitInitializer
 import com.example.avista.retrofit.service.ServicoAPI
+import com.example.avista.ui.activity.MapActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
+
+
+
 
 
 class MainActivity : BaseActivity() {
@@ -32,12 +37,15 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     val servicoObservacao: ServicoAPI = RetrofitInitializer().servicoAPI()
     private val listaObservacoes = ArrayList<Observacao>()
+    private lateinit var viewModel: ObservacaoSharedModel
     private var observacaoAdapter: ObservacaoListAdapter? = null
     private var observacaoAdapterOri: ObservacaoListAdapter? = null
     private lateinit var utilizador: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
 
         //receber o utilizador da atividade de Login
         utilizador = intent.getStringExtra("utilizador").toString()
@@ -129,6 +137,7 @@ class MainActivity : BaseActivity() {
                                 listaObservacoes.add(observacaoCurrente)
                             }
                         }
+                        sendPoints()
                     }
                     construirRecycleView()
                 }
@@ -139,6 +148,10 @@ class MainActivity : BaseActivity() {
                 loading.dismiss()
             }
         })
+    }
+
+    fun sendPoints(){
+        viewModel.listaObservacoes=listaObservacoes
     }
 
     fun construirRecycleView(){
