@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_Info"
+        android:icon="@drawable/information_icon_svgrepo_com"
+        android:title="Info"
+        app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/item_observacoes"
+        android:icon="@drawable/list_svgrepo_com"
+        android:title="Observacoes"
+        app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/item_mapa"
+        android:icon="@drawable/map_o_svgrepo_com__1_"
+        android:title="Mapa"
+        app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/item_Logout"
+        android:icon="@drawable/logout"
+        android:title="Logout"
+        app:showAsAction="always|withText"/>
+
+
+</menu>

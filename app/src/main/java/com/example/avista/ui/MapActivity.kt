@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.avista.R
+import com.example.avista.ui.BaseActivity
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -23,7 +24,7 @@ import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 
 
-class MapActivity : AppCompatActivity() {
+class MapActivity : BaseActivity() {
     private lateinit var mapView: MapView
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
     private lateinit var locationManager: LocationManager

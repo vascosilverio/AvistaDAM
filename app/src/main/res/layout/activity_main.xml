@@ -14,39 +14,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutUtilizador"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="5pt">
-
-        <TextView
-            android:id="@+id/txtViewBoasVindas"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/linearLayoutUtilizador"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Olá utilizador"
-            android:textAlignment="center"
-            android:textSize="10pt" />
+            android:orientation="horizontal"
+            android:paddingTop="5pt">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtViewBoasVindas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Olá utilizador"
+                android:textAlignment="center"
+                android:textSize="10pt" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Clique para terminar sessão" />
+            android:text="Clique para terminar sessão"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="As suas observações"
-            android:textAlignment="center"
             android:paddingTop="3pt"
             android:paddingBottom="3pt"
+            android:text="As suas observações"
+            android:textAlignment="center"
             android:textSize="12pt" />
 
 

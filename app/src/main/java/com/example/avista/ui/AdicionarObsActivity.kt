@@ -51,7 +51,7 @@ import java.time.format.DateTimeParseException
 import java.util.Locale
 
 
-class AdicionarObsActivity : AppCompatActivity() {
+class AdicionarObsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAdicionarObsBinding
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()

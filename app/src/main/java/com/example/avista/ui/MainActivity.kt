@@ -27,7 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     val servicoObservacao: ServicoAPI = RetrofitInitializer().servicoAPI()
