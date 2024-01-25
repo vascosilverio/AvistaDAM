@@ -20,6 +20,7 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.avista.R
 import com.example.avista.model.Observacao
+import com.example.avista.model.ObservacaoSharedModel
 import com.example.avista.model.RespostaAPI
 import com.example.avista.retrofit.RetrofitInitializer
 import com.example.avista.ui.EditarObsActivity
@@ -36,11 +37,12 @@ import retrofit2.Response
 
 
 class ObservacaoListAdapter(
-    val listaObservacoes: ArrayList<Observacao>,
+    var listaObservacoes: ArrayList<Observacao>,
 ) :
     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
 
     class ObservacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private lateinit var viewModel: ObservacaoSharedModel
         val textView: TextView = itemView.findViewById(R.id.card_Data_Observacao)
         val txtDescricao: TextView = itemView.findViewById(R.id.txtDescricao)
         val txtEspecie: TextView = itemView.findViewById(R.id.txtEspecie)
@@ -49,28 +51,32 @@ class ObservacaoListAdapter(
     }
 
     // ordenar a lista por data ou espécie
-    public fun ordenarObs(tipo: String, asc: Boolean) {
-        when (tipo) {
-            "data" -> {
-                ordData(asc)
-            }
-            "especie" -> {
-                ordEspecie(asc)
-            }
-            else -> {
-                return
-            }
-        }
-    }
-
-    // ordenar por data
-    fun ordData(asc: Boolean) {
+    public fun ordenarObs(asc: Boolean) {
         listaObservacoes.sortWith(compareBy { it.dataOrd() })
         if (!asc) {
             listaObservacoes.reverse()
         }
         notifyDataSetChanged()
     }
+
+    public fun setObs(obsOri: ArrayList<Observacao>){
+        listaObservacoes = obsOri
+        notifyDataSetChanged()
+    }
+
+
+    // criar uma lista auxiliar para adicionar as observações que coincidem com o filtro
+    public fun filtrarObs(especie: String) {
+        val listaFiltrada = listaObservacoes.filter { it.filtro(especie) }
+        listaObservacoes.clear()
+        listaObservacoes.addAll(listaFiltrada)
+        notifyDataSetChanged()
+    }
+
+    private fun Observacao.filtro(filtro: String): Boolean {
+        return especie!!.contains(filtro, ignoreCase = true)
+    }
+
 
     // extrair o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa
     private fun Observacao.dataOrd(): Long {
@@ -82,18 +88,6 @@ class ObservacaoListAdapter(
             return ano * 10000.toLong() + mes * 100.toLong() + dia
         }
         return 0
-    }
-
-    // ordenar por espécie
-    fun ordEspecie(ascendente: Boolean) {
-        listaObservacoes.sortedWith(compareBy { it.especie })
-        if (!ascendente) {
-            listaObservacoes.reverse()
-        }
-        notifyDataSetChanged()
-    }
-    class OnClickListener(val clickListener: (observacao: Observacao) -> Unit) {
-        fun onClick(observacao: Observacao) = clickListener(observacao)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObservacaoViewHolder {

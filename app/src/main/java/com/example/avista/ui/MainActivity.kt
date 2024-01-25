@@ -36,10 +36,9 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     val servicoObservacao: ServicoAPI = RetrofitInitializer().servicoAPI()
-    private val listaObservacoes = ArrayList<Observacao>()
+    private var listaObservacoes = ArrayList<Observacao>()
     private lateinit var viewModel: ObservacaoSharedModel
     private var observacaoAdapter: ObservacaoListAdapter? = null
-    private var observacaoAdapterOri: ObservacaoListAdapter? = null
     private lateinit var utilizador: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,25 +61,36 @@ class MainActivity : BaseActivity() {
 
         // ordenações
         binding.btnFiltros.setOnClickListener {
+
+            // se a listagem de observações já tiver sido filtrada, voltar a carregar todas as observações do arraylist original
+            if(viewModel.listaObservacoesFiltro!!.size < listaObservacoes.size){
+                viewModel.listaObservacoesFiltro!!.addAll(listaObservacoes)
+            }
+            listaObservacoes.clear()
+            listaObservacoes.addAll(viewModel.listaObservacoesFiltro!!)
+            //observacaoAdapter!!.setObs(listaObservacoes)
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.filtros_observacao)
+            dialog.window?.setLayout((0.7 * resources.displayMetrics.widthPixels).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
 
             // obter os objectos da view
             val btnAplicarFiltros = dialog.findViewById<Button>(R.id.btnAplicar)
             val radioGroupEspecie = dialog.findViewById<RadioGroup>(R.id.radioGroupEspecie)
             val radioGroupData = dialog.findViewById<RadioGroup>(R.id.radioGroupData)
-            val txtFiltro = dialog.findViewById<EditText>(R.id.txtEspecie)
+            val filtroEspecie = dialog.findViewById<EditText>(R.id.txtEspecieFiltro)
 
             // verificar qual a filtragem a aplicar
             btnAplicarFiltros.setOnClickListener {
-
-                val especieAsc = radioGroupEspecie.checkedRadioButtonId == R.id.radioEspecieAsc
                 val dataAsc = radioGroupData.checkedRadioButtonId == R.id.radioDataAsc
 
-                observacaoAdapter?.ordenarObs("especie", especieAsc)
-                observacaoAdapter?.ordenarObs("data", dataAsc)
+                // se tiver texto no campo de filtragem de espécies, filtrar por texto
+                if(!filtroEspecie.text.toString().isEmpty()){
+                    observacaoAdapter?.filtrarObs(filtroEspecie.text.toString())
+                }
 
+                // ordenar pelo selecionado (Mais antigo ou mais recente)
+                observacaoAdapter?.ordenarObs(dataAsc)
                 dialog.dismiss()
             }
             dialog.show()

@@ -10,6 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:text="Espécie:" />
 
     <RadioGroup
@@ -17,24 +18,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/radioEspecieAsc"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/txtEspecieFiltro"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ascendente" />
-
-        <RadioButton
-            android:id="@+id/radioEspecieDescDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descendente" />
+            android:ems="16"
+            android:inputType="text"
+            android:textSize="14dp"
+            android:hint="Insira a espécie para filtrar"
+            android:text="" />
     </RadioGroup>
-
-    <TextView
-        android:text="Data:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
 
     <RadioGroup
         android:id="@+id/radioGroupData"
@@ -45,19 +38,19 @@
             android:id="@+id/radioDataAsc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ascendente" />
+            android:text="Ordenar pelo mais antigo" />
 
         <RadioButton
             android:id="@+id/radioDataDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descendente" />
+            android:text="Ordenar pelo mais recente" />
 
     </RadioGroup>
 
     <Button
         android:id="@+id/btnAplicar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aplicar Filtros"/>
 </LinearLayout>
