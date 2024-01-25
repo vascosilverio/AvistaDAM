@@ -42,7 +42,6 @@ class ObservacaoListAdapter(
     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
 
     class ObservacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var viewModel: ObservacaoSharedModel
         val textView: TextView = itemView.findViewById(R.id.card_Data_Observacao)
         val txtDescricao: TextView = itemView.findViewById(R.id.txtDescricao)
         val txtEspecie: TextView = itemView.findViewById(R.id.txtEspecie)
@@ -172,6 +171,8 @@ class ObservacaoListAdapter(
                 intent.putExtra("descricao", observacao.descricao)
                 intent.putExtra("latitude", observacao.lat)
                 intent.putExtra("longitude", observacao.long)
+                intent.putExtra("listaObservacoes", listaObservacoes)
+                intent.putExtra("option", "OPTION_3")
                 detalhes.dismiss()
                 holder.itemView.context.startActivity(intent)
             }

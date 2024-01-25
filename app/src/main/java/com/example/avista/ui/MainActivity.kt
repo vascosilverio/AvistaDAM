@@ -100,6 +100,7 @@ class MainActivity : BaseActivity() {
             var intent = Intent(this@MainActivity, AdicionarObsActivity::class.java)
             // enviar para a atividade Main o utilizador autenticado
             intent.putExtra("utilizador", utilizador)
+            intent.putExtra("listaObservacoes", listaObservacoes)
             startActivity(intent)
         }
 

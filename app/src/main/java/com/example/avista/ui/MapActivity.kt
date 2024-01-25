@@ -2,19 +2,30 @@ package com.example.avista.ui.activity
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.avista.R
 import com.example.avista.model.Observacao
 import com.example.avista.ui.BaseActivity
+import com.squareup.picasso.Picasso
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
@@ -32,8 +43,6 @@ class MapActivity : BaseActivity() {
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var mapEventsOverlay: MapEventsOverlay
-    lateinit var Obslatitude: String
-    lateinit var Obslongitude: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +50,36 @@ class MapActivity : BaseActivity() {
 
         listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
 
+        val option = intent.getStringExtra("option")
+
+        when (option) {
+            "OPTION_1" -> {
+                val view = findViewById<LinearLayout>(R.id.guardarCoords)
+                view.visibility = View.GONE
+                val textViewToChange = findViewById<TextView>(R.id.textView2)
+                textViewToChange.text = "Clique no marcador para abrir os detalhes."
+            }
+            "OPTION_2" -> {
+                val view = findViewById<LinearLayout>(R.id.guardarCoords)
+                view.visibility = View.VISIBLE
+                val textViewToChange = findViewById<TextView>(R.id.textView2)
+                textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
+            }
+            "OPTION_3" -> {
+                val view = findViewById<LinearLayout>(R.id.guardarCoords)
+                view.visibility = View.VISIBLE
+                val textViewToChange = findViewById<TextView>(R.id.textView2)
+                textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
+
+            }
+        }
 
         // obter a latitude e longitude que foram lidas na actividade de adicionar observações
-        Obslatitude = intent.getStringExtra("latitude").toString()
-        Obslongitude = intent.getStringExtra("longitude").toString()
+        latitude = intent.getStringExtra("latitude")!!.toDouble()
+        longitude = intent.getStringExtra("longitude")!!.toDouble()
 
-        Log.d("Latitude: ", Obslatitude)
-        Log.d("Longitude: ", Obslongitude)
+        Log.d("Latitude: ", latitude.toString())
+        Log.d("Longitude: ", longitude.toString())
 
         val ctx = applicationContext
         Configuration.getInstance().load(ctx, getSharedPreferences("osmdroid", 0))
@@ -93,7 +125,7 @@ class MapActivity : BaseActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
-        populateMap(mapView,listaObservacoes)
+        if(option=="OPTION_1") populateMap(mapView,listaObservacoes)
     }
 
     private fun atualizarMarcador(posicao: GeoPoint) {
@@ -101,8 +133,8 @@ class MapActivity : BaseActivity() {
         val marcador = Marker(mapView)
         marcador.position = posicao
         marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        Obslatitude = marcador.position.latitude.toString()
-        Obslongitude = marcador.position.longitude.toString()
+        latitude = marcador.position.latitude
+        longitude = marcador.position.longitude
         Log.d("NOVA LATITUDE, LONGITUDE","$latitude, $longitude")
         mapView.overlays.removeAll { it is Marker }  // limpar o marcador anterior
         mapView.overlays.add(marcador)
@@ -171,15 +203,26 @@ class MapActivity : BaseActivity() {
         for (observacao in observacoes) {
             val latitude = observacao.lat
             val longitude = observacao.long
+            val fotoPath = observacao.foto // Assuming 'foto' is the image path in Observacao
+            val nomeAve = observacao.especie
+            val descricao = observacao.descricao
+            val data = observacao.data
 
             // Create a GeoPoint from the latitude and longitude
-            val geoPoint = latitude?.toDouble()?.let { longitude?.toDouble()
-                ?.let { it1 -> GeoPoint(it, it1) } }
+            val geoPoint = latitude?.toDouble()?.let { longitude?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }
 
             // Create a marker for each observation point
             val marker = Marker(mapView)
             marker.position = geoPoint
-            marker.title = "Observation Point" // Set a title if needed
+            marker.title = nomeAve + "\n" + descricao + "\n" + data
+
+            val imageView = ImageView(this)
+            Picasso.get().load(fotoPath).into(imageView)
+            val drawable : Drawable? = imageView?.drawable
+            // Load and set the image using Picasso
+            if (fotoPath != null && fotoPath.isNotEmpty()) {
+                marker.image = drawable
+            }
 
             // Add the marker to the map overlay
             mapView.overlays.add(marker)
@@ -188,8 +231,7 @@ class MapActivity : BaseActivity() {
         // Zoom and center the map on the first observation point
         if (observacoes.isNotEmpty()) {
             val firstObservation = observacoes[0]
-            val firstPoint = firstObservation.lat?.toDouble()
-                ?.let { firstObservation.long?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }
+            val firstPoint = firstObservation.lat?.toDouble()?.let { firstObservation.long?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }
             mapController.setCenter(firstPoint)
             mapController.setZoom(12.0) // Adjust the zoom level as needed
         }

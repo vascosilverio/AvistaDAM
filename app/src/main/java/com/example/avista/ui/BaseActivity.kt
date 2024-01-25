@@ -49,6 +49,7 @@ open class BaseActivity : AppCompatActivity() {
                 intent.putExtra("longitude", longitude.toString())
                 intent.putExtra("utilizador", utilizador)
                 intent.putExtra("listaObservacoes", listaObservacoes)
+                intent.putExtra("option", "OPTION_1")
                 startActivityForResult(intent, PICK_MARKER_CODE)
                 true
             }

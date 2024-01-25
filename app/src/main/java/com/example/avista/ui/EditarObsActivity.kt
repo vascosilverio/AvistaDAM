@@ -22,11 +22,13 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.avista.R
 import com.example.avista.databinding.ActivityEditarObsBinding
 import com.example.avista.model.Observacao
 import com.example.avista.model.ObservacaoPUT
+import com.example.avista.model.ObservacaoSharedModel
 import com.example.avista.model.RespostaAPI
 import com.example.avista.retrofit.EnvioFotografia
 import com.example.avista.retrofit.RetrofitInitializer
@@ -52,6 +54,8 @@ class EditarObsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditarObsBinding
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
+    private lateinit var viewModel: ObservacaoSharedModel
+    private var listaObservacoes = ArrayList<Observacao>()
     private val CAMERA_PERMISSION_CODE = 101
     private val PICK_MARKER_CODE = 103
     private val PICK_IMAGE_REQUEST = 1
@@ -72,6 +76,7 @@ class EditarObsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditarObsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
 
         //receber os dados a editar
         idObs = intent.getStringExtra("idObs").toString()
@@ -98,10 +103,14 @@ class EditarObsActivity : AppCompatActivity() {
         }
 
         binding.btnMapa.setOnClickListener {
+            listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
             var intent = Intent(this, MapActivity::class.java)
             // enviar para a atividade Mapa a latitude e longitude atuais
             intent.putExtra("latitude", latitude.toString())
             intent.putExtra("longitude", longitude.toString())
+            intent.putExtra("option", "OPTION_2")
+            intent.putExtra("utilizador", utilizador)
+            intent.putExtra("listaObservacoes", listaObservacoes)
             startActivityForResult(intent, PICK_MARKER_CODE)
         }
 
