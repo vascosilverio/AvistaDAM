@@ -1,33 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewCourse"
+        style="@style/InfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="53dp" />
+        android:text="@string/licenciatura_em_engenharia_inform_tica" />
 
-    <EditText
-        android:id="@+id/editTextText"
+    <TextView
+        android:id="@+id/textViewDiscipline"
+        style="@style/InfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="72dp" />
+        android:layout_below="@id/textViewCourse"
+        android:text="@string/desenvolvimento_de_aplica_es_m_veis" />
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
+    <TextView
+        android:id="@+id/textViewAcademicYear"
+        style="@style/InfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="118dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/textViewDiscipline"
+        android:text="Ano Letivo: 2023/2024" />
+
+    <!-- Author Information -->
+    <TextView
+        android:id="@+id/textViewAuthors"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAcademicYear"
+        android:layout_marginTop="16dp"
+        android:text="@string/autores" />
+
+    <TextView
+        android:id="@+id/textViewAuthor1"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAuthors"
+        android:text="@string/vasco_silv_rio_n_22350" />
+
+    <TextView
+        android:id="@+id/textViewAuthor2"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAuthor1"
+        android:text="@string/r_ben_garcia_n_16995" />
+
+    <!-- API Information -->
+    <TextView
+        android:id="@+id/textViewAPIs"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAuthor2"
+        android:layout_marginTop="16dp"
+        android:text="@string/utiliza_o_das_apis" />
+
+    <TextView
+        android:id="@+id/textViewSheety"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAPIs"
+        android:text="@string/api_sheety" />
+
+    <TextView
+        android:id="@+id/textViewOpenStreetMaps"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewSheety"
+        android:text="@string/openstreetmaps_api" />
+
+    <TextView
+        android:id="@+id/textViewImgBB"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewOpenStreetMaps"
+        android:text="@string/imgbb_api" />
+</RelativeLayout>

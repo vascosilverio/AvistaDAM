@@ -30,6 +30,7 @@
             android:text="Coloque o marcador no sítio onde observou a ave." />
 
         <LinearLayout
+            android:id="@+id/guardarCoords"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"

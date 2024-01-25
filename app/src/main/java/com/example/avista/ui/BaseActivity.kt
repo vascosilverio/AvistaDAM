@@ -1,30 +1,54 @@
 package com.example.avista.ui
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.os.Build
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.avista.R
+import com.example.avista.model.Observacao
 import com.example.avista.ui.activity.MapActivity
 
 
 open class BaseActivity : AppCompatActivity() {
 
+    private val LOCATION_PERMISSION_CODE = 102
     private lateinit var utilizador: String
+    private var listaObservacoes = ArrayList<Observacao>()
+    private val PICK_MARKER_CODE = 103
+    open var latitude = 0.0
+    open var longitude = 0.0
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val menuInflater: MenuInflater = menuInflater
         menuInflater.inflate(R.menu.bottom_nav, menu)
         return true
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_mapa -> {
-                var intent = Intent(this@BaseActivity, MapActivity::class.java)
-                // enviar para a atividade Main o utilizador autenticado
-
-                startActivity(intent)
+                utilizador = intent.getStringExtra("utilizador").toString()
+                listaObservacoes = (intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>?)!!
+                var intent = Intent(this, MapActivity::class.java)
+                // enviar para a atividade Mapa a latitude e longitude atuais
+                intent.putExtra("latitude", latitude.toString())
+                intent.putExtra("longitude", longitude.toString())
+                intent.putExtra("utilizador", utilizador)
+                intent.putExtra("listaObservacoes", listaObservacoes)
+                startActivityForResult(intent, PICK_MARKER_CODE)
                 true
             }
             R.id.item_observacoes -> {
@@ -58,6 +82,37 @@ open class BaseActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            LOCATION_PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    localizacaoAtual()
+                } else {
+                    Toast.makeText(this, "É preciso dar permissão de acesso à localização para obter a latitude e longitude.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    @SuppressLint("ServiceCast")
+    private fun localizacaoAtual() {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        val gps: String = LocationManager.GPS_PROVIDER
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            val localizacao: Location? = locationManager.getLastKnownLocation(gps)
+
+            if (localizacao != null) {
+                latitude = localizacao.latitude
+                longitude = localizacao.longitude
+            } else {
+                Log.e("AdicionarObsActivity", "Erro a obter a localização.")
+            }
         }
     }
 }

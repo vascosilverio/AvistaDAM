@@ -12,4 +12,13 @@
     <string name="preenchimento_falha">Preencha todos os campos.</string>
     <string name="login_falha">Houve um erro no acesso, tente novamente.</string>
     <string name="verificar_password">Verifique o nome de utilizador ou a password.</string>
+    <string name="licenciatura_em_engenharia_inform_tica">Licenciatura em Engenharia Informática</string>
+    <string name="desenvolvimento_de_aplica_es_m_veis">Desenvolvimento de Aplicações Móveis</string>
+    <string name="autores">Autores:</string>
+    <string name="vasco_silv_rio_n_22350">Vasco Silvério Nº22350</string>
+    <string name="r_ben_garcia_n_16995">Rúben Garcia Nº16995</string>
+    <string name="utiliza_o_das_apis">Utilização das APIs:</string>
+    <string name="api_sheety">API Sheety</string>
+    <string name="openstreetmaps_api">OpenStreetMaps API</string>
+    <string name="imgbb_api">ImgBB API</string>
 </resources>
