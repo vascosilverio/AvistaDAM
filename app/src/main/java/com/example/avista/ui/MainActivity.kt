@@ -85,18 +85,6 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        binding.btnLogout.setOnClickListener{
-            // limpar o login guardado na sharedPreferences
-            val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.clear()
-            editor.apply()
-
-            var intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
         getObservacoes(utilizador)
     }
 
