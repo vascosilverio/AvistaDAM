@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.avista"
+    namespace = "com.projetodam.avista"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.avista"
+        applicationId = "com.projetodam.avista"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
