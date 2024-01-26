@@ -87,4 +87,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewOpenStreetMaps"
         android:text="@string/imgbb_api" />
+
+    <Button
+        android:id="@+id/btnRemoverConta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textViewImgBB"
+        android:text="Remover conta de utilizador" />
 </RelativeLayout>
