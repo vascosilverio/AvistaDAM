@@ -68,8 +68,8 @@ class AdicionarObsActivity : BaseActivity() {
     private val RESULT_LOAD_IMAGE = 123
     val IMAGE_CAPTURE_CODE = 654
     var imgURL = ""
-    override var latitude = 0.0
-    override var longitude = 0.0
+    var latitude = 0.0
+    var longitude = 0.0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {

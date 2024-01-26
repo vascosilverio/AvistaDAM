@@ -50,7 +50,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
 
-class EditarObsActivity : AppCompatActivity() {
+class EditarObsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityEditarObsBinding
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()

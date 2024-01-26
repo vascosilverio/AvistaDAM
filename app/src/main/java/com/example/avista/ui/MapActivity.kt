@@ -43,6 +43,8 @@ class MapActivity : BaseActivity() {
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var mapEventsOverlay: MapEventsOverlay
+    lateinit var latitude: String
+    lateinit var longitude: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,20 +65,20 @@ class MapActivity : BaseActivity() {
                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
                 view.visibility = View.VISIBLE
                 val textViewToChange = findViewById<TextView>(R.id.textView2)
-                textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
+                textViewToChange.text = "Coloque o marcador na localização onde observou a ave."
             }
             "OPTION_3" -> {
                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
                 view.visibility = View.VISIBLE
                 val textViewToChange = findViewById<TextView>(R.id.textView2)
-                textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
+                textViewToChange.text = "Coloque o marcador na localização onde observou a ave."
 
             }
         }
 
         // obter a latitude e longitude que foram lidas na actividade de adicionar observações
-        latitude = intent.getStringExtra("latitude")!!.toDouble()
-        longitude = intent.getStringExtra("longitude")!!.toDouble()
+        latitude = intent.getStringExtra("latitude")!!.toString()
+        longitude = intent.getStringExtra("longitude")!!.toString()
 
         Log.d("Latitude: ", latitude.toString())
         Log.d("Longitude: ", longitude.toString())
@@ -133,8 +135,8 @@ class MapActivity : BaseActivity() {
         val marcador = Marker(mapView)
         marcador.position = posicao
         marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        latitude = marcador.position.latitude
-        longitude = marcador.position.longitude
+        latitude = marcador.position.latitude.toString()
+        longitude = marcador.position.longitude.toString()
         Log.d("NOVA LATITUDE, LONGITUDE","$latitude, $longitude")
         mapView.overlays.removeAll { it is Marker }  // limpar o marcador anterior
         mapView.overlays.add(marcador)

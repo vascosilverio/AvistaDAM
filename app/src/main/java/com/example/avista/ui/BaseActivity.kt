@@ -27,8 +27,8 @@ open class BaseActivity : AppCompatActivity() {
     private var listaObservacoes = ArrayList<Observacao>()
     private lateinit var viewModel: ObservacaoSharedModel
     private val PICK_MARKER_CODE = 103
-    open var latitude = 0.0
-    open var longitude = 0.0
+    var latitudeB = 0.0
+    var longitudeB = 0.0
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val menuInflater: MenuInflater = menuInflater
@@ -45,8 +45,8 @@ open class BaseActivity : AppCompatActivity() {
                 listaObservacoes = viewModel.listaObservacoes!!
                 var intent = Intent(this, MapActivity::class.java)
                 // enviar para a atividade Mapa a latitude e longitude atuais
-                intent.putExtra("latitude", latitude.toString())
-                intent.putExtra("longitude", longitude.toString())
+                intent.putExtra("latitude", latitudeB.toString())
+                intent.putExtra("longitude", longitudeB.toString())
                 intent.putExtra("utilizador", utilizador)
                 intent.putExtra("listaObservacoes", listaObservacoes)
                 intent.putExtra("option", "OPTION_1")
@@ -110,8 +110,8 @@ open class BaseActivity : AppCompatActivity() {
             val localizacao: Location? = locationManager.getLastKnownLocation(gps)
 
             if (localizacao != null) {
-                latitude = localizacao.latitude
-                longitude = localizacao.longitude
+                latitudeB = localizacao.latitude
+                longitudeB = localizacao.longitude
             } else {
                 Log.e("AdicionarObsActivity", "Erro a obter a localização.")
             }
