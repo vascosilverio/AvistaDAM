@@ -34,6 +34,7 @@ class AboutActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = AboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // receber o utilizador da atividade anterior
         utilizador = intent.getStringExtra("utilizador").toString()
 
         // botão para remover a observação que foi selecionada

@@ -15,9 +15,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/*
+* Classe inicial onde mostra o logotipo da aplicação e tenta realizar
+* O login com os dados armazenados na sharedPreferences
+*/
 class SplashScreenActivity : AppCompatActivity() {
-
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -45,6 +49,9 @@ class SplashScreenActivity : AppCompatActivity() {
         }, 1000)
     }
 
+    /*
+    * Verifica se o utilizador guardado na sharedPreferences e a hash da password permitem autenticação automática
+    */
     private fun verificarUtilizador(utilizador: String?, palavraPasse: String?) {
         val call = servicoAPI.listarUtilizadores()
 
@@ -52,19 +59,16 @@ class SplashScreenActivity : AppCompatActivity() {
             override fun onResponse(call: Call<UtilizadorGET>, response: Response<UtilizadorGET>) {
                 Log.d("Código da resposta da API:", response.code().toString())
 
+                // se a resposta da API a obter a lista de utilizadores for retornada com sucesso
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     responseBody?.let {
                         val listaUtilizadores = it.listaUtilizadores
-
                         if (listaUtilizadores != null && listaUtilizadores.isNotEmpty()) {
+                            // itera cada utilizador retornado pela API para comparar com a hash da password
                             for (utilizadorIterado in listaUtilizadores) {
-                                Log.d("Utilizador API:", utilizadorIterado.userId!!)
-                                Log.d("Password API:", utilizadorIterado.password!!)
-
                                 // se o utilizador e a password estiverem corretos, autenticar e iniciar a MainActivity
                                 if (utilizadorIterado.userId!! == utilizador!! && palavraPasse!! == utilizadorIterado.password!!) {
-                                    Log.d("AUTENTICACAO COM SUCESSO!", "AUTENTICADO")
                                     var intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                                     // enviar para a atividade Main o utilizador autenticado
                                     intent.putExtra("utilizador", utilizador)
@@ -76,7 +80,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         }
                     }
                 }
-                Log.d("AUTENTICACAO FALHOU!", "Não autenticado")
+                // se os dados de acesso guardados na sharedPreferences não forem válidos, vai solicitar os dados de acesso
                 startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
                 finish()
             }
