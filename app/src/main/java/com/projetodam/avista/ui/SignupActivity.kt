@@ -18,6 +18,10 @@ import retrofit2.Response
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.projetodam.avista.model.UtilizadorGET
 
+
+/*
+* Classe que permite efetuar o registo de novos utilizadores
+ */
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
@@ -28,15 +32,15 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // ao clicar no botão registar, valida se os dados de acesso são válidos e envia os dados do novo utilizador para a API Sheety
         binding.buttonRegistar.setOnClickListener {
             val utilizador = binding.editarUsername.text.toString()
             val palavraPasse = binding.editarPassword.text.toString()
             val palavraPasseC = binding.confirmarPassword.text.toString()
 
+            // verifica se todos os campos são válidos antes de proceder ao registo do utilizador
             if (utilizador.isNotEmpty() && palavraPasse.isNotEmpty() && palavraPasseC.isNotEmpty()) {
                 if (palavraPasse == palavraPasseC) {
-                    //validar signup
-                    //caso falhe limpar os campos de preenchimento
                     verificarUtilizador(utilizador, palavraPasse)
                 } else {
                     Toast.makeText(
@@ -56,6 +60,9 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    * 
+     */
     private fun isValidPassword(password: String): Boolean {
         if (password.length < 8) return false
         if (password.filter { it.isDigit() }.firstOrNull() == null) return false
