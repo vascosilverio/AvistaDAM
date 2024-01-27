@@ -16,7 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.avista.R
+import com.projetodam.avista.R
 import com.projetodam.avista.model.Observacao
 import com.projetodam.avista.model.RespostaAPI
 import com.projetodam.avista.retrofit.RetrofitInitializer
