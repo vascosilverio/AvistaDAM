@@ -49,7 +49,12 @@ open class BaseActivity : AppCompatActivity() {
             R.id.item_mapa -> {
                 utilizador = intent.getStringExtra("utilizador").toString()
                 // envia a lista de observações do SharedView Model
-                listaObservacoes = viewModel.listaObservacoes!!
+                try {
+                    listaObservacoes = viewModel.listaObservacoes!!
+                } catch (e: Exception){
+                    Log.e(e.message, "Erro a tentar obter a lista de observações")
+                    listaObservacoes = viewModel.listaObservacoesFiltro!!
+                }
                 var intent = Intent(this, MapActivity::class.java)
                 // envia para a atividade Mapa a latitude e longitude atuais
                 intent.putExtra("latitude", latitudeB.toString())
