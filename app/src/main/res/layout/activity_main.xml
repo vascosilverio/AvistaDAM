@@ -26,7 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Olá utilizador"
+                android:text="@string/ola_utilizador"
                 android:textAlignment="center"
                 android:textSize="10pt" />
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="3pt"
             android:paddingBottom="3pt"
-            android:text="As suas observações"
+            android:text="@string/as_suas_observacoes"
             android:textAlignment="center"
             android:textSize="12pt" />
 
@@ -47,7 +47,7 @@
                 android:id="@+id/btnFiltros"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filtros"
+                android:text="@string/filtros"
                 android:layout_gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/btnAdicionarObs"
                 app:layout_constraintStart_toStartOf="parent"

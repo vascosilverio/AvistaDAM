@@ -37,7 +37,7 @@
                     android:layout_width="145dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:text="Espécie:"
+                    android:text="@string/especie_add"
                     android:textSize="10pt"
                     tools:layout_editor_absoluteX="19dp"
                     tools:layout_editor_absoluteY="96dp" />
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:text="Descrição:"
+                    android:text="@string/descricao_add"
                     android:textSize="10pt" />
 
                 <EditText
@@ -86,7 +86,7 @@
                     android:layout_weight="0.2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data:"
+                    android:text="@string/data_add"
                     android:textSize="10pt" />
 
                 <EditText
@@ -110,7 +110,7 @@
                     android:textSize="10pt"
                     android:layout_weight="0.2"
                     android:paddingBottom="5pt"
-                    android:text="Fotografia:" />
+                    android:text="@string/fotografia_add" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -147,13 +147,13 @@
             android:id="@+id/btnMapa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mapa" />
+            android:text="@string/mapa_add" />
 
         <Button
             android:id="@+id/btnAdicionarObs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adicionar" />
+            android:text="@string/adicionar_add" />
 
     </LinearLayout>
 

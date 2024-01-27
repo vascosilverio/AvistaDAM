@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Espécie:" />
+        android:text="@string/especie" />
 
     <RadioGroup
         android:id="@+id/radioGroupEspecie"
@@ -25,7 +25,7 @@
             android:ems="16"
             android:inputType="text"
             android:textSize="14dp"
-            android:hint="Insira a espécie para filtrar"
+            android:hint="@string/inserir_especie_filtrar"
             android:text="" />
     </RadioGroup>
 
@@ -38,13 +38,13 @@
             android:id="@+id/radioDataAsc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ordenar pelo mais antigo" />
+            android:text="@string/ordenar_pelo_mais_antigo" />
 
         <RadioButton
             android:id="@+id/radioDataDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ordenar pelo mais recente" />
+            android:text="@string/ordenar_pelo_mais_recente" />
 
     </RadioGroup>
 
@@ -52,5 +52,5 @@
         android:id="@+id/btnAplicar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aplicar Filtros"/>
+        android:text="@string/aplicar_filtros"/>
 </LinearLayout>

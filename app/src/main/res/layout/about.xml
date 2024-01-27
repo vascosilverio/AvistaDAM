@@ -88,12 +88,38 @@
         android:layout_below="@id/textViewOpenStreetMaps"
         android:text="@string/imgbb_api" />
 
+    <TextView
+        android:id="@+id/textViewRecursos"
+        style="@style/HeadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewImgBB"
+        android:layout_marginTop="16dp"
+        android:text="@string/utilizacao_de_recursos" />
+
+    <TextView
+        android:id="@+id/textRecursoUpload"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewRecursos"
+        android:text="@string/resource_stackoverflow" />
+
+    <TextView
+        android:id="@+id/textUrlRecursoUpload"
+        style="@style/InfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textRecursoUpload"
+        android:text="@string/url_resource_stackoverflow" />
+
+
     <Button
         android:id="@+id/btnRemoverConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/textViewImgBB"
-        android:text="Remover conta de utilizador" />
+        android:layout_below="@id/textUrlRecursoUpload"
+        android:text="@string/remover_conta_de_utilizador" />
 </RelativeLayout>
