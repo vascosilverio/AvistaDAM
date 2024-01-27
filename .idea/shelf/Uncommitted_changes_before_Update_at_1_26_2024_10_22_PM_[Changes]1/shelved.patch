@@ -1,0 +1,259 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"false\" />\r\n\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@drawable/bird_logo\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AppCompat.Light.DarkActionBar\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".ui.AdicionarObsActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.EditarObsActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.SignupActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.LoginActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.activity.MapActivity\"\r\n            android:exported=\"false\" />\r\n        <activity android:name=\".ui.AboutActivity\" />\r\n        <activity\r\n            android:name=\".ui.FullscreenObservacaoActivity\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/Theme.Avista\">\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.SplashScreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.MainActivity\"\r\n            android:exported=\"true\"></activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools">
++    xmlns:tools="http://schemas.android.com/tools"
++    package="com.projetodam.avista">
+ 
+     <uses-feature
+         android:name="android.hardware.camera"
+@@ -25,28 +26,28 @@
+         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+         tools:targetApi="31">
+         <activity
+-            android:name=".ui.AdicionarObsActivity"
++            android:name="com.projetodam.avista.ui.AdicionarObsActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.EditarObsActivity"
++            android:name="com.projetodam.avista.ui.EditarObsActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.SignupActivity"
++            android:name="com.projetodam.avista.ui.SignupActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.LoginActivity"
++            android:name="com.projetodam.avista.ui.LoginActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.activity.MapActivity"
++            android:name="com.projetodam.avista.ui.activity.MapActivity"
+             android:exported="false" />
+-        <activity android:name=".ui.AboutActivity" />
++        <activity android:name="com.projetodam.avista.ui.AboutActivity" />
+         <activity
+-            android:name=".ui.FullscreenObservacaoActivity"
++            android:name="com.projetodam.avista.ui.FullscreenObservacaoActivity"
+             android:label="@string/app_name"
+             android:theme="@style/Theme.Avista">
+         </activity>
+         <activity
+-            android:name=".ui.SplashScreenActivity"
++            android:name="com.projetodam.avista.ui.SplashScreenActivity"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+@@ -55,7 +56,7 @@
+             </intent-filter>
+         </activity>
+         <activity
+-            android:name=".ui.MainActivity"
++            android:name="com.projetodam.avista.ui.MainActivity"
+             android:exported="true"></activity>
+     </application>
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AnalysisUIOptions\">\r\n    <option name=\"ANALYZE_INJECTED_CODE\" value=\"false\" />\r\n  </component>\r\n  <component name=\"AndroidLayouts\">\r\n    <shared>\r\n      <config />\r\n    </shared>\r\n    <layouts>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_obs.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_editar_obs.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/cell_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/detalhes_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.AppCompat.Light.DarkActionBar</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/fullscreen_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/loading.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/mapview.xml\">\r\n        <config>\r\n          <theme>@android:style/Theme.Material.Light</theme>\r\n        </config>\r\n      </layout>\r\n    </layouts>\r\n  </component>\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"NONE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"8b392a16-d667-47cf-811e-c86c73c2d843\" name=\"Changes\" comment=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ClangdSettings\">\r\n    <option name=\"formatViaClangd\" value=\"false\" />\r\n  </component>\r\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[eixomr6hxs7xyxvs]\" />\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Kotlin Interface\" />\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"layoutResourceFile\" />\r\n        <option value=\"Kotlin Class\" />\r\n        <option value=\"valueResourceFile\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"ProjectErrors\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Y071N69MkYEgNj3PJBAnguhfg3\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,\r\n    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/DAM/AvistaDAM/app/src/main/res/layout&quot;,\r\n    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\DAM\\AvistaDAM\\app\\src\\main\\res\\layout\" />\r\n      <recent name=\"C:\\DAM\\AvistaDAM\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM\\app\\src\\main\\res\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM\\app\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM\\app\\src\\main\\res\\layout\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\DAM\\AvistaDAM\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\\src\\main\\res\\values\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\\src\\main\\res\\layout\" />\r\n    </key>\r\n    <key name=\"MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.avista.ui\" />\r\n      <recent name=\"com.example.avista.data\" />\r\n      <recent name=\"com.example.avista.adapter\" />\r\n      <recent name=\"com.example.avista.model\" />\r\n    </key>\r\n    <key name=\"android.template.-498907413\">\r\n      <recent name=\"com.example.avista.ui\" />\r\n    </key>\r\n    <key name=\"CopyKotlinDeclarationDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.avista.model\" />\r\n      <recent name=\"com.example.avista.ui\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\">\r\n      <module name=\"Avista.app.main\" />\r\n      <option name=\"DEPLOY\" value=\"true\" />\r\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\r\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\r\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\r\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\r\n      <option name=\"ALL_USERS\" value=\"false\" />\r\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\r\n      <option name=\"CLEAR_APP_STORAGE\" value=\"false\" />\r\n      <option name=\"DYNAMIC_FEATURES_DISABLED_LIST\" value=\"\" />\r\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\r\n      <option name=\"MODE\" value=\"default_activity\" />\r\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\r\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\r\n      <option name=\"INSPECTION_WITHOUT_ACTIVITY_RESTART\" value=\"false\" />\r\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\r\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\r\n      <Auto>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Auto>\r\n      <Hybrid>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Hybrid>\r\n      <Java>\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Java>\r\n      <Native>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Native>\r\n      <Profilers>\r\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Java/Kotlin Method Sample (legacy)\" />\r\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\r\n      </Profilers>\r\n      <option name=\"DEEP_LINK\" value=\"\" />\r\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\r\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\r\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\r\n      <method v=\"2\">\r\n        <option name=\"Android.Gradle.BeforeRunTask\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"8b392a16-d667-47cf-811e-c86c73c2d843\" name=\"Changes\" comment=\"\" />\r\n      <created>1699650426524</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1699650426524</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"criação de projeto\">\r\n      <created>1699650627333</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1699650627333</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"criação de projeto\">\r\n      <created>1699650643914</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1699650643914</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1706141651561</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1706141651561</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"criação de projeto\" />\r\n    <MESSAGE value=\"-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)\" />\r\n    <MESSAGE value=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"kotlin-line\">\r\n          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>\r\n          <line>74</line>\r\n          <option name=\"timeStamp\" value=\"10\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"kotlin-line\">\r\n          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>\r\n          <line>80</line>\r\n          <option name=\"timeStamp\" value=\"11\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -74,12 +74,49 @@
+     <option name="autoReloadType" value="NONE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8b392a16-d667-47cf-811e-c86c73c2d843" name="Changes" comment="-action bar superior completa&#10;-atividade about&#10;-ajustes UI">
++    <list default="true" id="8b392a16-d667-47cf-811e-c86c73c2d843" name="Changes" comment="-bug fix alterar coordenadas">
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/projetodam/avista/ExampleInstrumentedTest.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ImgBBPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ImgBBPOST.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Observacao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoPUT.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/RespostaAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Utilizador.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/EnvioFotografia.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/RetrofitImgBB.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/RetrofitInitializer.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/EnvioFotografiaCallback.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoAPI.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoFotografia.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AboutActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/EditarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/FullscreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MapActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SignupActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/SignupActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/SplashScreenActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/avista/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/projetodam/avista/ExampleUnitTest.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -89,7 +126,7 @@
+   <component name="ClangdSettings">
+     <option name="formatViaClangd" value="false" />
+   </component>
+-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[eixomr6hxs7xyxvs]" />
++  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Administrator\.android\avd\Pixel_7_Pro_API_30.avd]" />
+   <component name="ExternalProjectsData">
+     <projectState path="$PROJECT_DIR$">
+       <ProjectState />
+@@ -114,14 +151,13 @@
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProblemsViewState">
+-    <option name="selectedTabId" value="ProjectErrors" />
++    <option name="selectedTabId" value="CurrentFile" />
+   </component>
+   <component name="ProjectId" id="2Y071N69MkYEgNj3PJBAnguhfg3" />
+   <component name="ProjectLevelVcsManager">
+     <ConfirmationsSetting value="2" id="Add" />
+   </component>
+   <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent">{
+@@ -271,7 +307,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1706141651561</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="-bug fix alterar coordenadas">
++      <option name="closed" value="true" />
++      <created>1706245373059</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1706245373059</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -290,22 +334,7 @@
+     <MESSAGE value="criação de projeto" />
+     <MESSAGE value="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)" />
+     <MESSAGE value="-action bar superior completa&#10;-atividade about&#10;-ajustes UI" />
+-    <option name="LAST_COMMIT_MESSAGE" value="-action bar superior completa&#10;-atividade about&#10;-ajustes UI" />
+-  </component>
+-  <component name="XDebuggerManager">
+-    <breakpoint-manager>
+-      <breakpoints>
+-        <line-breakpoint enabled="true" type="kotlin-line">
+-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>
+-          <line>74</line>
+-          <option name="timeStamp" value="10" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="kotlin-line">
+-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt</url>
+-          <line>80</line>
+-          <option name="timeStamp" value="11" />
+-        </line-breakpoint>
+-      </breakpoints>
+-    </breakpoint-manager>
++    <MESSAGE value="-bug fix alterar coordenadas" />
++    <option name="LAST_COMMIT_MESSAGE" value="-bug fix alterar coordenadas" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Avista</string>\r\n    <string name=\"utilizador\">E-Mail</string>\r\n    <string name=\"password\">Palavra-Passe</string>\r\n    <string name=\"keep_me_logged_in\">Mantém-me conectado.</string>\r\n    <string name=\"Registe\">Ainda não tem conta? Registe-se aqui.</string>\r\n    <string name=\"Recupere\">Recupere a sua palavra-passe.</string>\r\n    <string name=\"confirmar_palavra_passe\">Confirmar Palavra-Passe</string>\r\n    <string name=\"registar\">Registar</string>\r\n    <string name=\"data_placeholder\">Placeholder</string>\r\n    <string name=\"confirmar_password_falha\">Palavras-Passe não correspondem.</string>\r\n    <string name=\"preenchimento_falha\">Preencha todos os campos.</string>\r\n    <string name=\"login_falha\">Houve um erro no acesso, tente novamente.</string>\r\n    <string name=\"verificar_password\">Verifique o nome de utilizador ou a password.</string>\r\n    <string name=\"licenciatura_em_engenharia_inform_tica\">Licenciatura em Engenharia Informática</string>\r\n    <string name=\"desenvolvimento_de_aplica_es_m_veis\">Desenvolvimento de Aplicações Móveis</string>\r\n    <string name=\"autores\">Autores:</string>\r\n    <string name=\"vasco_silv_rio_n_22350\">Vasco Silvério Nº22350</string>\r\n    <string name=\"r_ben_garcia_n_16995\">Rúben Garcia Nº16995</string>\r\n    <string name=\"utiliza_o_das_apis\">Utilização das APIs:</string>\r\n    <string name=\"api_sheety\">API Sheety</string>\r\n    <string name=\"openstreetmaps_api\">OpenStreetMaps API</string>\r\n    <string name=\"imgbb_api\">ImgBB API</string>\r\n</resources>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	
++++ b/app/src/main/res/values/strings.xml	
+@@ -21,4 +21,10 @@
+     <string name="api_sheety">API Sheety</string>
+     <string name="openstreetmaps_api">OpenStreetMaps API</string>
+     <string name="imgbb_api">ImgBB API</string>
++    <string name="n_o_foi_selecionada_nenhuma_fotografia">Não foi selecionada nenhuma fotografia.</string>
++    <string name="n_o_foi_especificada_a_esp_cie">Não foi especificada a espécie.</string>
++    <string name="n_o_foi_especificada_a_data">Não foi especificada a data.</string>
++    <string name="verifique_a_liga_o_internet">Verifique a ligação à Internet.</string>
++    <string name="preciso_dar_permiss_o_de_acesso_localiza_o_para_obter_a_latitude_e_longitude">É preciso dar permissão de acesso à localização para obter a latitude e longitude.</string>
++    <string name="preciso_dar_a_permiss_o_de_acesso_c_mera_para_poder_tirar_fotografias">É preciso dar a permissão de acesso à câmera para poder tirar fotografias.</string>
+ </resources>
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id(\"com.android.application\")\r\n    id(\"org.jetbrains.kotlin.android\")\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.avista\"\r\n    compileSdk = 34\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.avista\"\r\n        minSdk = 24\r\n        targetSdk = 33\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_1_8\r\n        targetCompatibility = JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"1.8\"\r\n    }\r\n    buildFeatures {\r\n        dataBinding = true\r\n        viewBinding = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation (\"com.squareup.retrofit2:retrofit:2.3.0\")\r\n    implementation (\"com.squareup.retrofit2:converter-gson:2.3.0\")\r\n    implementation (\"org.osmdroid:osmdroid-android:6.1.11\")\r\n    implementation(\"androidx.core:core-ktx:1.9.0\")\r\n    implementation(\"androidx.appcompat:appcompat:1.6.1\")\r\n    implementation(\"com.google.android.material:material:1.10.0\")\r\n    implementation(\"androidx.constraintlayout:constraintlayout:2.1.4\")\r\n    implementation (\"com.squareup.picasso:picasso:2.71828\")\r\n    implementation(\"com.google.android.gms:play-services-cast-framework:21.4.0\")\r\n    implementation (\"at.favre.lib:bcrypt:0.10.2\")\r\n    testImplementation(\"junit:junit:4.13.2\")\r\n    implementation (\"com.github.bumptech.glide:glide:4.12.0\")\r\n    annotationProcessor (\"com.github.bumptech.glide:compiler:4.12.0\")\r\n    androidTestImplementation(\"androidx.test.ext:junit:1.1.5\")\r\n    androidTestImplementation(\"androidx.test.espresso:espresso-core:3.5.1\")\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	
++++ b/app/build.gradle.kts	
+@@ -4,11 +4,11 @@
+ }
+ 
+ android {
+-    namespace = "com.example.avista"
++    namespace = "com.projetodam.avista"
+     compileSdk = 34
+ 
+     defaultConfig {
+-        applicationId = "com.example.avista"
++        applicationId = "com.projetodam.avista"
+         minSdk = 24
+         targetSdk = 33
+         versionCode = 1
+Index: local.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>## This file must *NOT* be checked into Version Control Systems,\r\n# as it contains information specific to your local configuration.\r\n#\r\n# Location of the SDK. This is only used by Gradle.\r\n# For customization when using a Version Control System, please read the\r\n# header note.\r\n#Tue Dec 26 22:40:41 GMT 2023\r\nsdk.dir=C\\:\\\\Android\\\\Sdk\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/local.properties b/local.properties
+--- a/local.properties	
++++ b/local.properties	
+@@ -5,4 +5,4 @@
+ # For customization when using a Version Control System, please read the
+ # header note.
+ #Tue Dec 26 22:40:41 GMT 2023
+-sdk.dir=C\:\\Android\\Sdk
++sdk.dir=C\:\\Users\\Administrator\\AppData\\Local\\Android\\Sdk

@@ -150,7 +150,7 @@
             android:text="Mapa" />
 
         <Button
-            android:id="@+id/btnGuardarObs"
+            android:id="@+id/btn_editar_obs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Guardar alterações" />

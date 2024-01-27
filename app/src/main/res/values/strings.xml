@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Avista</string>
+    <string name="nome_app">Avista</string>
     <string name="utilizador">E-Mail</string>
     <string name="password">Palavra-Passe</string>
     <string name="keep_me_logged_in">Mantém-me conectado.</string>
@@ -21,4 +21,11 @@
     <string name="api_sheety">API Sheety</string>
     <string name="openstreetmaps_api">OpenStreetMaps API</string>
     <string name="imgbb_api">ImgBB API</string>
+    <string name="verifique_a_liga_o_internet">Verifique a ligação à Internet.</string>
+    <string name="preciso_dar_permiss_o_de_acesso_localiza_o_para_obter_a_latitude_e_longitude">É preciso dar permissão de acesso à localização para obter a latitude e longitude.</string>
+    <string name="preciso_dar_a_permiss_o_de_acesso_c_mera_para_poder_tirar_fotografias">É preciso dar a permissão de acesso à câmera para poder tirar fotografias.</string>
+    <string name="n_o_foi_selecionada_nenhuma_fotografia">Não foi selecionada nenhuma fotografia.</string>
+    <string name="n_o_foi_especificada_a_esp_cie">Não foi especificada a espécie.</string>
+    <string name="n_o_foi_especificada_a_data">Não foi especificada a data.</string>
+    <string name="data_inv_lida_o_formato_da_data_deve_ser_dd_mm_aaaa">Data inválida. O formato da data deve ser dd/MM/aaaa.</string>
 </resources>

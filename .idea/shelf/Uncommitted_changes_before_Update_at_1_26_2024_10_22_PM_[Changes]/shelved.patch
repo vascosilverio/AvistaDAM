@@ -1,0 +1,1377 @@
+Index: app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt b/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt
+rename from app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.Manifest
+ import android.annotation.SuppressLint
+@@ -13,7 +13,6 @@
+ import android.graphics.drawable.ColorDrawable
+ import android.location.Location
+ import android.location.LocationManager
+-import android.net.ParseException
+ import android.net.Uri
+ import android.os.Build
+ import android.os.Bundle
+@@ -23,20 +22,17 @@
+ import android.widget.ImageView
+ import android.widget.Toast
+ import androidx.annotation.RequiresApi
+-import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.app.ActivityCompat
+ import androidx.core.content.ContextCompat
+ import androidx.lifecycle.ViewModelProvider
+-import com.example.avista.R
+-import com.example.avista.databinding.ActivityAdicionarObsBinding
+-import com.example.avista.model.Observacao
+-import com.example.avista.model.ObservacaoPOST
+-import com.example.avista.model.RespostaAPI
+-import com.example.avista.retrofit.EnvioFotografia
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.retrofit.service.EnvioFotografiaCallback
+-import com.example.avista.retrofit.service.ServicoAPI
+-import com.example.avista.ui.activity.MapActivity
++import com.projetodam.avista.model.Observacao
++import com.projetodam.avista.model.ObservacaoPOST
++import com.projetodam.avista.model.RespostaAPI
++import com.projetodam.avista.retrofit.EnvioFotografia
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.retrofit.service.EnvioFotografiaCallback
++import com.projetodam.avista.retrofit.service.ServicoAPI
++import com.projetodam.avista.ui.activity.MapActivity
+ import com.google.gson.Gson
+ import retrofit2.Call
+ import retrofit2.Callback
+@@ -45,14 +41,22 @@
+ import java.text.SimpleDateFormat
+ import java.util.Date
+ import com.bumptech.glide.Glide
+-import com.example.avista.model.ObservacaoSharedModel
+-import java.lang.Exception
++import com.projetodam.avista.R
++import com.projetodam.avista.databinding.ActivityAdicionarObsBinding
++import com.projetodam.avista.model.ObservacaoSharedModel
+ import java.time.LocalDate
+ import java.time.format.DateTimeFormatter
+ import java.time.format.DateTimeParseException
+-import java.util.Locale
+ 
+-
++    /*
++    * Classe que inicia a actividade AdicionarObsActivity com o layout activity_adicionar_obs.xml
++    * Verifica as permissões de utilização de câmara
++    * Verifica as permissões de utilização de GPS
++    * Verifica os campos de preenchimento da observação (espécie,descrição e data)
++    * Permite introduzir localicação escolhida no mapa OpenStreetMaps ou utilizar localização atual
++    * Permite tirar foto para introduzir na observação ou escolher foto de galeria do utilizador
++    *
++    */
+ class AdicionarObsActivity : BaseActivity() {
+ 
+     private lateinit var binding: ActivityAdicionarObsBinding
+@@ -86,30 +90,35 @@
+         val currentDate = dataFormatada.format(Date())
+         binding.txtData.setText(currentDate)
+ 
++        //verifica as permissões introduzidas
+         verificarPermissaoLocalizacao()
+ 
++        // evento onclick no botao btnCamera para verificar a permissão e abrir a camara
+         binding.btnCamera.setOnClickListener{
+             verificarPermissaoCamera()
+         }
+ 
++        // evento onlcick no botao btnGaleria para abrir a galeria do utilizador
+         binding.btnGaleria.setOnClickListener{
+             abrirGaleria()
+         }
+ 
++        // evento onclick no botao btnMapa para abrir o mapa com a localização atual do utilizador
+         binding.btnMapa.setOnClickListener {
+             listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
+             var intent = Intent(this, MapActivity::class.java)
+-            // enviar para a atividade Mapa a latitude e longitude atuais
++            // envia para a atividade Mapa a latitude e longitude atuais
+             intent.putExtra("latitude", latitude.toString())
+             intent.putExtra("longitude", longitude.toString())
++            //envia a lista de observacoes do utilizador
+             intent.putExtra("listaObservacoes", listaObservacoes)
+             intent.putExtra("utilizador", utilizador)
+             intent.putExtra("option", "OPTION_2")
+             startActivityForResult(intent, PICK_MARKER_CODE)
+         }
+ 
++        // evento onclick no botao btnAdicionarObs para adicionar à base de dados a observação após verificar os campos
+         binding.btnAdicionarObs.setOnClickListener {
+-
+             var especie = binding.txtEspecie.text.toString()
+             var data = binding.txtData.text.toString()
+             var descricao = binding.txtDescricao.text.toString()
+@@ -117,7 +126,7 @@
+ 
+             // verifica se a data está no formato dd/mm/aaaa
+             if (validarData(data)) {
+-                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
++                // cria um dialog para mostrar o loading enquanto os dados são enviados para as APIs
+                 val loading = Dialog(this)
+                 loading.setContentView(R.layout.loading)
+                 loading.window?.setLayout(
+@@ -127,7 +136,7 @@
+                 loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                 loading.setCancelable(false)
+ 
+-                // usar o Glide para mostrar o GIF com movimento
++                // usa o Glide para mostrar o GIF do logo da app com movimento
+                 val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+                 Glide.with(this)
+                     .load(R.drawable.loading)
+@@ -139,31 +148,31 @@
+                 if (!::imgBitmap.isInitialized) {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi selecionada nenhuma fotografia.",
++                        getString(R.string.n_o_foi_selecionada_nenhuma_fotografia),
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else if (especie == "") {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi especificada a espécie.",
++                        getString(R.string.n_o_foi_especificada_a_esp_cie),
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else if (data == "") {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi especificada a data.",
++                        getString(R.string.n_o_foi_especificada_a_data),
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else {
+-                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
++                    // envia fotografia para o ImgBB e guardar o displayURL que vai ser retornado
+                     EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
+                         EnvioFotografiaCallback {
+                         override fun onSucess(url: String) {
+                             imgURL = url
+-                            // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS
++                            // adiciona observação com os campos todos verificados
+                             adicionarObs(
+                                 id,
+                                 utilizador,
+@@ -177,14 +186,11 @@
+                             )
+                         }
+ 
++                        // mostra mensagem de erro ao falhar a introdução da observação
+                         override fun onError(mensagemErro: String) {
+-                            Log.e(
+-                                "AdicionarObsActivity",
+-                                "Erro ao obter o displayURL: $mensagemErro"
+-                            )
+                             Toast.makeText(
+                                 applicationContext,
+-                                "Erro ao obter o displayURL",
++                                getString(R.string.verifique_a_liga_o_internet),
+                                 Toast.LENGTH_SHORT
+                             ).show()
+                             loading.dismiss()
+@@ -195,7 +201,9 @@
+         }
+     }
+ 
+-    // função para validar que a data inserida é válida
++        /*
++        * Retorna um boolean true se a data for inserida com o formato correcto dd/MM/yyyy
++        */
+     @RequiresApi(Build.VERSION_CODES.O)
+     private fun validarData(data: String): Boolean {
+         try {
+@@ -212,6 +220,10 @@
+         }
+     }
+ 
++        /*
++        * Pede permissões para acesso à localização do utilizador, se o já tiver as permissões, atualiza a localização para a atual
++        *
++        */
+     private fun verificarPermissaoLocalizacao() {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE)
+@@ -220,13 +232,21 @@
+         }
+     }
+ 
++        /*
++        * Abre a galeria do utilizador
++        *
++         */
+     private fun abrirGaleria() {
+         val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+         startActivityForResult(galeria, PICK_IMAGE_REQUEST)
+     }
+ 
++        /*
++        * Código com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
++        * Atualiza a uri da foto e passa com intent o onActivityResult com o request code de captura de imagem
++        *
++        */
+     private fun tirarFoto() {
+-        // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
+         val values = ContentValues()
+         values.put(MediaStore.Images.Media.TITLE, "Nova fotografia")
+         values.put(MediaStore.Images.Media.DESCRIPTION, "Através da aplicação Avista")
+@@ -236,6 +256,10 @@
+         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+     }
+ 
++        /*
++        * Pede permissões de acesso à câmera, so o utilizador já tiver permissões inicia a função de tirar foto
++        *
++         */
+     private fun verificarPermissaoCamera() {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
+@@ -244,6 +268,11 @@
+         }
+     }
+ 
++        /*
++        * Verifica se as permissões estão corretas para a escolha de tirar foto ou para o acesso à localização
++        * Apresenta mensagens de erro caso o utilizador não tenha as permissões
++        *
++         */
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+         when (requestCode) {
+@@ -251,7 +280,8 @@
+                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                     tirarFoto()
+                 } else {
+-                    Toast.makeText(this, "É preciso dar a permissão de acesso à câmera para poder tirar fotografias.", Toast.LENGTH_SHORT).show()
++                    Toast.makeText(this,
++                        getString(R.string.preciso_dar_a_permiss_o_de_acesso_c_mera_para_poder_tirar_fotografias), Toast.LENGTH_SHORT).show()
+                 }
+             }
+ 
+@@ -259,12 +289,17 @@
+                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                     localizacaoAtual()
+                 } else {
+-                    Toast.makeText(this, "É preciso dar permissão de acesso à localização para obter a latitude e longitude.", Toast.LENGTH_SHORT).show()
++                    Toast.makeText(this,
++                        getString(R.string.preciso_dar_permiss_o_de_acesso_localiza_o_para_obter_a_latitude_e_longitude), Toast.LENGTH_SHORT).show()
+                 }
+             }
+         }
+     }
+ 
++        /*
++        * Atualiza a localização do utilizador para a localização atual do utilizador utilizando as coordenadas GPS
++        *
++         */
+     @SuppressLint("ServiceCast")
+     private fun localizacaoAtual() {
+         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+@@ -283,6 +318,11 @@
+         }
+     }
+ 
++        /*
++        * Recebe o request code correspodente à autalização de localização, captura de foto e escolha de foto na galeria
++        * Atualiza as fotos ou localização obtida consoante a escolha do request code
++        *
++         */
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+ 
+@@ -301,6 +341,10 @@
+             longitude = data?.getStringExtra("longitudeAtualizada")!!.toDouble()
+         }
+     }
++
++        /*
++        * Conversão da imagem Uri para bitmap para introdução nas Views
++         */
+     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {
+         try {
+             val inputStream = contentResolver.openInputStream(uriImagem)
+@@ -311,6 +355,10 @@
+         }
+     }
+ 
++        /*
++        * Chamada à API Sheety de PUT para introdução da observação com os campos verificados
++        *
++         */
+     private fun adicionarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
+         // criar o objeto Observacao
+         val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
+Index: app/src/main/java/com/example/avista/ui/AboutActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/AboutActivity.kt b/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt
+rename from app/src/main/java/com/example/avista/ui/AboutActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/AboutActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt	
+@@ -1,8 +1,11 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.os.Bundle
+-import com.example.avista.databinding.AboutBinding
++import com.projetodam.avista.databinding.AboutBinding
+ 
++/*
++* Actividade about que inicia o layout about.xml
++*/
+ class AboutActivity : BaseActivity() {
+ 
+     private lateinit var binding: AboutBinding
+Index: app/src/main/java/com/example/avista/ui/LoginActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/LoginActivity.kt b/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt
+rename from app/src/main/java/com/example/avista/ui/LoginActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/LoginActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt	
+@@ -1,17 +1,16 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.content.Intent
+-import android.content.SharedPreferences
+ import android.os.Bundle
+ import android.util.Log
+ import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+ import at.favre.lib.crypto.bcrypt.BCrypt
+-import com.example.avista.R
+-import com.example.avista.databinding.ActivityLoginBinding
+-import com.example.avista.model.UtilizadorGET
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.retrofit.service.ServicoAPI
++import com.projetodam.avista.R
++import com.projetodam.avista.databinding.ActivityLoginBinding
++import com.projetodam.avista.model.UtilizadorGET
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.retrofit.service.ServicoAPI
+ import retrofit2.Call
+ import retrofit2.Callback
+ import retrofit2.Response
+Index: app/src/main/java/com/example/avista/ui/FullscreenActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/FullscreenActivity.kt b/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt
+rename from app/src/main/java/com/example/avista/ui/FullscreenActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/FullscreenActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt	
+@@ -1,13 +1,11 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.os.Bundle
+ import android.widget.ImageView
+ import androidx.appcompat.app.AppCompatActivity
+-import android.net.Uri
+ import androidx.core.net.toUri
+-import com.example.avista.R
+-import com.example.avista.databinding.ActivityAdicionarObsBinding
+-import com.example.avista.databinding.FullscreenObservacaoBinding
++import com.projetodam.avista.R
++import com.projetodam.avista.databinding.FullscreenObservacaoBinding
+ import com.squareup.picasso.Picasso
+ 
+ class FullscreenObservacaoActivity : AppCompatActivity() {
+Index: app/src/main/java/com/example/avista/ui/EditarObsActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/EditarObsActivity.kt b/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt
+rename from app/src/main/java/com/example/avista/ui/EditarObsActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/EditarObsActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.Manifest
+ import android.app.Activity
+@@ -19,37 +19,35 @@
+ import android.widget.ImageView
+ import android.widget.Toast
+ import androidx.annotation.RequiresApi
+-import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.app.ActivityCompat
+ import androidx.core.content.ContextCompat
+ import androidx.lifecycle.ViewModelProvider
+ import com.bumptech.glide.Glide
+-import com.example.avista.R
+-import com.example.avista.databinding.ActivityEditarObsBinding
+-import com.example.avista.model.Observacao
+-import com.example.avista.model.ObservacaoPUT
+-import com.example.avista.model.ObservacaoSharedModel
+-import com.example.avista.model.RespostaAPI
+-import com.example.avista.retrofit.EnvioFotografia
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.retrofit.service.EnvioFotografiaCallback
+-import com.example.avista.retrofit.service.ServicoAPI
+-import com.example.avista.ui.activity.MapActivity
++import com.projetodam.avista.model.Observacao
++import com.projetodam.avista.model.ObservacaoPUT
++import com.projetodam.avista.model.ObservacaoSharedModel
++import com.projetodam.avista.model.RespostaAPI
++import com.projetodam.avista.retrofit.EnvioFotografia
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.retrofit.service.EnvioFotografiaCallback
++import com.projetodam.avista.retrofit.service.ServicoAPI
++import com.projetodam.avista.ui.activity.MapActivity
+ import com.google.gson.Gson
++import com.projetodam.avista.R
++import com.projetodam.avista.databinding.ActivityEditarObsBinding
+ import com.squareup.picasso.Picasso
+-import kotlinx.coroutines.newFixedThreadPoolContext
+ import retrofit2.Call
+ import retrofit2.Callback
+ import retrofit2.Response
+ import java.io.FileNotFoundException
+-import java.io.IOException
+-import java.net.HttpURLConnection
+-import java.net.URL
+ import java.time.LocalDate
+ import java.time.format.DateTimeFormatter
+ import java.time.format.DateTimeParseException
+ 
+-
++/*
++*
++*
++ */
+ class EditarObsActivity : BaseActivity() {
+ 
+     private lateinit var binding: ActivityEditarObsBinding
+Index: app/src/main/java/com/example/avista/ui/BaseActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/BaseActivity.kt b/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt
+rename from app/src/main/java/com/example/avista/ui/BaseActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/BaseActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.Manifest
+ import android.annotation.SuppressLint
+@@ -14,12 +14,16 @@
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.app.ActivityCompat
+ import androidx.lifecycle.ViewModelProvider
+-import com.example.avista.R
+-import com.example.avista.model.Observacao
+-import com.example.avista.model.ObservacaoSharedModel
+-import com.example.avista.ui.activity.MapActivity
++import com.projetodam.avista.R
++import com.projetodam.avista.model.Observacao
++import com.projetodam.avista.model.ObservacaoSharedModel
++import com.projetodam.avista.ui.activity.MapActivity
+ 
+ 
++/*
++* Classe que extende a AppCompatActivity para adicionar às outras classes por extensão a ActionBar superior com o acesso ao About,Observações,Mapa e Logout
++*
++ */
+ open class BaseActivity : AppCompatActivity() {
+ 
+     private val LOCATION_PERMISSION_CODE = 102
+@@ -32,16 +36,23 @@
+ 
+     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+         val menuInflater: MenuInflater = menuInflater
++        //escolhe o menu layout bottom_nav do package menu
+         menuInflater.inflate(R.menu.bottom_nav, menu)
+         viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
+         return true
+     }
+ 
+-
++    /*
++    * Adiciona os eventos despoletados no clique dos items do menu layout bottom_nav
++    *
++     */
+     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         return when (item.itemId) {
++            // no clique do botao com o icone de Mapa, inicia o mapa com passagem da localização atual, id de utilizador e lista de observações
+             R.id.item_mapa -> {
++                // recebe o utilizador da atividade de Login
+                 utilizador = intent.getStringExtra("utilizador").toString()
++                // recebe a lista de observacoes do shared view model
+                 listaObservacoes = viewModel.listaObservacoes!!
+                 var intent = Intent(this, MapActivity::class.java)
+                 // enviar para a atividade Mapa a latitude e longitude atuais
+@@ -53,18 +64,19 @@
+                 startActivityForResult(intent, PICK_MARKER_CODE)
+                 true
+             }
++            // no clique do botao com o icone de Lista, inicia a recycler view da lista de observaçoes com passagem do id de utilizador
+             R.id.item_observacoes -> {
+-                //receber o utilizador da atividade de Login
++                // recebe o utilizador da atividade de Login
+                 utilizador = intent.getStringExtra("utilizador").toString()
+                 var intent = Intent(this@BaseActivity, MainActivity::class.java)
+-                // enviar para a atividade Main o utilizador autenticado
+                 intent.putExtra("utilizador", utilizador)
+                 startActivity(intent)
+                 true
+             }
++            // no clique do botao com o icone de Logout, faz logout do utilizador autenticado e devolve à página de Login
+             R.id.item_Logout ->
+                 {
+-                // Limpar o login guardado na sharedPreferences
++                // limpa o login guardado na sharedPreferences
+                 val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
+                 val editor = sharedPref.edit()
+                 editor.clear()
+@@ -75,6 +87,7 @@
+                 finish()
+                 true
+             }
++            // no clique do botao com o icone de Info/About, abre a atividade About com a informação relevante e passagem do id do utilizador
+             R.id.item_Info -> {
+                 utilizador = intent.getStringExtra("utilizador").toString()
+                 var intent = Intent(this@BaseActivity, AboutActivity::class.java)
+@@ -87,6 +100,11 @@
+         }
+     }
+ 
++        /*
++        * Verifica se as permissões estão corretas para a escolha de tirar foto ou para o acesso à localização
++        * Apresenta mensagens de erro caso o utilizador não tenha as permissões
++        *
++         */
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+         when (requestCode) {
+@@ -100,6 +118,10 @@
+         }
+     }
+ 
++        /*
++        * Atualiza a localização do utilizador para a localização atual do utilizador utilizando as coordenadas GPS
++        *
++        */
+     @SuppressLint("ServiceCast")
+     private fun localizacaoAtual() {
+         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+Index: app/src/main/java/com/example/avista/ui/SignupActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/SignupActivity.kt b/app/src/main/java/com/projetodam/avista/ui/SignupActivity.kt
+rename from app/src/main/java/com/example/avista/ui/SignupActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/SignupActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/SignupActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/SignupActivity.kt	
+@@ -1,23 +1,22 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+-import android.content.Intent
+ import android.os.Bundle
+ import android.util.Log
+ import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+-import com.example.avista.R
+-import com.example.avista.databinding.ActivitySignupBinding
+-import com.example.avista.model.RespostaAPI
+-import com.example.avista.model.Utilizador
+-import com.example.avista.model.UtilizadorPOST
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.retrofit.service.ServicoAPI
++import com.projetodam.avista.model.RespostaAPI
++import com.projetodam.avista.model.Utilizador
++import com.projetodam.avista.model.UtilizadorPOST
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.retrofit.service.ServicoAPI
+ import com.google.gson.Gson
+ import retrofit2.Call
+ import retrofit2.Callback
+ import retrofit2.Response
+ import at.favre.lib.crypto.bcrypt.BCrypt
+-import com.example.avista.model.UtilizadorGET
++import com.projetodam.avista.R
++import com.projetodam.avista.databinding.ActivitySignupBinding
++import com.projetodam.avista.model.UtilizadorGET
+ 
+ class SignupActivity : AppCompatActivity() {
+ 
+Index: app/src/main/java/com/example/avista/ui/MapActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/MapActivity.kt b/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt
+rename from app/src/main/java/com/example/avista/ui/MapActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/MapActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/MapActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt	
+@@ -1,12 +1,9 @@
+-package com.example.avista.ui.activity
++package com.projetodam.avista.ui.activity
+ 
+ import android.Manifest
+ import android.app.Activity
+-import android.app.Dialog
+ import android.content.Intent
+ import android.content.pm.PackageManager
+-import android.graphics.Color
+-import android.graphics.drawable.ColorDrawable
+ import android.graphics.drawable.Drawable
+ import android.location.Location
+ import android.location.LocationListener
+@@ -14,17 +11,15 @@
+ import android.os.Bundle
+ import android.util.Log
+ import android.view.View
+-import android.view.ViewGroup
+ import android.widget.Button
+ import android.widget.ImageView
+ import android.widget.LinearLayout
+ import android.widget.TextView
+-import android.widget.Toast
+ import androidx.core.app.ActivityCompat
+ import androidx.core.content.ContextCompat
+-import com.example.avista.R
+-import com.example.avista.model.Observacao
+-import com.example.avista.ui.BaseActivity
++import com.projetodam.avista.R
++import com.projetodam.avista.model.Observacao
++import com.projetodam.avista.ui.BaseActivity
+ import com.squareup.picasso.Picasso
+ import org.osmdroid.api.IMapController
+ import org.osmdroid.config.Configuration
+Index: app/src/main/java/com/example/avista/ui/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/MainActivity.kt b/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt
+rename from app/src/main/java/com/example/avista/ui/MainActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/MainActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/MainActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.app.Dialog
+ import android.content.Intent
+@@ -14,22 +14,17 @@
+ import androidx.lifecycle.ViewModelProvider
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import com.bumptech.glide.Glide
+-import com.example.avista.R
+-import com.example.avista.adapter.ObservacaoListAdapter
+-import com.example.avista.databinding.ActivityMainBinding
+-import com.example.avista.model.Observacao
+-import com.example.avista.model.ObservacaoGET
+-import com.example.avista.model.ObservacaoSharedModel
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.retrofit.service.ServicoAPI
+-import com.example.avista.ui.activity.MapActivity
++import com.projetodam.avista.R
++import com.projetodam.avista.adapter.ObservacaoListAdapter
++import com.projetodam.avista.databinding.ActivityMainBinding
++import com.projetodam.avista.model.Observacao
++import com.projetodam.avista.model.ObservacaoGET
++import com.projetodam.avista.model.ObservacaoSharedModel
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.retrofit.service.ServicoAPI
+ import retrofit2.Call
+ import retrofit2.Callback
+ import retrofit2.Response
+-import java.io.Serializable
+-
+-
+-
+ 
+ 
+ class MainActivity : BaseActivity() {
+Index: app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt b/app/src/main/java/com/projetodam/avista/ui/SplashScreenActivity.kt
+rename from app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt
+rename to app/src/main/java/com/projetodam/avista/ui/SplashScreenActivity.kt
+--- a/app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt	
++++ b/app/src/main/java/com/projetodam/avista/ui/SplashScreenActivity.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.ui
++package com.projetodam.avista.ui
+ 
+ import android.content.Intent
+ import android.content.pm.PackageManager
+@@ -6,13 +6,11 @@
+ import android.os.Handler
+ import android.os.Looper
+ import android.util.Log
+-import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+-import at.favre.lib.crypto.bcrypt.BCrypt
+-import com.example.avista.R
+-import com.example.avista.model.UtilizadorGET
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.retrofit.service.ServicoAPI
++import com.projetodam.avista.R
++import com.projetodam.avista.model.UtilizadorGET
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.retrofit.service.ServicoAPI
+ import retrofit2.Call
+ import retrofit2.Callback
+ import retrofit2.Response
+Index: app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java b/app/src/main/java/com/projetodam/avista/retrofit/service/EnvioFotografiaCallback.java
+rename from app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java
+rename to app/src/main/java/com/projetodam/avista/retrofit/service/EnvioFotografiaCallback.java
+--- a/app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java	
++++ b/app/src/main/java/com/projetodam/avista/retrofit/service/EnvioFotografiaCallback.java	
+@@ -1,4 +1,4 @@
+-package com.example.avista.retrofit.service;
++package com.projetodam.avista.retrofit.service;
+ 
+ public interface EnvioFotografiaCallback {
+     void onSucess(String url);
+Index: app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java b/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoFotografia.java
+rename from app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java
+rename to app/src/main/java/com/projetodam/avista/retrofit/service/ServicoFotografia.java
+--- a/app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java	
++++ b/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoFotografia.java	
+@@ -1,16 +1,17 @@
+-package com.example.avista.retrofit.service;
++package com.projetodam.avista.retrofit.service;
+ 
+-import com.example.avista.model.ImgBBPOST;
++import com.projetodam.avista.model.ImgBBPOST;
+ 
+ import okhttp3.MultipartBody;
+-import okhttp3.ResponseBody;
+ import retrofit2.Call;
+ import retrofit2.http.Multipart;
+ import retrofit2.http.POST;
+ import retrofit2.http.Part;
+ import retrofit2.http.Query;
+ 
+-// código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
++ /*
++ * código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
++ */
+ public interface ServicoFotografia {
+     @Multipart()
+     @POST("/1/upload")
+Index: app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt b/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt
+rename from app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt
+rename to app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt
+--- a/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt	
++++ b/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.adapter;
++package com.projetodam.avista.adapter;
+ 
+ 
+ import android.app.AlertDialog
+@@ -6,7 +6,6 @@
+ import android.content.Intent
+ import android.graphics.Color
+ import android.graphics.drawable.ColorDrawable
+-import android.net.Uri
+ import android.util.Log
+ import android.view.LayoutInflater
+ import android.view.View
+@@ -16,16 +15,14 @@
+ import android.widget.LinearLayout
+ import android.widget.TextView
+ import androidx.appcompat.app.AppCompatActivity
+-import androidx.core.net.toUri
+ import androidx.recyclerview.widget.RecyclerView
+-import com.example.avista.R
+-import com.example.avista.model.Observacao
+-import com.example.avista.model.ObservacaoSharedModel
+-import com.example.avista.model.RespostaAPI
+-import com.example.avista.retrofit.RetrofitInitializer
+-import com.example.avista.ui.EditarObsActivity
+-import com.example.avista.ui.FullscreenObservacaoActivity
+-import com.example.avista.ui.MainActivity
++import com.projetodam.avista.R
++import com.projetodam.avista.model.Observacao
++import com.projetodam.avista.model.RespostaAPI
++import com.projetodam.avista.retrofit.RetrofitInitializer
++import com.projetodam.avista.ui.EditarObsActivity
++import com.projetodam.avista.ui.FullscreenObservacaoActivity
++import com.projetodam.avista.ui.MainActivity
+ import com.squareup.picasso.Picasso
+ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+ import org.osmdroid.util.GeoPoint
+@@ -35,12 +32,22 @@
+ import retrofit2.Callback
+ import retrofit2.Response
+ 
+-
++/*
++*
++* Cria a recycler view populada com observações do utilizador representadas por CardView para a MainActivity
++* Implementa funcionalidade de filtragem por data e pesquisa por espécie de observação
++* Adiciona uma ScrollView de detalhes de cada observação com funcionalidade de editar ou eliminar observação selecionada
++* Implementa funcionalidade de adicionar observações
++*
++ */
+ class ObservacaoListAdapter(
+     var listaObservacoes: ArrayList<Observacao>,
+ ) :
+     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
+ 
++    /*
++    * Classe de ViewHolder com os dados de cada observação adicionados aos elementos da CardView
++     */
+     class ObservacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+         val textView: TextView = itemView.findViewById(R.id.card_Data_Observacao)
+         val txtDescricao: TextView = itemView.findViewById(R.id.txtDescricao)
+@@ -49,7 +56,9 @@
+         val cartao: LinearLayout = itemView.findViewById(R.id.card_layout)
+     }
+ 
+-    // ordenar a lista por data ou espécie
++    /*
++    * Ordena a lista de observações por data ou espécie
++     */
+     public fun ordenarObs(asc: Boolean) {
+         listaObservacoes.sortWith(compareBy { it.dataOrd() })
+         if (!asc) {
+@@ -58,13 +67,9 @@
+         notifyDataSetChanged()
+     }
+ 
+-    public fun setObs(obsOri: ArrayList<Observacao>){
+-        listaObservacoes = obsOri
+-        notifyDataSetChanged()
+-    }
+-
+-
+-    // criar uma lista auxiliar para adicionar as observações que coincidem com o filtro
++    /*
++    * cria uma lista auxiliar de observações para adicionar as observações que coincidem com o filtro
++    */
+     public fun filtrarObs(especie: String) {
+         val listaFiltrada = listaObservacoes.filter { it.filtro(especie) }
+         listaObservacoes.clear()
+@@ -72,12 +77,16 @@
+         notifyDataSetChanged()
+     }
+ 
++    /*
++    * Verifica se a observação coincide com o filtro
++    */
+     private fun Observacao.filtro(filtro: String): Boolean {
+         return especie!!.contains(filtro, ignoreCase = true)
+     }
+ 
+-
+-    // extrair o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa
++    /*
++    * Extrai o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa
++    */
+     private fun Observacao.dataOrd(): Long {
+         val data = this.data!!.split("/")
+         if (data.size == 3) {
+@@ -89,6 +98,9 @@
+         return 0
+     }
+ 
++    /*
++    * Associa o ViewHolder ao layout cell_observacao
++     */
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObservacaoViewHolder {
+         val view = LayoutInflater.from(parent.context)
+             .inflate(R.layout.cell_observacao, parent, false)
+@@ -96,39 +108,51 @@
+         return ObservacaoViewHolder(view)
+     }
+ 
++    /*
++    * Contagem de items observação
++     */
+     override fun getItemCount(): Int {
+         return listaObservacoes.size
+     }
+ 
++    /*
++    *
++    * Implementa no clique de cada observação a representação de detalhes da observação por ScrollView
++    * Implementa a função de editar e remover no detalhe da observação
++    * Implementa a função de adicionar observação
++    *
++     */
+     override fun onBindViewHolder(holder: ObservacaoViewHolder, position: Int) {
+ 
+-        // construir um objeto onde vão estar todos os dados referentes à observação selecionada
++        // constrói um objeto onde vão estar todos os dados referentes à observação selecionada
+         val observacao = listaObservacoes[position]
+ 
++        // Associa os dados da observação aos elementos do ViewHolder
+         holder.textView.setText(observacao.data)
+         holder.txtEspecie.setText(observacao.especie)
+         holder.txtDescricao.setText(observacao.descricao)
+         Picasso.get().load(observacao.foto).into(holder.image)
+ 
+ 
+-
+-        // evento no cartão selecionado para ficar à escuta de um clique
+-        holder.cartao.setOnClickListener{
+-            // Ao abrir os detalhes de uma observação, construir uma Dialog com recurso ao detalhes_observacao.xml
++        // cria um evento no cartão selecionado para ficar à escuta de um clique
++        holder.cartao.setOnClickListener {
++            // abre os detalhes de uma observação, constrói uma Dialog com recurso ao detalhes_observacao.xml
+             val detalhes = Dialog(holder.itemView.context)
+             detalhes.setContentView(R.layout.detalhes_observacao)
+             detalhes.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+ 
+-            // colocar a dialog com 90% do tamanho horizontal
+-            val largura = (holder.itemView.context.resources.displayMetrics.widthPixels * 0.90).toInt()
++            // coloca a dialog com 90% do tamanho horizontal
++            val largura =
++                (holder.itemView.context.resources.displayMetrics.widthPixels * 0.90).toInt()
+             detalhes.window?.setLayout(largura, ViewGroup.LayoutParams.WRAP_CONTENT)
+             detalhes.setCancelable(true)
+ 
+-            // construir o mapa
++            // constrói o mapa
+             val mapView = detalhes.findViewById<MapView>(R.id.mapa)
+             mapView.setTileSource(TileSourceFactory.MAPNIK)
+             mapView.setMultiTouchControls(true)
+ 
++            // adiciona um marker da localização da observação e centra o mapa nessa localização
+             val marcador = Marker(mapView)
+             marcador.position = GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())
+             mapView.overlays.add(marcador)
+@@ -137,7 +161,7 @@
+                 GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())
+             )
+ 
+-
++            // adciona os dados da observação na ScrollView de detalhes da observação
+             val txtdDescricao = detalhes.findViewById<TextView>(R.id.txtDescricao)
+             val txtEspecie = detalhes.findViewById<TextView>(R.id.txtEspecie)
+             val txtdData = detalhes.findViewById<TextView>(R.id.txtData)
+@@ -151,14 +175,15 @@
+             txtdData.text = observacao.data
+             detalhes.show()
+ 
+-
+-
++            // evento onclick na imagem que abre a imagem da observaçao para fullscreen
+             aveImg.setOnClickListener {
+-                val intent = Intent(holder.itemView.context, FullscreenObservacaoActivity::class.java)
++                val intent =
++                    Intent(holder.itemView.context, FullscreenObservacaoActivity::class.java)
+                 intent.putExtra("imageUri", observacao.foto!!)
+                 holder.itemView.context.startActivity(intent)
+             }
+ 
++            // evento onclick no botao editar que abre a view de editar observaçao com os dados da observaçao
+             editar.setOnClickListener {
+                 val intent =
+                     Intent(holder.itemView.context, EditarObsActivity::class.java)
+@@ -177,19 +202,21 @@
+                 holder.itemView.context.startActivity(intent)
+             }
+ 
++            // evento onclick no botao fechar para fechar a view de detalhes
+             fechar.setOnClickListener {
+                 detalhes.dismiss()
+             }
+ 
+-            // botão para remover a observação que foi selecionada
++            // envento onclick no botao remover para remover a observação que foi selecionada
+             remover.setOnClickListener {
++
+                 // é preciso confirmar o dialog para certificar que o utilizador pretende mesmo remover a observação
+                 val dialogConfirmacao = AlertDialog.Builder(holder.itemView.context)
+                 dialogConfirmacao.setTitle("Remover observação")
+                 dialogConfirmacao.setMessage("Tem a certeza de que pretende remover esta observação?")
+                 dialogConfirmacao.setPositiveButton("Sim") { dialog, which ->
+-                    Log.d("ID DA OBSERVACAO: -> ", "${observacao.id}")
+ 
++                    // chamada à api para remover observacao
+                     val call = RetrofitInitializer().servicoAPI()
+                         .removerObservacao(observacao.id.toString())
+                     call.enqueue(object : Callback<RespostaAPI> {
+@@ -212,6 +239,7 @@
+                                 Log.e("Estado: ", "Falha ao remover observação")
+                             }
+                         }
++
+                         override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
+                             Log.e("ObservacaoListAdapter", "Erro ao remover observação", t)
+                         }
+Index: app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt
+rename from app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt
+rename to app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt
+--- a/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt	
+@@ -1,7 +1,10 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import androidx.lifecycle.ViewModel
+ 
++/*
++* Classe de shared viewmodel do array list de observações para passagem da lista de observações pelas activities
++ */
+ class ObservacaoSharedModel : ViewModel() {
+     var listaObservacoes: ArrayList<Observacao>? = null
+     var listaObservacoesFiltro: ArrayList<Observacao>? = ArrayList<Observacao>()
+Index: app/src/main/java/com/example/avista/model/ObservacaoGET.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/ObservacaoGET.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt
+rename from app/src/main/java/com/example/avista/model/ObservacaoGET.kt
+rename to app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt
+--- a/app/src/main/java/com/example/avista/model/ObservacaoGET.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/model/Observacao.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/Observacao.kt b/app/src/main/java/com/projetodam/avista/model/Observacao.kt
+rename from app/src/main/java/com/example/avista/model/Observacao.kt
+rename to app/src/main/java/com/projetodam/avista/model/Observacao.kt
+--- a/app/src/main/java/com/example/avista/model/Observacao.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/Observacao.kt	
+@@ -1,9 +1,12 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import android.os.Parcel
+ import android.os.Parcelable
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++ * Classe de dados da Observação parcelable para leitura de campos
++ */
+ data class Observacao(
+     @SerializedName("id")
+     val id: String?,
+Index: app/src/main/java/com/example/avista/model/Utilizador.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/Utilizador.kt b/app/src/main/java/com/projetodam/avista/model/Utilizador.kt
+rename from app/src/main/java/com/example/avista/model/Utilizador.kt
+rename to app/src/main/java/com/projetodam/avista/model/Utilizador.kt
+--- a/app/src/main/java/com/example/avista/model/Utilizador.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/Utilizador.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/test/java/com/example/avista/ExampleUnitTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/example/avista/ExampleUnitTest.kt b/app/src/test/java/com/projetodam/avista/ExampleUnitTest.kt
+rename from app/src/test/java/com/example/avista/ExampleUnitTest.kt
+rename to app/src/test/java/com/projetodam/avista/ExampleUnitTest.kt
+--- a/app/src/test/java/com/example/avista/ExampleUnitTest.kt	
++++ b/app/src/test/java/com/projetodam/avista/ExampleUnitTest.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista
++package com.projetodam.avista
+ 
+ import org.junit.Test
+ 
+Index: app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt b/app/src/androidTest/java/com/projetodam/avista/ExampleInstrumentedTest.kt
+rename from app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt
+rename to app/src/androidTest/java/com/projetodam/avista/ExampleInstrumentedTest.kt
+--- a/app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt	
++++ b/app/src/androidTest/java/com/projetodam/avista/ExampleInstrumentedTest.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista
++package com.projetodam.avista
+ 
+ import androidx.test.platform.app.InstrumentationRegistry
+ import androidx.test.ext.junit.runners.AndroidJUnit4
+Index: app/src/main/java/com/example/avista/model/ImgBBPOST.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/ImgBBPOST.kt b/app/src/main/java/com/projetodam/avista/model/ImgBBPOST.kt
+rename from app/src/main/java/com/example/avista/model/ImgBBPOST.kt
+rename to app/src/main/java/com/projetodam/avista/model/ImgBBPOST.kt
+--- a/app/src/main/java/com/example/avista/model/ImgBBPOST.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/ImgBBPOST.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/model/ObservacaoPUT.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/ObservacaoPUT.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt
+rename from app/src/main/java/com/example/avista/model/ObservacaoPUT.kt
+rename to app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt
+--- a/app/src/main/java/com/example/avista/model/ObservacaoPUT.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/model/UtilizadorPOST.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/UtilizadorPOST.kt b/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt
+rename from app/src/main/java/com/example/avista/model/UtilizadorPOST.kt
+rename to app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt
+--- a/app/src/main/java/com/example/avista/model/UtilizadorPOST.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/model/RespostaAPI.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/RespostaAPI.kt b/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt
+rename from app/src/main/java/com/example/avista/model/RespostaAPI.kt
+rename to app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt
+--- a/app/src/main/java/com/example/avista/model/RespostaAPI.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/model/ObservacaoPOST.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/ObservacaoPOST.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt
+rename from app/src/main/java/com/example/avista/model/ObservacaoPOST.kt
+rename to app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt
+--- a/app/src/main/java/com/example/avista/model/ObservacaoPOST.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/model/UtilizadorGET.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/model/UtilizadorGET.kt b/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt
+rename from app/src/main/java/com/example/avista/model/UtilizadorGET.kt
+rename to app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt
+--- a/app/src/main/java/com/example/avista/model/UtilizadorGET.kt	
++++ b/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt	
+@@ -1,4 +1,4 @@
+-package com.example.avista.model
++package com.projetodam.avista.model
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt b/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoAPI.kt
+rename from app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt
+rename to app/src/main/java/com/projetodam/avista/retrofit/service/ServicoAPI.kt
+--- a/app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt	
++++ b/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoAPI.kt	
+@@ -1,11 +1,11 @@
+-package com.example.avista.retrofit.service
++package com.projetodam.avista.retrofit.service
+ 
+-import com.example.avista.model.ObservacaoGET
+-import com.example.avista.model.ObservacaoPOST
+-import com.example.avista.model.ObservacaoPUT
+-import com.example.avista.model.RespostaAPI
+-import com.example.avista.model.UtilizadorGET
+-import com.example.avista.model.UtilizadorPOST
++import com.projetodam.avista.model.ObservacaoGET
++import com.projetodam.avista.model.ObservacaoPOST
++import com.projetodam.avista.model.ObservacaoPUT
++import com.projetodam.avista.model.RespostaAPI
++import com.projetodam.avista.model.UtilizadorGET
++import com.projetodam.avista.model.UtilizadorPOST
+ import retrofit2.Call
+ import retrofit2.http.Body
+ import retrofit2.http.DELETE
+Index: app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt b/app/src/main/java/com/projetodam/avista/retrofit/RetrofitInitializer.kt
+rename from app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt
+rename to app/src/main/java/com/projetodam/avista/retrofit/RetrofitInitializer.kt
+--- a/app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt	
++++ b/app/src/main/java/com/projetodam/avista/retrofit/RetrofitInitializer.kt	
+@@ -1,7 +1,7 @@
+-package com.example.avista.retrofit
++package com.projetodam.avista.retrofit
+ 
+ import android.util.Log
+-import com.example.avista.retrofit.service.ServicoAPI
++import com.projetodam.avista.retrofit.service.ServicoAPI
+ import com.google.gson.Gson
+ import com.google.gson.GsonBuilder
+ import okhttp3.Interceptor
+Index: app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java b/app/src/main/java/com/projetodam/avista/retrofit/RetrofitImgBB.java
+rename from app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java
+rename to app/src/main/java/com/projetodam/avista/retrofit/RetrofitImgBB.java
+--- a/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java	
++++ b/app/src/main/java/com/projetodam/avista/retrofit/RetrofitImgBB.java	
+@@ -1,4 +1,4 @@
+-package com.example.avista.retrofit;
++package com.projetodam.avista.retrofit;
+ 
+ import android.content.Context;
+ 
+@@ -8,7 +8,9 @@
+ import retrofit2.Retrofit;
+ import retrofit2.converter.gson.GsonConverterFactory;
+ 
+-// código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
++  /*
++  * código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
++  */
+ public class RetrofitImgBB {
+ 
+     public static final String KEY_API="1243f229ab03f8e16387eb2679e8a005";
+Index: app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java b/app/src/main/java/com/projetodam/avista/retrofit/EnvioFotografia.java
+rename from app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java
+rename to app/src/main/java/com/projetodam/avista/retrofit/EnvioFotografia.java
+--- a/app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java	
++++ b/app/src/main/java/com/projetodam/avista/retrofit/EnvioFotografia.java	
+@@ -1,12 +1,12 @@
+-package com.example.avista.retrofit;
++package com.projetodam.avista.retrofit;
+ 
+ import android.content.Context;
+ import android.graphics.Bitmap;
+ import android.util.Log;
+ 
+-import com.example.avista.model.ImgBBPOST;
+-import com.example.avista.retrofit.service.EnvioFotografiaCallback;
+-import com.example.avista.retrofit.service.ServicoFotografia;
++import com.projetodam.avista.model.ImgBBPOST;
++import com.projetodam.avista.retrofit.service.EnvioFotografiaCallback;
++import com.projetodam.avista.retrofit.service.ServicoFotografia;
+ 
+ import java.io.ByteArrayOutputStream;
+ import java.io.File;
+@@ -24,7 +24,9 @@
+ import retrofit2.Response;
+ import retrofit2.Retrofit;
+ 
+-// código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
++ /*
++ * código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
++ */
+ public class EnvioFotografia {
+     static String urlImgBB = "";
+     public static String enviarFoto(Bitmap bitmap, Context context, EnvioFotografiaCallback callback) throws IOException {

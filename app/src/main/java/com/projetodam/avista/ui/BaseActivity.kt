@@ -19,7 +19,9 @@ import com.projetodam.avista.model.Observacao
 import com.projetodam.avista.model.ObservacaoSharedModel
 import com.projetodam.avista.ui.activity.MapActivity
 
-
+/*
+* Classe Activity que extende a AppCompatActivity para implementação da ActionBar nas restantes atividades
+ */
 open class BaseActivity : AppCompatActivity() {
 
     private val LOCATION_PERMISSION_CODE = 102
@@ -38,14 +40,18 @@ open class BaseActivity : AppCompatActivity() {
         return true
     }
 
-
+    /*
+    * associa aos items da action bar os eventos de clique
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            //abre o mapa com a lista de observaçoes do utilizador
             R.id.item_mapa -> {
                 utilizador = intent.getStringExtra("utilizador").toString()
+                // envia a lista de observações do SharedView Model
                 listaObservacoes = viewModel.listaObservacoes!!
                 var intent = Intent(this, MapActivity::class.java)
-                // enviar para a atividade Mapa a latitude e longitude atuais
+                // envia para a atividade Mapa a latitude e longitude atuais
                 intent.putExtra("latitude", latitudeB.toString())
                 intent.putExtra("longitude", longitudeB.toString())
                 intent.putExtra("utilizador", utilizador)
@@ -54,18 +60,20 @@ open class BaseActivity : AppCompatActivity() {
                 startActivityForResult(intent, PICK_MARKER_CODE)
                 true
             }
+            //abre a RecyclerView de observações
             R.id.item_observacoes -> {
-                //receber o utilizador da atividade de Login
+                //recebe o utilizador da atividade de Login
                 utilizador = intent.getStringExtra("utilizador").toString()
                 var intent = Intent(this@BaseActivity, MainActivity::class.java)
-                // enviar para a atividade Main o utilizador autenticado
+                // envia para a atividade Main o utilizador autenticado
                 intent.putExtra("utilizador", utilizador)
                 startActivity(intent)
                 true
             }
+            // executa o logout do utilizador autenticado
             R.id.item_Logout ->
                 {
-                // Limpar o login guardado na sharedPreferences
+                // limpa o login guardado na sharedPreferences
                 val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
                 val editor = sharedPref.edit()
                 editor.clear()
@@ -76,10 +84,11 @@ open class BaseActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            //abre a atividade e view de About/Info
             R.id.item_Info -> {
                 utilizador = intent.getStringExtra("utilizador").toString()
                 var intent = Intent(this@BaseActivity, AboutActivity::class.java)
-                // enviar para a atividade Main o utilizador autenticado
+                // envia para a atividade Main o utilizador autenticado
                 intent.putExtra("utilizador", utilizador)
                 startActivity(intent)
                 true
@@ -88,6 +97,10 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    * inicia a atividade correspondente ao request code enviado
+    * as atividades são captura de foto e obtenção
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -101,6 +114,9 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    * obtém e atualiza a localização atual do gps
+    */
     @SuppressLint("ServiceCast")
     private fun localizacaoAtual() {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager

@@ -1,0 +1,1431 @@
+Index: app/src/main/res/layout/activity_editar_obs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@color/white\"\r\n    tools:context=\".ui.AdicionarObsActivity\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView8\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"30pt\"\r\n            android:paddingTop=\"6pt\"\r\n            android:paddingBottom=\"4pt\"\r\n            android:text=\"Editar observação\"\r\n            android:textAlignment=\"center\"\r\n            android:textSize=\"12pt\" />\r\n\r\n        <TableLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:paddingStart=\"6pt\"\r\n            android:paddingEnd=\"6pt\">\r\n\r\n            <TableRow>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtViewEspecie\"\r\n                    android:layout_width=\"145dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"0.2\"\r\n                    android:text=\"Espécie:\"\r\n                    android:textSize=\"10pt\"\r\n                    tools:layout_editor_absoluteX=\"19dp\"\r\n                    tools:layout_editor_absoluteY=\"96dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/txtEspecie\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"0.8\"\r\n                    android:ems=\"10\"\r\n                    android:inputType=\"text\"\r\n                    android:text=\"\"\r\n                    tools:layout_editor_absoluteX=\"144dp\"\r\n                    tools:layout_editor_absoluteY=\"92dp\" />\r\n\r\n            </TableRow>\r\n\r\n            <TableRow\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtViewDescricao\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"0.2\"\r\n                    android:text=\"Descrição:\"\r\n                    android:textSize=\"10pt\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/txtDescricao\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"0.8\"\r\n                    android:ems=\"10\"\r\n                    android:inputType=\"text\"\r\n                    android:text=\"\" />\r\n            </TableRow>\r\n\r\n            <TableRow\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtViewData\"\r\n                    android:layout_weight=\"0.2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Data:\"\r\n                    android:textSize=\"10pt\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/txtData\"\r\n                    android:layout_weight=\"0.8\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:ems=\"10\"\r\n                    android:inputType=\"date\" />\r\n\r\n            </TableRow>\r\n\r\n            <TableRow\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"1dp\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtViewEscolherFoto\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:textSize=\"10pt\"\r\n                    android:layout_weight=\"0.2\"\r\n                    android:paddingBottom=\"5pt\"\r\n                    android:text=\"Fotografia:\" />\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:orientation=\"horizontal\"\r\n                    android:layout_weight=\"0.8\">\r\n\r\n                    <ImageButton\r\n                        android:id=\"@+id/btnGaleria\"\r\n                        android:layout_width=\"0dp\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"0.4\"\r\n                        app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n                    <ImageButton\r\n                        android:id=\"@+id/btnCamera\"\r\n                        android:layout_width=\"0dp\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"0.4\"\r\n                        app:srcCompat=\"@android:drawable/ic_menu_camera\" />\r\n\r\n                </LinearLayout>\r\n\r\n            </TableRow>\r\n        </TableLayout>\r\n\r\n        <ImageView\r\n            android:id=\"@+id/viewImagem\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:src=\"@drawable/foto_template\"\r\n            android:layout_height=\"400dp\"/>\r\n\r\n        <Button\r\n            android:id=\"@+id/btnMapa\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Mapa\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/btnGuardarObs\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Guardar alterações\" />\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</ScrollView>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_editar_obs.xml b/app/src/main/res/layout/activity_editar_obs.xml
+--- a/app/src/main/res/layout/activity_editar_obs.xml	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/res/layout/activity_editar_obs.xml	(date 1706312425758)
+@@ -150,7 +150,7 @@
+             android:text="Mapa" />
+ 
+         <Button
+-            android:id="@+id/btnGuardarObs"
++            android:id="@+id/btn_editar_obs"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Guardar alterações" />
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"false\" />\r\n\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@drawable/bird_logo\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AppCompat.Light.DarkActionBar\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".ui.AdicionarObsActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.EditarObsActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.SignupActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.LoginActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.activity.MapActivity\"\r\n            android:exported=\"false\" />\r\n        <activity android:name=\".ui.AboutActivity\" />\r\n        <activity\r\n            android:name=\".ui.FullscreenObservacaoActivity\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/Theme.Avista\">\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.SplashScreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.MainActivity\"\r\n            android:exported=\"true\"></activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/AndroidManifest.xml	(date 1706313345083)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools">
++    xmlns:tools="http://schemas.android.com/tools"
++    package="com.projetodam.avista">
+ 
+     <uses-feature
+         android:name="android.hardware.camera"
+@@ -19,34 +20,34 @@
+         android:dataExtractionRules="@xml/data_extraction_rules"
+         android:fullBackupContent="@xml/backup_rules"
+         android:icon="@drawable/bird_logo"
+-        android:label="@string/app_name"
++        android:label="@string/nome_app"
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+         tools:targetApi="31">
+         <activity
+-            android:name=".ui.AdicionarObsActivity"
++            android:name="com.projetodam.avista.ui.AdicionarObsActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.EditarObsActivity"
++            android:name="com.projetodam.avista.ui.EditarObsActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.SignupActivity"
++            android:name="com.projetodam.avista.ui.SignupActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.LoginActivity"
++            android:name="com.projetodam.avista.ui.LoginActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".ui.activity.MapActivity"
++            android:name="com.projetodam.avista.ui.activity.MapActivity"
+             android:exported="false" />
+-        <activity android:name=".ui.AboutActivity" />
++        <activity android:name="com.projetodam.avista.ui.AboutActivity" />
+         <activity
+-            android:name=".ui.FullscreenObservacaoActivity"
+-            android:label="@string/app_name"
++            android:name="com.projetodam.avista.ui.FullscreenObservacaoActivity"
++            android:label="@string/nome_app"
+             android:theme="@style/Theme.Avista">
+         </activity>
+         <activity
+-            android:name=".ui.SplashScreenActivity"
++            android:name="com.projetodam.avista.ui.SplashScreenActivity"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+@@ -55,7 +56,7 @@
+             </intent-filter>
+         </activity>
+         <activity
+-            android:name=".ui.MainActivity"
++            android:name="com.projetodam.avista.ui.MainActivity"
+             android:exported="true"></activity>
+     </application>
+ 
+Index: app/src/main/res/layout/activity_splash_screen.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:gravity=\"center\"\r\n    android:orientation=\"vertical\"\r\n    android:background=\"@color/white\"\r\n    tools:context=\".ui.SplashScreenActivity\">\r\n\r\n    <ImageView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"345dp\"\r\n        android:src=\"@drawable/bird_logo\" />\r\n\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:text=\"@string/app_name\"\r\n        android:textSize=\"40dp\"\r\n        android:textStyle=\"bold\"\r\n        />\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_splash_screen.xml b/app/src/main/res/layout/activity_splash_screen.xml
+--- a/app/src/main/res/layout/activity_splash_screen.xml	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/res/layout/activity_splash_screen.xml	(date 1706313345079)
+@@ -18,7 +18,7 @@
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+-        android:text="@string/app_name"
++        android:text="@string/nome_app"
+         android:textSize="40dp"
+         android:textStyle="bold"
+         />
+Index: app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.adapter;\r\n\r\n\r\nimport android.app.AlertDialog\r\nimport android.app.Dialog\r\nimport android.content.Intent\r\nimport android.graphics.Color\r\nimport android.graphics.drawable.ColorDrawable\r\nimport android.util.Log\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport android.widget.ImageView\r\nimport android.widget.LinearLayout\r\nimport android.widget.TextView\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.example.avista.R\r\nimport com.projetodam.avista.model.Observacao\r\nimport com.projetodam.avista.model.RespostaAPI\r\nimport com.projetodam.avista.retrofit.RetrofitInitializer\r\nimport com.projetodam.avista.ui.EditarObsActivity\r\nimport com.projetodam.avista.ui.FullscreenObservacaoActivity\r\nimport com.projetodam.avista.ui.MainActivity\r\nimport com.squareup.picasso.Picasso\r\nimport org.osmdroid.tileprovider.tilesource.TileSourceFactory\r\nimport org.osmdroid.util.GeoPoint\r\nimport org.osmdroid.views.MapView\r\nimport org.osmdroid.views.overlay.Marker\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\n\r\n\r\nclass ObservacaoListAdapter(\r\n    var listaObservacoes: ArrayList<Observacao>,\r\n) :\r\n    RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {\r\n\r\n    class ObservacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {\r\n        val textView: TextView = itemView.findViewById(R.id.card_Data_Observacao)\r\n        val txtDescricao: TextView = itemView.findViewById(R.id.txtDescricao)\r\n        val txtEspecie: TextView = itemView.findViewById(R.id.txtEspecie)\r\n        val image: ImageView = itemView.findViewById(R.id.card_thumbnail_Observacao)\r\n        val cartao: LinearLayout = itemView.findViewById(R.id.card_layout)\r\n    }\r\n\r\n    // ordenar a lista por data ou espécie\r\n    public fun ordenarObs(asc: Boolean) {\r\n        listaObservacoes.sortWith(compareBy { it.dataOrd() })\r\n        if (!asc) {\r\n            listaObservacoes.reverse()\r\n        }\r\n        notifyDataSetChanged()\r\n    }\r\n\r\n    public fun setObs(obsOri: ArrayList<Observacao>){\r\n        listaObservacoes = obsOri\r\n        notifyDataSetChanged()\r\n    }\r\n\r\n\r\n    // criar uma lista auxiliar para adicionar as observações que coincidem com o filtro\r\n    public fun filtrarObs(especie: String) {\r\n        val listaFiltrada = listaObservacoes.filter { it.filtro(especie) }\r\n        listaObservacoes.clear()\r\n        listaObservacoes.addAll(listaFiltrada)\r\n        notifyDataSetChanged()\r\n    }\r\n\r\n    private fun Observacao.filtro(filtro: String): Boolean {\r\n        return especie!!.contains(filtro, ignoreCase = true)\r\n    }\r\n\r\n\r\n    // extrair o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa\r\n    private fun Observacao.dataOrd(): Long {\r\n        val data = this.data!!.split(\"/\")\r\n        if (data.size == 3) {\r\n            val ano = data[2].toInt()\r\n            val mes = data[1].toInt()\r\n            val dia = data[0].toInt()\r\n            return ano * 10000.toLong() + mes * 100.toLong() + dia\r\n        }\r\n        return 0\r\n    }\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObservacaoViewHolder {\r\n        val view = LayoutInflater.from(parent.context)\r\n            .inflate(R.layout.cell_observacao, parent, false)\r\n\r\n        return ObservacaoViewHolder(view)\r\n    }\r\n\r\n    override fun getItemCount(): Int {\r\n        return listaObservacoes.size\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: ObservacaoViewHolder, position: Int) {\r\n\r\n        // construir um objeto onde vão estar todos os dados referentes à observação selecionada\r\n        val observacao = listaObservacoes[position]\r\n\r\n        holder.textView.setText(observacao.data)\r\n        holder.txtEspecie.setText(observacao.especie)\r\n        holder.txtDescricao.setText(observacao.descricao)\r\n        Picasso.get().load(observacao.foto).into(holder.image)\r\n\r\n\r\n\r\n        // evento no cartão selecionado para ficar à escuta de um clique\r\n        holder.cartao.setOnClickListener{\r\n            // Ao abrir os detalhes de uma observação, construir uma Dialog com recurso ao detalhes_observacao.xml\r\n            val detalhes = Dialog(holder.itemView.context)\r\n            detalhes.setContentView(R.layout.detalhes_observacao)\r\n            detalhes.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))\r\n\r\n            // colocar a dialog com 90% do tamanho horizontal\r\n            val largura = (holder.itemView.context.resources.displayMetrics.widthPixels * 0.90).toInt()\r\n            detalhes.window?.setLayout(largura, ViewGroup.LayoutParams.WRAP_CONTENT)\r\n            detalhes.setCancelable(true)\r\n\r\n            // construir o mapa\r\n            val mapView = detalhes.findViewById<MapView>(R.id.mapa)\r\n            mapView.setTileSource(TileSourceFactory.MAPNIK)\r\n            mapView.setMultiTouchControls(true)\r\n\r\n            val marcador = Marker(mapView)\r\n            marcador.position = GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())\r\n            mapView.overlays.add(marcador)\r\n            mapView.controller.setZoom(12.0)\r\n            mapView.controller.setCenter(\r\n                GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())\r\n            )\r\n\r\n\r\n            val txtdDescricao = detalhes.findViewById<TextView>(R.id.txtDescricao)\r\n            val txtEspecie = detalhes.findViewById<TextView>(R.id.txtEspecie)\r\n            val txtdData = detalhes.findViewById<TextView>(R.id.txtData)\r\n            val aveImg = detalhes.findViewById<ImageView>(R.id.imgAve)\r\n            val fechar = detalhes.findViewById<Button>(R.id.btnFecharDialog)\r\n            val editar = detalhes.findViewById<Button>(R.id.btnEditar)\r\n            val remover = detalhes.findViewById<Button>(R.id.btnRemoverObservacao)\r\n            Picasso.get().load(observacao.foto).into(aveImg)\r\n            txtEspecie.text = observacao.especie\r\n            txtdDescricao.text = observacao.descricao\r\n            txtdData.text = observacao.data\r\n            detalhes.show()\r\n\r\n\r\n\r\n            aveImg.setOnClickListener {\r\n                val intent = Intent(holder.itemView.context, FullscreenObservacaoActivity::class.java)\r\n                intent.putExtra(\"imageUri\", observacao.foto!!)\r\n                holder.itemView.context.startActivity(intent)\r\n            }\r\n\r\n            editar.setOnClickListener {\r\n                val intent =\r\n                    Intent(holder.itemView.context, EditarObsActivity::class.java)\r\n                (holder.itemView.context as? AppCompatActivity)?.finish()\r\n                intent.putExtra(\"idObs\", observacao.id)\r\n                intent.putExtra(\"utilizador\", observacao.utilizador)\r\n                intent.putExtra(\"data\", observacao.data)\r\n                intent.putExtra(\"especie\", observacao.especie)\r\n                intent.putExtra(\"foto\", observacao.foto)\r\n                intent.putExtra(\"descricao\", observacao.descricao)\r\n                intent.putExtra(\"latitude\", observacao.lat)\r\n                intent.putExtra(\"longitude\", observacao.long)\r\n                intent.putExtra(\"listaObservacoes\", listaObservacoes)\r\n                intent.putExtra(\"option\", \"OPTION_3\")\r\n                detalhes.dismiss()\r\n                holder.itemView.context.startActivity(intent)\r\n            }\r\n\r\n            fechar.setOnClickListener {\r\n                detalhes.dismiss()\r\n            }\r\n\r\n            // botão para remover a observação que foi selecionada\r\n            remover.setOnClickListener {\r\n                // é preciso confirmar o dialog para certificar que o utilizador pretende mesmo remover a observação\r\n                val dialogConfirmacao = AlertDialog.Builder(holder.itemView.context)\r\n                dialogConfirmacao.setTitle(\"Remover observação\")\r\n                dialogConfirmacao.setMessage(\"Tem a certeza de que pretende remover esta observação?\")\r\n                dialogConfirmacao.setPositiveButton(\"Sim\") { dialog, which ->\r\n                    Log.d(\"ID DA OBSERVACAO: -> \", \"${observacao.id}\")\r\n\r\n                    val call = RetrofitInitializer().servicoAPI()\r\n                        .removerObservacao(observacao.id.toString())\r\n                    call.enqueue(object : Callback<RespostaAPI> {\r\n                        override fun onResponse(\r\n                            call: Call<RespostaAPI>,\r\n                            response: Response<RespostaAPI>\r\n                        ) {\r\n                            if (response.isSuccessful) {\r\n                                Log.d(\"Estado: \", \"removida\")\r\n                                detalhes.dismiss()\r\n                                listaObservacoes.remove(observacao)\r\n\r\n                                // construir novamente a MainActivity para recarregar as observações sem a que foi removida\r\n                                val intent =\r\n                                    Intent(holder.itemView.context, MainActivity::class.java)\r\n                                (holder.itemView.context as? AppCompatActivity)?.finish()\r\n                                intent.putExtra(\"utilizador\", observacao.utilizador)\r\n                                holder.itemView.context.startActivity(intent)\r\n                            } else {\r\n                                Log.e(\"Estado: \", \"Falha ao remover observação\")\r\n                            }\r\n                        }\r\n                        override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {\r\n                            Log.e(\"ObservacaoListAdapter\", \"Erro ao remover observação\", t)\r\n                        }\r\n                    })\r\n\r\n                }\r\n                dialogConfirmacao.setNegativeButton(\"Não\", null)\r\n                dialogConfirmacao.show()\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt b/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt
+--- a/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt	(date 1706309414656)
+@@ -16,7 +16,7 @@
+ import android.widget.TextView
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.recyclerview.widget.RecyclerView
+-import com.example.avista.R
++import com.projetodam.avista.R
+ import com.projetodam.avista.model.Observacao
+ import com.projetodam.avista.model.RespostaAPI
+ import com.projetodam.avista.retrofit.RetrofitInitializer
+@@ -32,12 +32,22 @@
+ import retrofit2.Callback
+ import retrofit2.Response
+ 
+-
++/*
++ * Classe que contém a classe ViewHolder com uma RecyclerView com a lista de observações
++ * Cada célula da RecyclerView implementa uma CardView com os detalhes de observações
++ * Cada CardView com os detalhes implementam as funcionalidades de editar ou remover cada observação
++ * Dá acesso à funcionalidade de adicionar observação
++ * Implementa a ordenação e filtragem da lista de observações da RecyclerView
++ *
++ */
+ class ObservacaoListAdapter(
+     var listaObservacoes: ArrayList<Observacao>,
+ ) :
+     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
+ 
++        /*
++        * Classe que contém o ViewHolder de observações que extende a RecyclerView
++         */
+     class ObservacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+         val textView: TextView = itemView.findViewById(R.id.card_Data_Observacao)
+         val txtDescricao: TextView = itemView.findViewById(R.id.txtDescricao)
+@@ -46,7 +56,9 @@
+         val cartao: LinearLayout = itemView.findViewById(R.id.card_layout)
+     }
+ 
+-    // ordenar a lista por data ou espécie
++    /*
++     * Ordena a lista de observações por data de inserção ou por nome de espécie
++     */
+     public fun ordenarObs(asc: Boolean) {
+         listaObservacoes.sortWith(compareBy { it.dataOrd() })
+         if (!asc) {
+@@ -55,13 +67,9 @@
+         notifyDataSetChanged()
+     }
+ 
+-    public fun setObs(obsOri: ArrayList<Observacao>){
+-        listaObservacoes = obsOri
+-        notifyDataSetChanged()
+-    }
+-
+-
+-    // criar uma lista auxiliar para adicionar as observações que coincidem com o filtro
++    /*
++     * Cria uma lista auxiliar para adicionar as observações que coincidem com o filtro
++     */
+     public fun filtrarObs(especie: String) {
+         val listaFiltrada = listaObservacoes.filter { it.filtro(especie) }
+         listaObservacoes.clear()
+@@ -69,12 +77,16 @@
+         notifyDataSetChanged()
+     }
+ 
++    /*
++     * Devolve true se o nome da espécie corresponder ao filtro
++     */
+     private fun Observacao.filtro(filtro: String): Boolean {
+         return especie!!.contains(filtro, ignoreCase = true)
+     }
+ 
+-
+-    // extrair o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa
++    /*
++    * Extrai o ano, mês e dia, para a ordenação por data ser aaaa/mm/dd, em vez de dd/mm/aaaa
++    */
+     private fun Observacao.dataOrd(): Long {
+         val data = this.data!!.split("/")
+         if (data.size == 3) {
+@@ -86,6 +98,9 @@
+         return 0
+     }
+ 
++    /*
++    * Associa o ViewHolder ao layout da RecyclerView
++     */
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObservacaoViewHolder {
+         val view = LayoutInflater.from(parent.context)
+             .inflate(R.layout.cell_observacao, parent, false)
+@@ -93,13 +108,20 @@
+         return ObservacaoViewHolder(view)
+     }
+ 
++    /*
++    * Contagem de items na lista de observacoes
++     */
+     override fun getItemCount(): Int {
+         return listaObservacoes.size
+     }
+ 
++    /*
++    * Associa os eventos de ver a ScrollView de detalhes da observação, editar, remover, adicionar observação
++    * fechar a ScrollView e abrir a imagem da observação para fullscreen
++     */
+     override fun onBindViewHolder(holder: ObservacaoViewHolder, position: Int) {
+ 
+-        // construir um objeto onde vão estar todos os dados referentes à observação selecionada
++        // constrói um objeto onde vão estar todos os dados referentes à observação selecionada
+         val observacao = listaObservacoes[position]
+ 
+         holder.textView.setText(observacao.data)
+@@ -109,23 +131,24 @@
+ 
+ 
+ 
+-        // evento no cartão selecionado para ficar à escuta de um clique
++        // adiciona evento onclick na célula de observação da RecyclerView selecionada para ficar à escuta de um clique
+         holder.cartao.setOnClickListener{
+-            // Ao abrir os detalhes de uma observação, construir uma Dialog com recurso ao detalhes_observacao.xml
++            // abre os detalhes de uma observação, construói uma Dialog com recurso ao layout detalhes_observacao.xml
+             val detalhes = Dialog(holder.itemView.context)
+             detalhes.setContentView(R.layout.detalhes_observacao)
+             detalhes.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+ 
+-            // colocar a dialog com 90% do tamanho horizontal
++            // coloca a dialog com 90% do tamanho horizontal
+             val largura = (holder.itemView.context.resources.displayMetrics.widthPixels * 0.90).toInt()
+             detalhes.window?.setLayout(largura, ViewGroup.LayoutParams.WRAP_CONTENT)
+             detalhes.setCancelable(true)
+ 
+-            // construir o mapa
++            // constrói o mapa
+             val mapView = detalhes.findViewById<MapView>(R.id.mapa)
+             mapView.setTileSource(TileSourceFactory.MAPNIK)
+             mapView.setMultiTouchControls(true)
+ 
++            // adiciona um marker no mapa e centra o mapa na localização atual do utilizador
+             val marcador = Marker(mapView)
+             marcador.position = GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())
+             mapView.overlays.add(marcador)
+@@ -134,7 +157,7 @@
+                 GeoPoint(observacao.lat!!.toDouble(), observacao.long!!.toDouble())
+             )
+ 
+-
++            //preenche os dados da observacao escolhida em variáveis
+             val txtdDescricao = detalhes.findViewById<TextView>(R.id.txtDescricao)
+             val txtEspecie = detalhes.findViewById<TextView>(R.id.txtEspecie)
+             val txtdData = detalhes.findViewById<TextView>(R.id.txtData)
+@@ -149,13 +172,14 @@
+             detalhes.show()
+ 
+ 
+-
++            //abre a imagem da observação escolhida na RecyclerView em fullscreen
+             aveImg.setOnClickListener {
+                 val intent = Intent(holder.itemView.context, FullscreenObservacaoActivity::class.java)
+                 intent.putExtra("imageUri", observacao.foto!!)
+                 holder.itemView.context.startActivity(intent)
+             }
+ 
++            //abre a atividade de editar a observação escolhida na RecyclerView
+             editar.setOnClickListener {
+                 val intent =
+                     Intent(holder.itemView.context, EditarObsActivity::class.java)
+@@ -174,6 +198,7 @@
+                 holder.itemView.context.startActivity(intent)
+             }
+ 
++            //fecha a janela de detalhes da observação escolhida na RecyclerView
+             fechar.setOnClickListener {
+                 detalhes.dismiss()
+             }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AnalysisUIOptions\">\r\n    <option name=\"ANALYZE_INJECTED_CODE\" value=\"false\" />\r\n  </component>\r\n  <component name=\"AndroidLayouts\">\r\n    <shared>\r\n      <config />\r\n    </shared>\r\n    <layouts>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/about.xml\">\r\n        <config>\r\n          <theme>@style/Theme.AppCompat.Light.DarkActionBar</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_obs.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_editar_obs.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/cell_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/detalhes_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.AppCompat.Light.DarkActionBar</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/fullscreen_observacao.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/loading.xml\">\r\n        <config>\r\n          <theme>@style/Theme.Avista</theme>\r\n        </config>\r\n      </layout>\r\n      <layout url=\"file://$PROJECT_DIR$/app/src/main/res/layout/mapview.xml\">\r\n        <config>\r\n          <theme>@android:style/Theme.Material.Light</theme>\r\n        </config>\r\n      </layout>\r\n    </layouts>\r\n  </component>\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"NONE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"8b392a16-d667-47cf-811e-c86c73c2d843\" name=\"Changes\" comment=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\">\r\n      <change afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/file-system.probe\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/file-system.probe\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/build.gradle.kts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/build.gradle.kts\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/androidTest/java/com/projetodam/avista/ExampleInstrumentedTest.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ImgBBPOST.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ImgBBPOST.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Observacao.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoGET.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoPOST.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoPUT.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/RespostaAPI.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Utilizador.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorGET.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorPOST.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/EnvioFotografia.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/RetrofitImgBB.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/RetrofitInitializer.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/EnvioFotografiaCallback.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoAPI.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoFotografia.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AboutActivity.kt\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/BaseActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/EditarObsActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/FullscreenActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MapActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SignupActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/SignupActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/SplashScreenActivity.kt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/about.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/about.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/test/java/com/example/avista/ExampleUnitTest.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/test/java/com/projetodam/avista/ExampleUnitTest.kt\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ClangdSettings\">\r\n    <option name=\"formatViaClangd\" value=\"false\" />\r\n  </component>\r\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[C:\\Users\\Rúben\\.android\\avd\\Pixel_7_Pro_API_30.avd]\" />\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Kotlin Interface\" />\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"layoutResourceFile\" />\r\n        <option value=\"Kotlin Class\" />\r\n        <option value=\"valueResourceFile\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"ProjectErrors\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Y071N69MkYEgNj3PJBAnguhfg3\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,\r\n    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/DAM/AvistaDAM/app/src/main/res/layout&quot;,\r\n    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\DAM\\AvistaDAM\\app\\src\\main\\res\\layout\" />\r\n      <recent name=\"C:\\DAM\\AvistaDAM\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM\\app\\src\\main\\res\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM\\app\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM\\app\\src\\main\\res\\layout\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\DAM\\AvistaDAM\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\\src\\main\\res\\values\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\Silver\\AndroidStudioProjects\\AvistaDAM_LayoutBranch\\app\\src\\main\\res\\layout\" />\r\n    </key>\r\n    <key name=\"MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.avista.ui\" />\r\n      <recent name=\"com.example.avista.data\" />\r\n      <recent name=\"com.example.avista.adapter\" />\r\n      <recent name=\"com.example.avista.model\" />\r\n    </key>\r\n    <key name=\"android.template.-498907413\">\r\n      <recent name=\"com.example.avista.ui\" />\r\n    </key>\r\n    <key name=\"CopyKotlinDeclarationDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.avista.model\" />\r\n      <recent name=\"com.example.avista.ui\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\">\r\n      <module name=\"Avista.app.main\" />\r\n      <option name=\"DEPLOY\" value=\"true\" />\r\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\r\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\r\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\r\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\r\n      <option name=\"ALL_USERS\" value=\"false\" />\r\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\r\n      <option name=\"CLEAR_APP_STORAGE\" value=\"false\" />\r\n      <option name=\"DYNAMIC_FEATURES_DISABLED_LIST\" value=\"\" />\r\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\r\n      <option name=\"MODE\" value=\"default_activity\" />\r\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\r\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\r\n      <option name=\"INSPECTION_WITHOUT_ACTIVITY_RESTART\" value=\"false\" />\r\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\r\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\r\n      <Auto>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Auto>\r\n      <Hybrid>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Hybrid>\r\n      <Java>\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Java>\r\n      <Native>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Native>\r\n      <Profilers>\r\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Java/Kotlin Method Sample (legacy)\" />\r\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\r\n      </Profilers>\r\n      <option name=\"DEEP_LINK\" value=\"\" />\r\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\r\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\r\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\r\n      <method v=\"2\">\r\n        <option name=\"Android.Gradle.BeforeRunTask\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"8b392a16-d667-47cf-811e-c86c73c2d843\" name=\"Changes\" comment=\"\" />\r\n      <created>1699650426524</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1699650426524</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"criação de projeto\">\r\n      <created>1699650627333</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1699650627333</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"criação de projeto\">\r\n      <created>1699650643914</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1699650643914</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1706141651561</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1706141651561</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"criação de projeto\" />\r\n    <MESSAGE value=\"-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)\" />\r\n    <MESSAGE value=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"-action bar superior completa&#10;-atividade about&#10;-ajustes UI\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"kotlin-line\">\r\n          <url>file://$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt</url>\r\n          <line>74</line>\r\n          <option name=\"timeStamp\" value=\"10\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"kotlin-line\">\r\n          <url>file://$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt</url>\r\n          <line>80</line>\r\n          <option name=\"timeStamp\" value=\"11\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/.idea/workspace.xml	(date 1706313782929)
+@@ -80,7 +80,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="8b392a16-d667-47cf-811e-c86c73c2d843" name="Changes" comment="-action bar superior completa&#10;-atividade about&#10;-ajustes UI">
+-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
+@@ -90,37 +91,29 @@
+       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/avista/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/projetodam/avista/ExampleInstrumentedTest.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/adapter/ObservacaoListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ImgBBPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ImgBBPOST.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Observacao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoPUT.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/ObservacaoSharedModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/RespostaAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/Utilizador.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/model/UtilizadorPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/EnvioFotografia.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/EnvioFotografia.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitImgBB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/RetrofitImgBB.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/RetrofitInitializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/RetrofitInitializer.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/EnvioFotografiaCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/EnvioFotografiaCallback.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoAPI.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/retrofit/service/ServicoFotografia.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/retrofit/service/ServicoFotografia.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AboutActivity.kt" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/AdicionarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/EditarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/FullscreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/MapActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SignupActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/SignupActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/avista/ui/SplashScreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/SplashScreenActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/about.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/avista/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/projetodam/avista/ExampleUnitTest.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_obs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_obs.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/mapview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/mapview.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -130,7 +123,7 @@
+   <component name="ClangdSettings">
+     <option name="formatViaClangd" value="false" />
+   </component>
+-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Rúben\.android\avd\Pixel_7_Pro_API_30.avd]" />
++  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Administrator\.android\avd\Pixel_7_Pro_API_30.avd]" />
+   <component name="ExternalProjectsData">
+     <projectState path="$PROJECT_DIR$">
+       <ProjectState />
+@@ -155,7 +148,7 @@
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProblemsViewState">
+-    <option name="selectedTabId" value="ProjectErrors" />
++    <option name="selectedTabId" value="CurrentFile" />
+   </component>
+   <component name="ProjectId" id="2Y071N69MkYEgNj3PJBAnguhfg3" />
+   <component name="ProjectLevelVcsManager">
+@@ -311,7 +304,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1706141651561</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="-bug fix alterar coordenadas">
++      <option name="closed" value="true" />
++      <created>1706245373059</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1706245373059</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -330,22 +331,7 @@
+     <MESSAGE value="criação de projeto" />
+     <MESSAGE value="-layouts e navegaçao de login,registo,splashScreen e estrutura da main activity.&#10;-adapter para preencher a recycler view de observações na main activity&#10;-layout da recycler view(cell_observacao)&#10;-mock de dados de observacoes para teste(ObservacaoMock)" />
+     <MESSAGE value="-action bar superior completa&#10;-atividade about&#10;-ajustes UI" />
++    <MESSAGE value="-bug fix alterar coordenadas" />
+     <option name="LAST_COMMIT_MESSAGE" value="-action bar superior completa&#10;-atividade about&#10;-ajustes UI" />
+   </component>
+-  <component name="XDebuggerManager">
+-    <breakpoint-manager>
+-      <breakpoints>
+-        <line-breakpoint enabled="true" type="kotlin-line">
+-          <url>file://$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt</url>
+-          <line>74</line>
+-          <option name="timeStamp" value="10" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="kotlin-line">
+-          <url>file://$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt</url>
+-          <line>80</line>
+-          <option name="timeStamp" value="11" />
+-        </line-breakpoint>
+-      </breakpoints>
+-    </breakpoint-manager>
+-  </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport androidx.lifecycle.ViewModel\r\n\r\nclass ObservacaoSharedModel : ViewModel() {\r\n    var listaObservacoes: ArrayList<Observacao>? = null\r\n    var listaObservacoesFiltro: ArrayList<Observacao>? = ArrayList<Observacao>()\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt
+--- a/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt	(date 1706309751900)
+@@ -2,6 +2,9 @@
+ 
+ import androidx.lifecycle.ViewModel
+ 
++/*
++* SharedView Model da lista de observações e lista filtrada de observações para acesso entre atividades
++ */
+ class ObservacaoSharedModel : ViewModel() {
+     var listaObservacoes: ArrayList<Observacao>? = null
+     var listaObservacoesFiltro: ArrayList<Observacao>? = ArrayList<Observacao>()
+Index: app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class ObservacaoGET (\r\n    @SerializedName(\"observacao\")\r\n    val listaObservacoes: List<Observacao>\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt
+--- a/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt	(date 1706309751894)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados da Observação para comunicar com o verbo GET
++ */
+ data class ObservacaoGET (
+     @SerializedName("observacao")
+     val listaObservacoes: List<Observacao>
+Index: app/src/main/java/com/projetodam/avista/model/Observacao.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport android.os.Parcel\r\nimport android.os.Parcelable\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class Observacao(\r\n    @SerializedName(\"id\")\r\n    val id: String?,\r\n    @SerializedName(\"utilizador\")\r\n    val utilizador: String?,\r\n    @SerializedName(\"lat\")\r\n    val lat: String?,\r\n    @SerializedName(\"long\")\r\n    val long: String?,\r\n    @SerializedName(\"foto\")\r\n    val foto: String?,\r\n    @SerializedName(\"descricao\")\r\n    val descricao: String?,\r\n    @SerializedName(\"data\")\r\n    val data: String?,\r\n    @SerializedName(\"especie\")\r\n    val especie: String?\r\n) : Parcelable {\r\n    constructor(parcel: Parcel) : this(\r\n        parcel.readString(),\r\n        parcel.readString(),\r\n        parcel.readString(),\r\n        parcel.readString(),\r\n        parcel.readString(),\r\n        parcel.readString(),\r\n        parcel.readString(),\r\n        parcel.readString()\r\n    ) {\r\n    }\r\n\r\n    override fun writeToParcel(parcel: Parcel, flags: Int) {\r\n        parcel.writeString(id)\r\n        parcel.writeString(utilizador)\r\n        parcel.writeString(lat)\r\n        parcel.writeString(long)\r\n        parcel.writeString(foto)\r\n        parcel.writeString(descricao)\r\n        parcel.writeString(data)\r\n        parcel.writeString(especie)\r\n    }\r\n\r\n    override fun describeContents(): Int {\r\n        return 0\r\n    }\r\n\r\n    companion object CREATOR : Parcelable.Creator<Observacao> {\r\n        override fun createFromParcel(parcel: Parcel): Observacao {\r\n            return Observacao(parcel)\r\n        }\r\n\r\n        override fun newArray(size: Int): Array<Observacao?> {\r\n            return arrayOfNulls(size)\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/Observacao.kt b/app/src/main/java/com/projetodam/avista/model/Observacao.kt
+--- a/app/src/main/java/com/projetodam/avista/model/Observacao.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/Observacao.kt	(date 1706309879600)
+@@ -4,6 +4,10 @@
+ import android.os.Parcelable
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados da Observação para comunicar com a API Sheety
++* Este modelo é parcelable para leitura dos campos individuais em actividades
++ */
+ data class Observacao(
+     @SerializedName("id")
+     val id: String?,
+Index: app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui\r\n\r\nimport android.Manifest\r\nimport android.annotation.SuppressLint\r\nimport android.app.Activity\r\nimport android.app.Dialog\r\nimport android.content.ContentValues\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.graphics.Bitmap\r\nimport android.graphics.BitmapFactory\r\nimport android.graphics.Color\r\nimport android.graphics.drawable.ColorDrawable\r\nimport android.location.Location\r\nimport android.location.LocationManager\r\nimport android.net.Uri\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.provider.MediaStore\r\nimport android.util.Log\r\nimport android.view.ViewGroup\r\nimport android.widget.ImageView\r\nimport android.widget.Toast\r\nimport androidx.annotation.RequiresApi\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.databinding.ActivityAdicionarObsBinding\r\nimport com.projetodam.avista.model.Observacao\r\nimport com.projetodam.avista.model.ObservacaoPOST\r\nimport com.projetodam.avista.model.RespostaAPI\r\nimport com.projetodam.avista.retrofit.EnvioFotografia\r\nimport com.projetodam.avista.retrofit.RetrofitInitializer\r\nimport com.projetodam.avista.retrofit.service.EnvioFotografiaCallback\r\nimport com.projetodam.avista.retrofit.service.ServicoAPI\r\nimport com.projetodam.avista.ui.activity.MapActivity\r\nimport com.google.gson.Gson\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport java.io.FileNotFoundException\r\nimport java.text.SimpleDateFormat\r\nimport java.util.Date\r\nimport com.bumptech.glide.Glide\r\nimport com.projetodam.avista.model.ObservacaoSharedModel\r\nimport java.time.LocalDate\r\nimport java.time.format.DateTimeFormatter\r\nimport java.time.format.DateTimeParseException\r\n\r\n\r\nclass AdicionarObsActivity : BaseActivity() {\r\n\r\n    private lateinit var binding: ActivityAdicionarObsBinding\r\n    val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()\r\n    private lateinit var viewModel: ObservacaoSharedModel\r\n    private var listaObservacoes = ArrayList<Observacao>()\r\n    private val CAMERA_PERMISSION_CODE = 101\r\n    private val LOCATION_PERMISSION_CODE = 102\r\n    private val PICK_MARKER_CODE = 103\r\n    private val PICK_IMAGE_REQUEST = 1\r\n    lateinit var imgBitmap: Bitmap\r\n    var image_uri: Uri? = null\r\n    private val RESULT_LOAD_IMAGE = 123\r\n    val IMAGE_CAPTURE_CODE = 654\r\n    var imgURL = \"\"\r\n    var latitude = 0.0\r\n    var longitude = 0.0\r\n\r\n    @RequiresApi(Build.VERSION_CODES.O)\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityAdicionarObsBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n        viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)\r\n\r\n        //receber o utilizador da atividade Main\r\n        val utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n\r\n        // atribuir a data atual ao campo \"Data\"\r\n        val dataFormatada = SimpleDateFormat(\"dd/MM/yyyy\")\r\n        val currentDate = dataFormatada.format(Date())\r\n        binding.txtData.setText(currentDate)\r\n\r\n        verificarPermissaoLocalizacao()\r\n\r\n        binding.btnCamera.setOnClickListener{\r\n            verificarPermissaoCamera()\r\n        }\r\n\r\n        binding.btnGaleria.setOnClickListener{\r\n            abrirGaleria()\r\n        }\r\n\r\n        binding.btnMapa.setOnClickListener {\r\n            listaObservacoes = intent.getSerializableExtra(\"listaObservacoes\") as ArrayList<Observacao>\r\n            var intent = Intent(this, MapActivity::class.java)\r\n            // enviar para a atividade Mapa a latitude e longitude atuais\r\n            intent.putExtra(\"latitude\", latitude.toString())\r\n            intent.putExtra(\"longitude\", longitude.toString())\r\n            intent.putExtra(\"listaObservacoes\", listaObservacoes)\r\n            intent.putExtra(\"utilizador\", utilizador)\r\n            intent.putExtra(\"option\", \"OPTION_2\")\r\n            startActivityForResult(intent, PICK_MARKER_CODE)\r\n        }\r\n\r\n        binding.btnAdicionarObs.setOnClickListener {\r\n\r\n            var especie = binding.txtEspecie.text.toString()\r\n            var data = binding.txtData.text.toString()\r\n            var descricao = binding.txtDescricao.text.toString()\r\n            var id = \"\"\r\n\r\n            // verifica se a data está no formato dd/mm/aaaa\r\n            if (validarData(data)) {\r\n                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs\r\n                val loading = Dialog(this)\r\n                loading.setContentView(R.layout.loading)\r\n                loading.window?.setLayout(\r\n                    (resources.displayMetrics.widthPixels).toInt(),\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT\r\n                )\r\n                loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))\r\n                loading.setCancelable(false)\r\n\r\n                // usar o Glide para mostrar o GIF com movimento\r\n                val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)\r\n                Glide.with(this)\r\n                    .load(R.drawable.loading)\r\n                    .into(loadingImageView)\r\n                loading.show()\r\n\r\n\r\n                // verificar se foi selecionada alguma fotografia\r\n                if (!::imgBitmap.isInitialized) {\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Não foi selecionada nenhuma fotografia.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    loading.dismiss()\r\n                } else if (especie == \"\") {\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Não foi especificada a espécie.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    loading.dismiss()\r\n                } else if (data == \"\") {\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Não foi especificada a data.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    loading.dismiss()\r\n                } else {\r\n                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado\r\n                    EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :\r\n                        EnvioFotografiaCallback {\r\n                        override fun onSucess(url: String) {\r\n                            imgURL = url\r\n                            // adicionar observação - latitude e longitude com valores de teste enquanto não se estão a obter as coordenadas de GPS\r\n                            adicionarObs(\r\n                                id,\r\n                                utilizador,\r\n                                latitude,\r\n                                longitude,\r\n                                imgURL,\r\n                                descricao,\r\n                                data,\r\n                                especie,\r\n                                loading\r\n                            )\r\n                        }\r\n\r\n                        override fun onError(mensagemErro: String) {\r\n                            Log.e(\r\n                                \"AdicionarObsActivity\",\r\n                                \"Erro ao obter o displayURL: $mensagemErro\"\r\n                            )\r\n                            Toast.makeText(\r\n                                applicationContext,\r\n                                \"Erro ao obter o displayURL\",\r\n                                Toast.LENGTH_SHORT\r\n                            ).show()\r\n                            loading.dismiss()\r\n                        }\r\n                    })\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    // função para validar que a data inserida é válida\r\n    @RequiresApi(Build.VERSION_CODES.O)\r\n    private fun validarData(data: String): Boolean {\r\n        try {\r\n            val formatter = DateTimeFormatter.ofPattern(\"dd/MM/yyyy\")\r\n            val localDate = LocalDate.parse(data, formatter)\r\n            return true\r\n        } catch (e: DateTimeParseException) {\r\n            Toast.makeText(\r\n                applicationContext,\r\n                \"Data inválida. O formato da data deve ser dd/MM/aaaa.\",\r\n                Toast.LENGTH_SHORT\r\n            ).show()\r\n            return false\r\n        }\r\n    }\r\n\r\n    private fun verificarPermissaoLocalizacao() {\r\n        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {\r\n            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE)\r\n        } else {\r\n            localizacaoAtual()\r\n        }\r\n    }\r\n\r\n    private fun abrirGaleria() {\r\n        val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)\r\n        startActivityForResult(galeria, PICK_IMAGE_REQUEST)\r\n    }\r\n\r\n    private fun tirarFoto() {\r\n        // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2\r\n        val values = ContentValues()\r\n        values.put(MediaStore.Images.Media.TITLE, \"Nova fotografia\")\r\n        values.put(MediaStore.Images.Media.DESCRIPTION, \"Através da aplicação Avista\")\r\n        image_uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)\r\n        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)\r\n        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)\r\n        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)\r\n    }\r\n\r\n    private fun verificarPermissaoCamera() {\r\n        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {\r\n            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)\r\n        } else {\r\n            tirarFoto()\r\n        }\r\n    }\r\n\r\n    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults)\r\n        when (requestCode) {\r\n            CAMERA_PERMISSION_CODE -> {\r\n                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n                    tirarFoto()\r\n                } else {\r\n                    Toast.makeText(this, \"É preciso dar a permissão de acesso à câmera para poder tirar fotografias.\", Toast.LENGTH_SHORT).show()\r\n                }\r\n            }\r\n\r\n            LOCATION_PERMISSION_CODE -> {\r\n                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n                    localizacaoAtual()\r\n                } else {\r\n                    Toast.makeText(this, \"É preciso dar permissão de acesso à localização para obter a latitude e longitude.\", Toast.LENGTH_SHORT).show()\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    @SuppressLint(\"ServiceCast\")\r\n    private fun localizacaoAtual() {\r\n        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager\r\n        val gps: String = LocationManager.GPS_PROVIDER\r\n\r\n        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED\r\n            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n            val localizacao: Location? = locationManager.getLastKnownLocation(gps)\r\n\r\n            if (localizacao != null) {\r\n                latitude = localizacao.latitude\r\n                longitude = localizacao.longitude\r\n            } else {\r\n                Log.e(\"AdicionarObsActivity\", \"Erro a obter a localização.\")\r\n            }\r\n        }\r\n    }\r\n\r\n    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {\r\n        super.onActivityResult(requestCode, resultCode, data)\r\n\r\n        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {\r\n            // se o requestCode for o de selecionar image, é porque veio da galeria\r\n            val uriImagem = data?.data\r\n            imgBitmap = converterParaBitmap(uriImagem!!)!!\r\n            binding.viewImagem.setImageBitmap(imgBitmap)\r\n\r\n        } else if(requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK){\r\n            // se o requestCode for o de capturar uma imagem, é porque veio da câmera\r\n            imgBitmap = converterParaBitmap(image_uri!!)!!\r\n            binding.viewImagem.setImageBitmap(imgBitmap)\r\n        } else if(requestCode == PICK_MARKER_CODE && resultCode == RESULT_OK){\r\n            latitude = data?.getStringExtra(\"latitudeAtualizada\")!!.toDouble()\r\n            longitude = data?.getStringExtra(\"longitudeAtualizada\")!!.toDouble()\r\n        }\r\n    }\r\n    private fun converterParaBitmap(uriImagem: Uri): Bitmap? {\r\n        try {\r\n            val inputStream = contentResolver.openInputStream(uriImagem)\r\n            return BitmapFactory.decodeStream(inputStream)\r\n        } catch (e: FileNotFoundException) {\r\n            e.printStackTrace()\r\n            return null\r\n        }\r\n    }\r\n\r\n    private fun adicionarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){\r\n        // criar o objeto Observacao\r\n        val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)\r\n\r\n        // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar\r\n        val postObservacao = ObservacaoPOST(observacao = novaObservacao)\r\n        Log.d(\"AdicionarObsActivity\", \"JSON enviado: ${Gson().toJson(postObservacao)}\")\r\n\r\n        val call = servicoAPI.adicionarObservacao(postObservacao)\r\n        call.enqueue(object : Callback<RespostaAPI> {\r\n            override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {\r\n                if (response.isSuccessful) {\r\n                    Log.d(\"AdicionarObsActivity\", \"onSucessful: ${response.body()}\")\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Observação adicionada com sucesso.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    finish()\r\n                } else {\r\n                    Log.e(\"AdicionarObsActivity\", \"Erro: ${response.code()}\")\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Erro. Código: ${response.code()}\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                }\r\n                loading.dismiss()\r\n            }\r\n\r\n            override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {\r\n                Log.e(\"AdicionarObsActivity\", \"Erro: ${t.message}\")\r\n                loading.dismiss()\r\n            }\r\n        })\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt b/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt	(date 1706312425763)
+@@ -48,7 +48,10 @@
+ import java.time.format.DateTimeFormatter
+ import java.time.format.DateTimeParseException
+ 
+-
++/*
++* Classe Activity que adiciona uma observação pelo utilizador autenticado na API com validação de campos, captura de foto e localização
++* Permite escolher uma localização nova no mapa ou escolher uma foto da galeria do utilizador
++ */
+ class AdicionarObsActivity : BaseActivity() {
+ 
+     private lateinit var binding: ActivityAdicionarObsBinding
+@@ -82,16 +85,20 @@
+         val currentDate = dataFormatada.format(Date())
+         binding.txtData.setText(currentDate)
+ 
++        //verifica se é necessários permissões de localização e pede-as caso não existam
+         verificarPermissaoLocalizacao()
+ 
++        //abre camara para captura de foto
+         binding.btnCamera.setOnClickListener{
+             verificarPermissaoCamera()
+         }
+ 
++        //abre a galeria de fotos do utilizador
+         binding.btnGaleria.setOnClickListener{
+             abrirGaleria()
+         }
+ 
++        //abre a atividade do mapa na localização atual do utilizador
+         binding.btnMapa.setOnClickListener {
+             listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
+             var intent = Intent(this, MapActivity::class.java)
+@@ -104,6 +111,7 @@
+             startActivityForResult(intent, PICK_MARKER_CODE)
+         }
+ 
++        //adiciona a observacao na api após verificação de campos e permissões
+         binding.btnAdicionarObs.setOnClickListener {
+ 
+             var especie = binding.txtEspecie.text.toString()
+@@ -113,7 +121,7 @@
+ 
+             // verifica se a data está no formato dd/mm/aaaa
+             if (validarData(data)) {
+-                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
++                // cria um dialog para mostrar o loading enquanto os dados são enviados para as APIs
+                 val loading = Dialog(this)
+                 loading.setContentView(R.layout.loading)
+                 loading.window?.setLayout(
+@@ -123,7 +131,7 @@
+                 loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                 loading.setCancelable(false)
+ 
+-                // usar o Glide para mostrar o GIF com movimento
++                // usa o Glide para mostrar o GIF com movimento
+                 val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+                 Glide.with(this)
+                     .load(R.drawable.loading)
+@@ -131,30 +139,30 @@
+                 loading.show()
+ 
+ 
+-                // verificar se foi selecionada alguma fotografia
++                // verifica se foi selecionada alguma fotografia
+                 if (!::imgBitmap.isInitialized) {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi selecionada nenhuma fotografia.",
++                        getString(R.string.n_o_foi_selecionada_nenhuma_fotografia),
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else if (especie == "") {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi especificada a espécie.",
++                        getString(R.string.n_o_foi_especificada_a_esp_cie),
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else if (data == "") {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi especificada a data.",
++                        getString(R.string.n_o_foi_especificada_a_data),
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else {
+-                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
++                    // envia fotografia para o ImgBB e guarda o displayURL que vai ser retornado
+                     EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
+                         EnvioFotografiaCallback {
+                         override fun onSucess(url: String) {
+@@ -191,7 +199,9 @@
+         }
+     }
+ 
+-    // função para validar que a data inserida é válida
++    /*
++    * valida se a data está no formato inserid dd/MM/yyyy
++     */
+     @RequiresApi(Build.VERSION_CODES.O)
+     private fun validarData(data: String): Boolean {
+         try {
+@@ -201,13 +211,16 @@
+         } catch (e: DateTimeParseException) {
+             Toast.makeText(
+                 applicationContext,
+-                "Data inválida. O formato da data deve ser dd/MM/aaaa.",
++                getString(R.string.data_inv_lida_o_formato_da_data_deve_ser_dd_mm_aaaa),
+                 Toast.LENGTH_SHORT
+             ).show()
+             return false
+         }
+     }
+ 
++    /*
++    * Verifica permissões para acesso a localização para atualizar a localização atual
++     */
+     private fun verificarPermissaoLocalizacao() {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE)
+@@ -216,11 +229,17 @@
+         }
+     }
+ 
++    /*
++    * envia um request activity para abrir a galeria de fotos
++     */
+     private fun abrirGaleria() {
+         val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+         startActivityForResult(galeria, PICK_IMAGE_REQUEST)
+     }
+ 
++    /*
++    * envia um request activity para capturar foto
++     */
+     private fun tirarFoto() {
+         // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
+         val values = ContentValues()
+@@ -232,6 +251,9 @@
+         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+     }
+ 
++    /*
++     * Verifica a permissão para utilização de câmara para permitir a captura de foto
++     */
+     private fun verificarPermissaoCamera() {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
+@@ -240,6 +262,10 @@
+         }
+     }
+ 
++    /*
++    * inicia a atividade correspondente ao request code enviado
++    * as atividades são captura de foto e obtenção
++     */
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+         when (requestCode) {
+@@ -261,6 +287,9 @@
+         }
+     }
+ 
++    /*
++    * obtém e atualiza a localização atual do gps
++     */
+     @SuppressLint("ServiceCast")
+     private fun localizacaoAtual() {
+         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+@@ -279,6 +308,10 @@
+         }
+     }
+ 
++    /*
++    * atualiza a imagem consoante o request code enviado
++    * distingue se foto veio da galeria ou se veio da captura de foto
++     */
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+ 
+@@ -297,6 +330,10 @@
+             longitude = data?.getStringExtra("longitudeAtualizada")!!.toDouble()
+         }
+     }
++
++    /*
++    * conversão da imagem uri para bitmap
++     */
+     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {
+         try {
+             val inputStream = contentResolver.openInputStream(uriImagem)
+@@ -307,11 +344,14 @@
+         }
+     }
+ 
++    /*
++    * chamada de post da observação à API Sheety
++     */
+     private fun adicionarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
+-        // criar o objeto Observacao
++        // cria o objeto Observacao
+         val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
+ 
+-        // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar
++        // encapsula dentro de um objecto Observacao para construir corretamente o JSON a enviar
+         val postObservacao = ObservacaoPOST(observacao = novaObservacao)
+         Log.d("AdicionarObsActivity", "JSON enviado: ${Gson().toJson(postObservacao)}")
+ 
+Index: app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui\r\n\r\nimport android.app.AlertDialog\r\nimport android.app.Dialog\r\nimport android.content.Intent\r\nimport android.graphics.Color\r\nimport android.graphics.drawable.ColorDrawable\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.ViewGroup\r\nimport android.widget.ImageView\r\nimport android.widget.Toast\r\nimport com.bumptech.glide.Glide\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.databinding.AboutBinding\r\nimport com.projetodam.avista.model.Observacao\r\nimport com.projetodam.avista.model.ObservacaoGET\r\nimport com.projetodam.avista.model.RespostaAPI\r\nimport com.projetodam.avista.model.UtilizadorGET\r\nimport com.projetodam.avista.retrofit.RetrofitInitializer\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport java.lang.Thread.sleep\r\n\r\nclass AboutActivity : BaseActivity() {\r\n\r\n    private lateinit var binding: AboutBinding\r\n    private lateinit var utilizador: String\r\n    private lateinit var listaObs: List<Observacao>\r\n    lateinit var loading: Dialog\r\n\r\n        override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = AboutBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n        // receber o utilizador da atividade anterior\r\n        utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n\r\n        // botão para remover a observação que foi selecionada\r\n        binding.btnRemoverConta.setOnClickListener {\r\n            // é preciso confirmar o dialog para certificar que o utilizador pretende mesmo remover a observação\r\n            val dialogConfirmacao = AlertDialog.Builder(this)\r\n            dialogConfirmacao.setTitle(\"Remover conta de utilizador\")\r\n            dialogConfirmacao.setMessage(\"Tem a certeza de que pretende remover a sua conta de utilizador e todas as suas observações?\")\r\n            dialogConfirmacao.setPositiveButton(\"Sim\") { dialog, which ->\r\n                loading = Dialog(this)\r\n                loading.setContentView(R.layout.loading)\r\n                loading.window?.setLayout(\r\n                    (resources.displayMetrics.widthPixels).toInt(),\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT\r\n                )\r\n                loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))\r\n                loading.setCancelable(false)\r\n                // usar o Glide para mostrar o GIF com movimento\r\n                val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)\r\n                Glide.with(this)\r\n                    .load(R.drawable.loading)\r\n                    .into(loadingImageView)\r\n                loading.show()\r\n                removerConta(utilizador)\r\n            }\r\n            dialogConfirmacao.setNegativeButton(\"Não\", null)\r\n            dialogConfirmacao.show()\r\n        }\r\n\r\n\r\n    }\r\n    private fun removerConta(user: String) {\r\n        val call = RetrofitInitializer().servicoAPI().listarUtilizadores()\r\n        call.enqueue(object : Callback<UtilizadorGET> {\r\n            override fun onResponse(\r\n                call: Call<UtilizadorGET>,\r\n                response: Response<UtilizadorGET>\r\n            ) {\r\n                if (response.isSuccessful) {\r\n                    val responseBody = response.body()\r\n                    responseBody?.let {\r\n                        for (utilizadorIterado in it.listaUtilizadores) {\r\n                            Log.d(\"USER\", user)\r\n                            Log.d(\"USER ITERADO\", utilizadorIterado.userId.toString())\r\n                            if (user.equals(utilizadorIterado.userId.toString())) {\r\n                                Log.d(\"USER ID\", utilizadorIterado.id.toString())\r\n                                // botão para remover a conta que foi selecionada\r\n                                val call = RetrofitInitializer().servicoAPI()\r\n                                    .removerUtilizador(utilizadorIterado.id.toString())\r\n                                Log.d(\"USER ID\", utilizadorIterado.id.toString())\r\n                                call.enqueue(object : Callback<RespostaAPI> {\r\n                                    override fun onResponse(\r\n                                        call: Call<RespostaAPI>,\r\n                                        response: Response<RespostaAPI>\r\n                                    ) {\r\n                                        if (response.isSuccessful) {\r\n                                            listarObs(user)\r\n                                        } else {\r\n                                            Log.e(\r\n                                                \"Estado: \",\r\n                                                \"Falha ao remover conta de utilizador\"\r\n                                            )\r\n                                        }\r\n                                    }\r\n\r\n                                    override fun onFailure(\r\n                                        call: Call<RespostaAPI>,\r\n                                        t: Throwable\r\n                                    ) {\r\n                                        Log.e(\r\n                                            \"ObservacaoListAdapter\",\r\n                                            \"Erro ao remover conta de utilizador\",\r\n                                            t\r\n                                        )\r\n                                    }\r\n                                })\r\n\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n            override fun onFailure(call: Call<UtilizadorGET>, t: Throwable) {\r\n                Log.d(\"AboutActivity\", \"onFailure: ${t.message}\")\r\n            }\r\n        })\r\n    }\r\n\r\n    private fun listarObs(user: String) {\r\n        val call = RetrofitInitializer().servicoAPI().listarObservacoes()\r\n        call.enqueue(object : Callback<ObservacaoGET> {\r\n            override fun onResponse(\r\n                call: Call<ObservacaoGET>,\r\n                response: Response<ObservacaoGET>\r\n            ) {\r\n                if (response.isSuccessful) {\r\n                    response.body()?.let {\r\n                        // remover as observações a partir do maior índice, porque a API do Sheety reordena os índices após a remoção\r\n                        listaObs = it.listaObservacoes\r\n                        ajustarObsRemover(user)\r\n                    }\r\n                }\r\n            }\r\n\r\n            override fun onFailure(call: Call<ObservacaoGET>, t: Throwable) {\r\n                Log.d(\"AboutActivity\", \"onFailure: ${t.message}\")\r\n            }\r\n        })\r\n    }\r\n\r\n    private fun ajustarObsRemover(user:String){\r\n        val novaListaObs = mutableListOf<Observacao>()\r\n\r\n        for (obs in listaObs) {\r\n            if (obs.utilizador.equals(user)) {\r\n                novaListaObs.add(obs)\r\n            }\r\n        }\r\n        listaObs = novaListaObs\r\n        removerObs(user)\r\n    }\r\n\r\n    private fun removerObs(user: String) {\r\n        for(i in listaObs.size-1 downTo 0){\r\n\r\n                    val call = RetrofitInitializer().servicoAPI()\r\n                        .removerObservacao(listaObs[i].id.toString())\r\n                    call.enqueue(object : Callback<RespostaAPI> {\r\n                        override fun onResponse(\r\n                            call: Call<RespostaAPI>,\r\n                            response: Response<RespostaAPI>\r\n                        ) {\r\n                            if (!response.isSuccessful) {\r\n                                Toast.makeText(\r\n                                    applicationContext,\r\n                                    \"Ocorreu um erro a remover a sua conta.\",\r\n                                    Toast.LENGTH_SHORT\r\n                                ).show()\r\n                            }\r\n                        }\r\n\r\n                        override fun onFailure(\r\n                            call: Call<RespostaAPI>,\r\n                            t: Throwable\r\n                        ) {\r\n                            Log.e(\r\n                                \"AboutActivity\",\r\n                                \"Falha ao remover observações do utilizador\",\r\n                                t\r\n                            )\r\n                        }\r\n                    })\r\n\r\n            sleep(800)\r\n            }\r\n        // Limpar o login guardado na sharedPreferences\r\n        val sharedPref = getSharedPreferences(\"utilizadorAutenticado\", MODE_PRIVATE)\r\n        val editor = sharedPref.edit()\r\n        editor.clear()\r\n        editor.apply()\r\n        val intent = Intent(this, LoginActivity::class.java)\r\n        startActivity(intent)\r\n        finish()\r\n        loading.dismiss()\r\n        }\r\n    }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt b/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt	(date 1706312425769)
+@@ -23,6 +23,10 @@
+ import retrofit2.Response
+ import java.lang.Thread.sleep
+ 
++/*
++* Classe Activity que extende a BaseActivity e apresenta a página de About
++* Implementa o botão de remover conta e dados do utilizador autenticado
++ */
+ class AboutActivity : BaseActivity() {
+ 
+     private lateinit var binding: AboutBinding
+@@ -30,11 +34,15 @@
+     private lateinit var listaObs: List<Observacao>
+     lateinit var loading: Dialog
+ 
++        /*
++        * Apresenta o layout about_xml
++        * Associa os eventos no botão de remover conta e cria uma imagem de loading para aguardar a remoção dos dados do utilizador
++         */
+         override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         binding = AboutBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+-        // receber o utilizador da atividade anterior
++        // recebe o utilizador da atividade anterior
+         utilizador = intent.getStringExtra("utilizador").toString()
+ 
+         // botão para remover a observação que foi selecionada
+@@ -52,7 +60,7 @@
+                 )
+                 loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                 loading.setCancelable(false)
+-                // usar o Glide para mostrar o GIF com movimento
++                // usa o Glide para mostrar o GIF com movimento
+                 val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+                 Glide.with(this)
+                     .load(R.drawable.loading)
+@@ -66,9 +74,14 @@
+ 
+ 
+     }
++
++    /*
++    * executa a remoção da conta e dados do utilizador
++     */
+     private fun removerConta(user: String) {
+         val call = RetrofitInitializer().servicoAPI().listarUtilizadores()
+         call.enqueue(object : Callback<UtilizadorGET> {
++            //retira da api a lista de utilizadores
+             override fun onResponse(
+                 call: Call<UtilizadorGET>,
+                 response: Response<UtilizadorGET>
+@@ -76,9 +89,11 @@
+                 if (response.isSuccessful) {
+                     val responseBody = response.body()
+                     responseBody?.let {
++                        //itera cada utilizador na lista de utilizadores
+                         for (utilizadorIterado in it.listaUtilizadores) {
+                             Log.d("USER", user)
+                             Log.d("USER ITERADO", utilizadorIterado.userId.toString())
++                            //se utilizador é o autenticado, remove o utilizador por chamada DELETE à API com o id do utilizador
+                             if (user.equals(utilizadorIterado.userId.toString())) {
+                                 Log.d("USER ID", utilizadorIterado.id.toString())
+                                 // botão para remover a conta que foi selecionada
+@@ -124,6 +139,9 @@
+         })
+     }
+ 
++    /*
++    * Dado o utilizador, vai buscar à API a lista de observações referentes ao utilizador
++     */
+     private fun listarObs(user: String) {
+         val call = RetrofitInitializer().servicoAPI().listarObservacoes()
+         call.enqueue(object : Callback<ObservacaoGET> {
+@@ -133,7 +151,8 @@
+             ) {
+                 if (response.isSuccessful) {
+                     response.body()?.let {
+-                        // remover as observações a partir do maior índice, porque a API do Sheety reordena os índices após a remoção
++                        // remover as observações a partir do maior índice, porque a API do Sheety
++                        // reordena os índices após a remoção
+                         listaObs = it.listaObservacoes
+                         ajustarObsRemover(user)
+                     }
+@@ -146,6 +165,9 @@
+         })
+     }
+ 
++    /*
++    * Reordena os índíces da lista de observações
++     */
+     private fun ajustarObsRemover(user:String){
+         val novaListaObs = mutableListOf<Observacao>()
+ 
+@@ -158,6 +180,9 @@
+         removerObs(user)
+     }
+ 
++    /*
++    * Remove observação da lista da API
++     */
+     private fun removerObs(user: String) {
+         for(i in listaObs.size-1 downTo 0){
+ 
+Index: app/src/main/java/com/projetodam/avista/model/Utilizador.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class Utilizador(\r\n    @SerializedName(\"id\")\r\n    val id: String?,\r\n    @SerializedName(\"utilizador\")\r\n    val userId: String?,\r\n    @SerializedName(\"password\")\r\n    val password: String?\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/Utilizador.kt b/app/src/main/java/com/projetodam/avista/model/Utilizador.kt
+--- a/app/src/main/java/com/projetodam/avista/model/Utilizador.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/Utilizador.kt	(date 1706309879604)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados do Utilizador para comunicar com a API Sheety
++ */
+ data class Utilizador(
+     @SerializedName("id")
+     val id: String?,
+Index: app/src/main/res/layout/mapview.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:background=\"@color/white\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_height=\"match_parent\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    tools:context=\".ui.activity.MapActivity\">\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/mapViewContainer\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <org.osmdroid.views.MapView\r\n            android:id=\"@+id/mapView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"0.9\"\r\n            app:layout_behavior=\"@string/appbar_scrolling_view_behavior\">\r\n\r\n        </org.osmdroid.views.MapView>\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView2\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textAlignment=\"center\"\r\n            android:paddingTop=\"5pt\"\r\n            android:text=\"Coloque o marcador no sítio onde observou a ave.\" />\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/guardarCoords\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"0.1\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <androidx.constraintlayout.widget.ConstraintLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/btnObterCoordenadas\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Guardar coordenadas\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n            </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/mapview.xml b/app/src/main/res/layout/mapview.xml
+--- a/app/src/main/res/layout/mapview.xml	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/res/layout/mapview.xml	(date 1706313782910)
+@@ -23,7 +23,7 @@
+         </org.osmdroid.views.MapView>
+ 
+         <TextView
+-            android:id="@+id/textView2"
++            android:id="@+id/textoInferior"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textAlignment="center"
+Index: app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport at.favre.lib.crypto.bcrypt.BCrypt\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.databinding.ActivityLoginBinding\r\nimport com.projetodam.avista.model.UtilizadorGET\r\nimport com.projetodam.avista.retrofit.RetrofitInitializer\r\nimport com.projetodam.avista.retrofit.service.ServicoAPI\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\n\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n\r\n    private lateinit var binding: ActivityLoginBinding\r\n    val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityLoginBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        binding.buttonLogin.setOnClickListener {\r\n            val utilizador = binding.editUsername.text.toString()\r\n            val palavraPasse = binding.editarPassword.text.toString()\r\n\r\n            if(utilizador != \"\" && palavraPasse != \"\") {\r\n                verificarUtilizador(utilizador, palavraPasse)\r\n            } else {\r\n                Toast.makeText(\r\n                    applicationContext,\r\n                    getString(R.string.preenchimento_falha),\r\n                    Toast.LENGTH_SHORT\r\n                ).show()\r\n            }\r\n        }\r\n\r\n        binding.textoRegistar.setOnClickListener {\r\n            startActivity(Intent(this, SignupActivity::class.java))\r\n        }\r\n\r\n        binding.textoRecuperar.setOnClickListener {\r\n            //recuperar password\r\n        }\r\n\r\n    }\r\n    private fun verificarUtilizador(utilizador: String, palavraPasse: String) {\r\n        val call = servicoAPI.listarUtilizadores()\r\n\r\n        Log.d(\"LoginActivity\", \"utilizador: ${utilizador}\")\r\n        call.enqueue(object : Callback<UtilizadorGET> {\r\n            override fun onResponse(call: Call<UtilizadorGET>, response: Response<UtilizadorGET>) {\r\n                if (response.isSuccessful) {\r\n                    val responseBody = response.body()\r\n                    responseBody?.let {\r\n\r\n                        for (utilizadorIterado in it.listaUtilizadores) {\r\n                            Log.d(\"LoginActivity\", \"utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}\")\r\n                            Log.d(\"LoginActivity\", \"utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}\")\r\n\r\n                            if (utilizadorIterado.userId == utilizador && verificarPalavraPasse(palavraPasse, utilizadorIterado.password)) {\r\n                                if(binding.checkboxLogged.isChecked) {\r\n                                    val sharedPref = getSharedPreferences(\"utilizadorAutenticado\", MODE_PRIVATE)\r\n                                    val editor = sharedPref.edit()\r\n                                    editor.putString(\"utilizador\", utilizadorIterado.userId)\r\n                                    editor.putString(\"pwEncriptada\", utilizadorIterado.password)\r\n                                    editor.apply()\r\n                                }\r\n                                var intent = Intent(this@LoginActivity, MainActivity::class.java)\r\n                                // enviar para a atividade Main o utilizador autenticado\r\n                                intent.putExtra(\"utilizador\", utilizador)\r\n                                startActivity(intent)\r\n                                return\r\n                            }\r\n                        }\r\n                        Toast.makeText(\r\n                            applicationContext,\r\n                            getString(R.string.verificar_password),\r\n                            Toast.LENGTH_SHORT\r\n                        ).show()\r\n                    }\r\n                }\r\n\r\n            }\r\n\r\n            override fun onFailure(call: Call<UtilizadorGET>, t: Throwable) {\r\n                Log.d(\"LoginActivity\", \"onFailure: ${t.message}\")\r\n            }\r\n        })\r\n    }\r\n\r\n    // usar o BCrypt para confirmar que a hash é a mesma da base de dados\r\n    private fun verificarPalavraPasse(palavraPasse: String, hashPalavraPasse: String?): Boolean {\r\n        val bcrypt = BCrypt.verifyer()\r\n        return bcrypt.verify(palavraPasse.toCharArray(), hashPalavraPasse).verified\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt b/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt	(date 1706313345099)
+@@ -15,7 +15,6 @@
+ import retrofit2.Callback
+ import retrofit2.Response
+ 
+-
+ class LoginActivity : AppCompatActivity() {
+ 
+     private lateinit var binding: ActivityLoginBinding
+Index: app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui\r\n\r\nimport android.os.Bundle\r\nimport android.widget.ImageView\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.net.toUri\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.databinding.FullscreenObservacaoBinding\r\nimport com.squareup.picasso.Picasso\r\n\r\nclass FullscreenObservacaoActivity : AppCompatActivity() {\r\n\r\n    private lateinit var binding: FullscreenObservacaoBinding\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = FullscreenObservacaoBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        // Retrieve the URI from the intent\r\n        val imageUri = intent.getStringExtra(\"imageUri\")\r\n        val img: ImageView = this.findViewById<ImageView>(R.id.imgDisplay)\r\n        // Display the image in the ImageView\r\n        Picasso.get().load(imageUri!!.toUri()).into(img)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt b/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt	(date 1706313345087)
+@@ -8,6 +8,9 @@
+ import com.projetodam.avista.databinding.FullscreenObservacaoBinding
+ import com.squareup.picasso.Picasso
+ 
++/*
++* Classe Activity que apresenta a imagem selecionada no detalhe da lista de observações na tela inteira
++ */
+ class FullscreenObservacaoActivity : AppCompatActivity() {
+ 
+     private lateinit var binding: FullscreenObservacaoBinding
+@@ -16,10 +19,10 @@
+         binding = FullscreenObservacaoBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+ 
+-        // Retrieve the URI from the intent
++        // atualiza a image do intent
+         val imageUri = intent.getStringExtra("imageUri")
+         val img: ImageView = this.findViewById<ImageView>(R.id.imgDisplay)
+-        // Display the image in the ImageView
++        // introduz a imagem na view
+         Picasso.get().load(imageUri!!.toUri()).into(img)
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui\r\n\r\nimport android.Manifest\r\nimport android.app.Activity\r\nimport android.app.Dialog\r\nimport android.content.ContentValues\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.graphics.Bitmap\r\nimport android.graphics.BitmapFactory\r\nimport android.graphics.Color\r\nimport android.graphics.drawable.ColorDrawable\r\nimport android.net.Uri\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.provider.MediaStore\r\nimport android.util.Log\r\nimport android.view.ViewGroup\r\nimport android.widget.ImageView\r\nimport android.widget.Toast\r\nimport androidx.annotation.RequiresApi\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport com.bumptech.glide.Glide\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.databinding.ActivityEditarObsBinding\r\nimport com.projetodam.avista.model.Observacao\r\nimport com.projetodam.avista.model.ObservacaoPUT\r\nimport com.projetodam.avista.model.ObservacaoSharedModel\r\nimport com.projetodam.avista.model.RespostaAPI\r\nimport com.projetodam.avista.retrofit.EnvioFotografia\r\nimport com.projetodam.avista.retrofit.RetrofitInitializer\r\nimport com.projetodam.avista.retrofit.service.EnvioFotografiaCallback\r\nimport com.projetodam.avista.retrofit.service.ServicoAPI\r\nimport com.projetodam.avista.ui.activity.MapActivity\r\nimport com.google.gson.Gson\r\nimport com.squareup.picasso.Picasso\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport java.io.FileNotFoundException\r\nimport java.time.LocalDate\r\nimport java.time.format.DateTimeFormatter\r\nimport java.time.format.DateTimeParseException\r\n\r\n\r\nclass EditarObsActivity : BaseActivity() {\r\n\r\n    private lateinit var binding: ActivityEditarObsBinding\r\n    val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()\r\n    private lateinit var viewModel: ObservacaoSharedModel\r\n    private var listaObservacoes = ArrayList<Observacao>()\r\n    private val CAMERA_PERMISSION_CODE = 101\r\n    private val PICK_MARKER_CODE = 103\r\n    private val PICK_IMAGE_REQUEST = 1\r\n    lateinit var imgBitmap: Bitmap\r\n    var image_uri: Uri? = null\r\n    val IMAGE_CAPTURE_CODE = 654\r\n    var idObs = \"\"\r\n    var utilizador = \"\"\r\n    var data = \"\"\r\n    var especie = \"\"\r\n    var foto = \"\"\r\n    var descricao = \"\"\r\n    var latitude = 0.0\r\n    var longitude = 0.0\r\n\r\n    @RequiresApi(Build.VERSION_CODES.O)\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityEditarObsBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n        viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)\r\n\r\n        //receber os dados a editar\r\n        idObs = intent.getStringExtra(\"idObs\").toString()\r\n        utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n        utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n        data = intent.getStringExtra(\"data\").toString()\r\n        especie = intent.getStringExtra(\"especie\").toString()\r\n        foto = intent.getStringExtra(\"foto\").toString()\r\n        descricao = intent.getStringExtra(\"descricao\").toString()\r\n        latitude = intent.getStringExtra(\"latitude\")!!.toDouble()\r\n        longitude = intent.getStringExtra(\"longitude\")!!.toDouble()\r\n        binding.txtData.setText(data)\r\n        binding.txtEspecie.setText(especie)\r\n        binding.txtDescricao.setText(descricao)\r\n        Picasso.get().load(foto).into(binding.viewImagem)\r\n\r\n\r\n        binding.btnCamera.setOnClickListener{\r\n            verificarPermissaoCamera()\r\n        }\r\n\r\n        binding.btnGaleria.setOnClickListener{\r\n            abrirGaleria()\r\n        }\r\n\r\n        binding.btnMapa.setOnClickListener {\r\n            listaObservacoes = intent.getSerializableExtra(\"listaObservacoes\") as ArrayList<Observacao>\r\n            var intent = Intent(this, MapActivity::class.java)\r\n            // enviar para a atividade Mapa a latitude e longitude atuais\r\n            intent.putExtra(\"latitude\", latitude.toString())\r\n            intent.putExtra(\"longitude\", longitude.toString())\r\n            intent.putExtra(\"option\", \"OPTION_2\")\r\n            intent.putExtra(\"utilizador\", utilizador)\r\n            intent.putExtra(\"listaObservacoes\", listaObservacoes)\r\n            startActivityForResult(intent, PICK_MARKER_CODE)\r\n        }\r\n\r\n        binding.btnGuardarObs.setOnClickListener {\r\n\r\n            especie = binding.txtEspecie.text.toString()\r\n            data = binding.txtData.text.toString()\r\n            descricao = binding.txtDescricao.text.toString()\r\n            var id = idObs\r\n\r\n            // verifica se a data está no formato dd/mm/aaaa\r\n            if (validarData(data)) {\r\n                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs\r\n                val loading = Dialog(this)\r\n                loading.setContentView(R.layout.loading)\r\n                loading.window?.setLayout(\r\n                    (resources.displayMetrics.widthPixels).toInt(),\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT\r\n                )\r\n                loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))\r\n                loading.setCancelable(false)\r\n\r\n                // usar o Glide para mostrar o GIF com movimento\r\n                val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)\r\n                Glide.with(this)\r\n                    .load(R.drawable.loading)\r\n                    .into(loadingImageView)\r\n                loading.show()\r\n\r\n\r\n                if (especie == \"\") {\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Não foi especificada a espécie.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    loading.dismiss()\r\n                } else if (data == \"\") {\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Não foi especificada a data.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    loading.dismiss()\r\n                } else {\r\n                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado\r\n                    if (!checkNullBitMap()) {\r\n                        EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :\r\n                            EnvioFotografiaCallback {\r\n                            override fun onSucess(url: String) {\r\n                                foto = url\r\n                                editarObs(\r\n                                    id,\r\n                                    utilizador,\r\n                                    latitude,\r\n                                    longitude,\r\n                                    foto,\r\n                                    descricao,\r\n                                    data,\r\n                                    especie,\r\n                                    loading\r\n                                )\r\n                            }\r\n\r\n                            override fun onError(mensagemErro: String) {\r\n                                Log.e(\r\n                                    \"EditarObsActivity\",\r\n                                    \"Erro ao obter o displayURL: $mensagemErro\"\r\n                                )\r\n                                Toast.makeText(\r\n                                    applicationContext,\r\n                                    \"Erro ao obter o displayURL\",\r\n                                    Toast.LENGTH_SHORT\r\n                                ).show()\r\n                                loading.dismiss()\r\n                            }\r\n\r\n                        })\r\n                    } else {\r\n                        editarObs(\r\n                            id,\r\n                            utilizador,\r\n                            latitude,\r\n                            longitude,\r\n                            foto,\r\n                            descricao,\r\n                            data,\r\n                            especie,\r\n                            loading\r\n                        )\r\n                    }\r\n\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    // verificar se a imagem não foi alterada e é a original\r\n    private fun checkNullBitMap(): Boolean{\r\n        try{\r\n            if (imgBitmap != null)\r\n                return false\r\n        } catch (e: Exception){\r\n            return true\r\n        }\r\n        return false\r\n    }\r\n\r\n    // função para validar que a data inserida é válida\r\n    @RequiresApi(Build.VERSION_CODES.O)\r\n    private fun validarData(data: String): Boolean {\r\n        try {\r\n            val formatter = DateTimeFormatter.ofPattern(\"dd/MM/yyyy\")\r\n            val localDate = LocalDate.parse(data, formatter)\r\n            return true\r\n        } catch (e: DateTimeParseException) {\r\n            Toast.makeText(\r\n                applicationContext,\r\n                \"Data inválida. O formato da data deve ser dd/MM/aaaa.\",\r\n                Toast.LENGTH_SHORT\r\n            ).show()\r\n            return false\r\n        }\r\n    }\r\n\r\n    private fun abrirGaleria() {\r\n        val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)\r\n        startActivityForResult(galeria, PICK_IMAGE_REQUEST)\r\n    }\r\n\r\n    private fun tirarFoto() {\r\n        // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2\r\n        val values = ContentValues()\r\n        values.put(MediaStore.Images.Media.TITLE, \"Nova fotografia\")\r\n        values.put(MediaStore.Images.Media.DESCRIPTION, \"Através da aplicação Avista\")\r\n        image_uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)\r\n        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)\r\n        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)\r\n        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)\r\n    }\r\n\r\n    private fun verificarPermissaoCamera() {\r\n        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {\r\n            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)\r\n        } else {\r\n            tirarFoto()\r\n        }\r\n    }\r\n\r\n    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults)\r\n        when (requestCode) {\r\n            CAMERA_PERMISSION_CODE -> {\r\n                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n                    tirarFoto()\r\n                } else {\r\n                    Toast.makeText(this, \"É preciso dar a permissão de acesso à câmera para poder tirar fotografias.\", Toast.LENGTH_SHORT).show()\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {\r\n        super.onActivityResult(requestCode, resultCode, data)\r\n\r\n        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {\r\n            // se o requestCode for o de selecionar image, é porque veio da galeria\r\n            val uriImagem = data?.data\r\n            imgBitmap = converterParaBitmap(uriImagem!!)!!\r\n            binding.viewImagem.setImageBitmap(imgBitmap)\r\n\r\n        } else if(requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK){\r\n            // se o requestCode for o de capturar uma imagem, é porque veio da câmera\r\n            imgBitmap = converterParaBitmap(image_uri!!)!!\r\n            binding.viewImagem.setImageBitmap(imgBitmap)\r\n        } else if(requestCode == PICK_MARKER_CODE && resultCode == RESULT_OK){\r\n            latitude = data?.getStringExtra(\"latitudeAtualizada\")!!.toDouble()\r\n            longitude = data?.getStringExtra(\"longitudeAtualizada\")!!.toDouble()\r\n        }\r\n    }\r\n    private fun converterParaBitmap(uriImagem: Uri): Bitmap? {\r\n        try {\r\n            val inputStream = contentResolver.openInputStream(uriImagem)\r\n            return BitmapFactory.decodeStream(inputStream)\r\n        } catch (e: FileNotFoundException) {\r\n            e.printStackTrace()\r\n            return null\r\n        }\r\n    }\r\n\r\n    private fun editarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){\r\n        // criar o objeto Observacao\r\n        val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)\r\n\r\n        // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar\r\n        val putObservacao = ObservacaoPUT(observacao = novaObservacao)\r\n        Log.d(\"EditarObsActivity\", \"JSON enviado: ${Gson().toJson(putObservacao)}\")\r\n\r\n        val call = servicoAPI.editarObservacao(id, putObservacao)\r\n        call.enqueue(object : Callback<RespostaAPI> {\r\n            override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {\r\n                if (response.isSuccessful) {\r\n                    Log.d(\"EditarObsActivity\", \"onSucessful: ${response.body()}\")\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Observação alterada com sucesso.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    finish()\r\n                    var intent = Intent(this@EditarObsActivity, MainActivity::class.java)\r\n                    // enviar para a atividade Main o utilizador autenticado\r\n                    intent.putExtra(\"utilizador\", utilizador)\r\n                    startActivity(intent)\r\n                } else {\r\n                    Log.e(\"EditarObsActivity\", \"Erro: ${response.code()}\")\r\n                    Toast.makeText(\r\n                        applicationContext,\r\n                        \"Erro. Código: ${response.code()}\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                }\r\n                loading.dismiss()\r\n            }\r\n\r\n            override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {\r\n                Log.e(\"EditarObsActivity\", \"Erro: ${t.message}\")\r\n                loading.dismiss()\r\n            }\r\n        })\r\n\r\n    }\r\n\r\n    // ao retroceder, para a aplicação não fechar, voltar à MainActivity\r\n    override fun onBackPressed() {\r\n        super.onBackPressed()\r\n        var intent = Intent(this@EditarObsActivity, MainActivity::class.java)\r\n        intent.putExtra(\"utilizador\", utilizador)\r\n        startActivity(intent)\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt b/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt	(date 1706313345092)
+@@ -19,7 +19,6 @@
+ import android.widget.ImageView
+ import android.widget.Toast
+ import androidx.annotation.RequiresApi
+-import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.app.ActivityCompat
+ import androidx.core.content.ContextCompat
+ import androidx.lifecycle.ViewModelProvider
+@@ -45,7 +44,10 @@
+ import java.time.format.DateTimeFormatter
+ import java.time.format.DateTimeParseException
+ 
+-
++/*
++* Classe Activity de Edição da Observação selecionada na RecyclerView de observações com verificação de campos e atualização
++* na API Sheety dos campos alterados
++ */
+ class EditarObsActivity : BaseActivity() {
+ 
+     private lateinit var binding: ActivityEditarObsBinding
+@@ -74,7 +76,7 @@
+         setContentView(binding.root)
+         viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
+ 
+-        //receber os dados a editar
++        //recebe os dados a editar
+         idObs = intent.getStringExtra("idObs").toString()
+         utilizador = intent.getStringExtra("utilizador").toString()
+         utilizador = intent.getStringExtra("utilizador").toString()
+@@ -98,6 +100,7 @@
+             abrirGaleria()
+         }
+ 
++        //abre o mapa na localizaçao do utilizador
+         binding.btnMapa.setOnClickListener {
+             listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
+             var intent = Intent(this, MapActivity::class.java)
+@@ -110,7 +113,8 @@
+             startActivityForResult(intent, PICK_MARKER_CODE)
+         }
+ 
+-        binding.btnGuardarObs.setOnClickListener {
++        // verificação de campos e alterações na imagem para atualizar observação
++        binding.btnEditarObs.setOnClickListener {
+ 
+             especie = binding.txtEspecie.text.toString()
+             data = binding.txtData.text.toString()
+@@ -119,7 +123,7 @@
+ 
+             // verifica se a data está no formato dd/mm/aaaa
+             if (validarData(data)) {
+-                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
++                // cria um dialog para mostra o loading enquanto os dados são enviados para as APIs
+                 val loading = Dialog(this)
+                 loading.setContentView(R.layout.loading)
+                 loading.window?.setLayout(
+@@ -129,7 +133,7 @@
+                 loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                 loading.setCancelable(false)
+ 
+-                // usar o Glide para mostrar o GIF com movimento
++                // usa o Glide para mostra o GIF com movimento
+                 val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
+                 Glide.with(this)
+                     .load(R.drawable.loading)
+@@ -140,19 +144,19 @@
+                 if (especie == "") {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi especificada a espécie.",
++                        R.string.n_o_foi_especificada_a_esp_cie,
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else if (data == "") {
+                     Toast.makeText(
+                         applicationContext,
+-                        "Não foi especificada a data.",
++                        R.string.n_o_foi_especificada_a_data,
+                         Toast.LENGTH_SHORT
+                     ).show()
+                     loading.dismiss()
+                 } else {
+-                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
++                    //envia fotografia para o ImgBB e guarda o displayURL que vai ser retornado
+                     if (!checkNullBitMap()) {
+                         EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
+                             EnvioFotografiaCallback {
+@@ -178,7 +182,7 @@
+                                 )
+                                 Toast.makeText(
+                                     applicationContext,
+-                                    "Erro ao obter o displayURL",
++                                    "Erro ao atualizar Observação.",
+                                     Toast.LENGTH_SHORT
+                                 ).show()
+                                 loading.dismiss()
+@@ -204,7 +208,9 @@
+         }
+     }
+ 
+-    // verificar se a imagem não foi alterada e é a original
++    /*
++    * verifica se a imagem não foi alterada e é a original
++     */
+     private fun checkNullBitMap(): Boolean{
+         try{
+             if (imgBitmap != null)
+@@ -215,7 +221,9 @@
+         return false
+     }
+ 
+-    // função para validar que a data inserida é válida
++     /*
++     * valida se a data está no formato inserid dd/MM/yyyy
++     */
+     @RequiresApi(Build.VERSION_CODES.O)
+     private fun validarData(data: String): Boolean {
+         try {
+@@ -232,11 +240,17 @@
+         }
+     }
+ 
++    /*
++     * envia um request de atividade para abrir a galeria do utilizador
++     */
+     private fun abrirGaleria() {
+         val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+         startActivityForResult(galeria, PICK_IMAGE_REQUEST)
+     }
+ 
++    /*
++     * envia um request activity para capturar foto
++     */
+     private fun tirarFoto() {
+         // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
+         val values = ContentValues()
+@@ -248,6 +262,9 @@
+         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+     }
+ 
++    /*
++     * Verifica a permissão para utilização de câmara para permitir a captura de foto
++     */
+     private fun verificarPermissaoCamera() {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
+@@ -256,6 +273,10 @@
+         }
+     }
+ 
++    /*
++    * inicia a atividade correspondente ao request code enviado
++    * as atividades são captura de foto e obtenção
++     */
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+         when (requestCode) {
+@@ -269,6 +290,10 @@
+         }
+     }
+ 
++    /*
++    * atualiza a imagem consoante o request code enviado
++    * distingue se foto veio da galeria ou se veio da captura de foto
++     */
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+ 
+@@ -287,6 +312,10 @@
+             longitude = data?.getStringExtra("longitudeAtualizada")!!.toDouble()
+         }
+     }
++
++    /*
++    * conversão da imagem uri para bitmap
++     */
+     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {
+         try {
+             val inputStream = contentResolver.openInputStream(uriImagem)
+@@ -297,11 +326,14 @@
+         }
+     }
+ 
++    /*
++     * chamada de post da observação à API Sheety
++     */
+     private fun editarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
+-        // criar o objeto Observacao
++        // cria o objeto Observacao
+         val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
+ 
+-        // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar
++        // encapsula dentro de um objecto Observacao para construir corretamente o JSON a enviar
+         val putObservacao = ObservacaoPUT(observacao = novaObservacao)
+         Log.d("EditarObsActivity", "JSON enviado: ${Gson().toJson(putObservacao)}")
+ 
+@@ -317,7 +349,7 @@
+                     ).show()
+                     finish()
+                     var intent = Intent(this@EditarObsActivity, MainActivity::class.java)
+-                    // enviar para a atividade Main o utilizador autenticado
++                    // envia para a atividade Main o utilizador autenticado
+                     intent.putExtra("utilizador", utilizador)
+                     startActivity(intent)
+                 } else {
+@@ -339,7 +371,7 @@
+ 
+     }
+ 
+-    // ao retroceder, para a aplicação não fechar, voltar à MainActivity
++    // volta à MainActivity ao retroceder
+     override fun onBackPressed() {
+         super.onBackPressed()
+         var intent = Intent(this@EditarObsActivity, MainActivity::class.java)
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Avista</string>\r\n    <string name=\"utilizador\">E-Mail</string>\r\n    <string name=\"password\">Palavra-Passe</string>\r\n    <string name=\"keep_me_logged_in\">Mantém-me conectado.</string>\r\n    <string name=\"Registe\">Ainda não tem conta? Registe-se aqui.</string>\r\n    <string name=\"Recupere\">Recupere a sua palavra-passe.</string>\r\n    <string name=\"confirmar_palavra_passe\">Confirmar Palavra-Passe</string>\r\n    <string name=\"registar\">Registar</string>\r\n    <string name=\"data_placeholder\">Placeholder</string>\r\n    <string name=\"confirmar_password_falha\">Palavras-Passe não correspondem.</string>\r\n    <string name=\"preenchimento_falha\">Preencha todos os campos.</string>\r\n    <string name=\"login_falha\">Houve um erro no acesso, tente novamente.</string>\r\n    <string name=\"verificar_password\">Verifique o nome de utilizador ou a password.</string>\r\n    <string name=\"licenciatura_em_engenharia_inform_tica\">Licenciatura em Engenharia Informática</string>\r\n    <string name=\"desenvolvimento_de_aplica_es_m_veis\">Desenvolvimento de Aplicações Móveis</string>\r\n    <string name=\"autores\">Autores:</string>\r\n    <string name=\"vasco_silv_rio_n_22350\">Vasco Silvério Nº22350</string>\r\n    <string name=\"r_ben_garcia_n_16995\">Rúben Garcia Nº16995</string>\r\n    <string name=\"utiliza_o_das_apis\">Utilização das APIs:</string>\r\n    <string name=\"api_sheety\">API Sheety</string>\r\n    <string name=\"openstreetmaps_api\">OpenStreetMaps API</string>\r\n    <string name=\"imgbb_api\">ImgBB API</string>\r\n</resources>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/res/values/strings.xml	(date 1706313345095)
+@@ -1,5 +1,5 @@
+ <resources>
+-    <string name="app_name">Avista</string>
++    <string name="nome_app">Avista</string>
+     <string name="utilizador">E-Mail</string>
+     <string name="password">Palavra-Passe</string>
+     <string name="keep_me_logged_in">Mantém-me conectado.</string>
+@@ -21,4 +21,11 @@
+     <string name="api_sheety">API Sheety</string>
+     <string name="openstreetmaps_api">OpenStreetMaps API</string>
+     <string name="imgbb_api">ImgBB API</string>
++    <string name="verifique_a_liga_o_internet">Verifique a ligação à Internet.</string>
++    <string name="preciso_dar_permiss_o_de_acesso_localiza_o_para_obter_a_latitude_e_longitude">É preciso dar permissão de acesso à localização para obter a latitude e longitude.</string>
++    <string name="preciso_dar_a_permiss_o_de_acesso_c_mera_para_poder_tirar_fotografias">É preciso dar a permissão de acesso à câmera para poder tirar fotografias.</string>
++    <string name="n_o_foi_selecionada_nenhuma_fotografia">Não foi selecionada nenhuma fotografia.</string>
++    <string name="n_o_foi_especificada_a_esp_cie">Não foi especificada a espécie.</string>
++    <string name="n_o_foi_especificada_a_data">Não foi especificada a data.</string>
++    <string name="data_inv_lida_o_formato_da_data_deve_ser_dd_mm_aaaa">Data inválida. O formato da data deve ser dd/MM/aaaa.</string>
+ </resources>
+Index: app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui\r\n\r\nimport android.Manifest\r\nimport android.annotation.SuppressLint\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.location.Location\r\nimport android.location.LocationManager\r\nimport android.util.Log\r\nimport android.view.Menu\r\nimport android.view.MenuInflater\r\nimport android.view.MenuItem\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.model.Observacao\r\nimport com.projetodam.avista.model.ObservacaoSharedModel\r\nimport com.projetodam.avista.ui.activity.MapActivity\r\n\r\n\r\nopen class BaseActivity : AppCompatActivity() {\r\n\r\n    private val LOCATION_PERMISSION_CODE = 102\r\n    private lateinit var utilizador: String\r\n    private var listaObservacoes = ArrayList<Observacao>()\r\n    private lateinit var viewModel: ObservacaoSharedModel\r\n    private val PICK_MARKER_CODE = 103\r\n    var latitudeB = 0.0\r\n    var longitudeB = 0.0\r\n\r\n    override fun onCreateOptionsMenu(menu: Menu): Boolean {\r\n        val menuInflater: MenuInflater = menuInflater\r\n        menuInflater.inflate(R.menu.bottom_nav, menu)\r\n        viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)\r\n        return true\r\n    }\r\n\r\n\r\n    override fun onOptionsItemSelected(item: MenuItem): Boolean {\r\n        return when (item.itemId) {\r\n            R.id.item_mapa -> {\r\n                utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n                listaObservacoes = viewModel.listaObservacoes!!\r\n                var intent = Intent(this, MapActivity::class.java)\r\n                // enviar para a atividade Mapa a latitude e longitude atuais\r\n                intent.putExtra(\"latitude\", latitudeB.toString())\r\n                intent.putExtra(\"longitude\", longitudeB.toString())\r\n                intent.putExtra(\"utilizador\", utilizador)\r\n                intent.putExtra(\"listaObservacoes\", listaObservacoes)\r\n                intent.putExtra(\"option\", \"OPTION_1\")\r\n                startActivityForResult(intent, PICK_MARKER_CODE)\r\n                true\r\n            }\r\n            R.id.item_observacoes -> {\r\n                //receber o utilizador da atividade de Login\r\n                utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n                var intent = Intent(this@BaseActivity, MainActivity::class.java)\r\n                // enviar para a atividade Main o utilizador autenticado\r\n                intent.putExtra(\"utilizador\", utilizador)\r\n                startActivity(intent)\r\n                true\r\n            }\r\n            R.id.item_Logout ->\r\n                {\r\n                // Limpar o login guardado na sharedPreferences\r\n                val sharedPref = getSharedPreferences(\"utilizadorAutenticado\", MODE_PRIVATE)\r\n                val editor = sharedPref.edit()\r\n                editor.clear()\r\n                editor.apply()\r\n\r\n                val intent = Intent(this, LoginActivity::class.java)\r\n                startActivity(intent)\r\n                finish()\r\n                true\r\n            }\r\n            R.id.item_Info -> {\r\n                utilizador = intent.getStringExtra(\"utilizador\").toString()\r\n                var intent = Intent(this@BaseActivity, AboutActivity::class.java)\r\n                // enviar para a atividade Main o utilizador autenticado\r\n                intent.putExtra(\"utilizador\", utilizador)\r\n                startActivity(intent)\r\n                true\r\n            }\r\n            else -> super.onOptionsItemSelected(item)\r\n        }\r\n    }\r\n\r\n    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults)\r\n        when (requestCode) {\r\n            LOCATION_PERMISSION_CODE -> {\r\n                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n                    localizacaoAtual()\r\n                } else {\r\n                    Toast.makeText(this, \"É preciso dar permissão de acesso à localização para obter a latitude e longitude.\", Toast.LENGTH_SHORT).show()\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    @SuppressLint(\"ServiceCast\")\r\n    private fun localizacaoAtual() {\r\n        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager\r\n        val gps: String = LocationManager.GPS_PROVIDER\r\n\r\n        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED\r\n            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {\r\n            val localizacao: Location? = locationManager.getLastKnownLocation(gps)\r\n\r\n            if (localizacao != null) {\r\n                latitudeB = localizacao.latitude\r\n                longitudeB = localizacao.longitude\r\n            } else {\r\n                Log.e(\"AdicionarObsActivity\", \"Erro a obter a localização.\")\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt b/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt	(date 1706313782906)
+@@ -19,7 +19,9 @@
+ import com.projetodam.avista.model.ObservacaoSharedModel
+ import com.projetodam.avista.ui.activity.MapActivity
+ 
+-
++/*
++* Classe Activity que extende a AppCompatActivity para implementação da ActionBar nas restantes atividades
++ */
+ open class BaseActivity : AppCompatActivity() {
+ 
+     private val LOCATION_PERMISSION_CODE = 102
+@@ -34,17 +36,22 @@
+         val menuInflater: MenuInflater = menuInflater
+         menuInflater.inflate(R.menu.bottom_nav, menu)
+         viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
++        localizacaoAtual()
+         return true
+     }
+ 
+-
++    /*
++    * associa aos items da action bar os eventos de clique
++     */
+     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         return when (item.itemId) {
++            //abre o mapa com a lista de observaçoes do utilizador
+             R.id.item_mapa -> {
+                 utilizador = intent.getStringExtra("utilizador").toString()
++                // envia a lista de observações do SharedView Model
+                 listaObservacoes = viewModel.listaObservacoes!!
+                 var intent = Intent(this, MapActivity::class.java)
+-                // enviar para a atividade Mapa a latitude e longitude atuais
++                // envia para a atividade Mapa a latitude e longitude atuais
+                 intent.putExtra("latitude", latitudeB.toString())
+                 intent.putExtra("longitude", longitudeB.toString())
+                 intent.putExtra("utilizador", utilizador)
+@@ -53,18 +60,20 @@
+                 startActivityForResult(intent, PICK_MARKER_CODE)
+                 true
+             }
++            //abre a RecyclerView de observações
+             R.id.item_observacoes -> {
+-                //receber o utilizador da atividade de Login
++                //recebe o utilizador da atividade de Login
+                 utilizador = intent.getStringExtra("utilizador").toString()
+                 var intent = Intent(this@BaseActivity, MainActivity::class.java)
+-                // enviar para a atividade Main o utilizador autenticado
++                // envia para a atividade Main o utilizador autenticado
+                 intent.putExtra("utilizador", utilizador)
+                 startActivity(intent)
+                 true
+             }
++            // executa o logout do utilizador autenticado
+             R.id.item_Logout ->
+                 {
+-                // Limpar o login guardado na sharedPreferences
++                // limpa o login guardado na sharedPreferences
+                 val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
+                 val editor = sharedPref.edit()
+                 editor.clear()
+@@ -75,10 +84,11 @@
+                 finish()
+                 true
+             }
++            //abre a atividade e view de About/Info
+             R.id.item_Info -> {
+                 utilizador = intent.getStringExtra("utilizador").toString()
+                 var intent = Intent(this@BaseActivity, AboutActivity::class.java)
+-                // enviar para a atividade Main o utilizador autenticado
++                // envia para a atividade Main o utilizador autenticado
+                 intent.putExtra("utilizador", utilizador)
+                 startActivity(intent)
+                 true
+@@ -87,6 +97,10 @@
+         }
+     }
+ 
++    /*
++    * inicia a atividade correspondente ao request code enviado
++    * as atividades são captura de foto e obtenção
++     */
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+         when (requestCode) {
+@@ -100,6 +114,9 @@
+         }
+     }
+ 
++    /*
++    * obtém e atualiza a localização atual do gps
++    */
+     @SuppressLint("ServiceCast")
+     private fun localizacaoAtual() {
+         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+Index: app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class ObservacaoPUT (\r\n    @SerializedName(\"observacao\")\r\n    val observacao: Observacao\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt
+--- a/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt	(date 1706309751888)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados da Observação para comunicar com o verbo PUT
++ */
+ data class ObservacaoPUT (
+     @SerializedName("observacao")
+     val observacao: Observacao
+Index: app/src/main/java/com/projetodam/avista/ui/MapActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.ui.activity\r\n\r\nimport android.Manifest\r\nimport android.app.Activity\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.graphics.drawable.Drawable\r\nimport android.location.Location\r\nimport android.location.LocationListener\r\nimport android.location.LocationManager\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.View\r\nimport android.widget.Button\r\nimport android.widget.ImageView\r\nimport android.widget.LinearLayout\r\nimport android.widget.TextView\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport com.projetodam.avista.R\r\nimport com.projetodam.avista.model.Observacao\r\nimport com.projetodam.avista.ui.BaseActivity\r\nimport com.squareup.picasso.Picasso\r\nimport org.osmdroid.api.IMapController\r\nimport org.osmdroid.config.Configuration\r\nimport org.osmdroid.events.MapEventsReceiver\r\nimport org.osmdroid.tileprovider.tilesource.TileSourceFactory\r\nimport org.osmdroid.util.GeoPoint\r\nimport org.osmdroid.views.MapView\r\nimport org.osmdroid.views.overlay.MapEventsOverlay\r\nimport org.osmdroid.views.overlay.Marker\r\n\r\n\r\nclass MapActivity : BaseActivity() {\r\n    private lateinit var mapView: MapView\r\n    private val REQUEST_PERMISSIONS_REQUEST_CODE = 1\r\n    private var listaObservacoes = ArrayList<Observacao>()\r\n    private lateinit var locationManager: LocationManager\r\n    private lateinit var locationListener: LocationListener\r\n    private lateinit var mapEventsOverlay: MapEventsOverlay\r\n    lateinit var latitude: String\r\n    lateinit var longitude: String\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.mapview)\r\n\r\n        listaObservacoes = intent.getSerializableExtra(\"listaObservacoes\") as ArrayList<Observacao>\r\n\r\n        val option = intent.getStringExtra(\"option\")\r\n\r\n        when (option) {\r\n            \"OPTION_1\" -> {\r\n                val view = findViewById<LinearLayout>(R.id.guardarCoords)\r\n                view.visibility = View.GONE\r\n                val textViewToChange = findViewById<TextView>(R.id.textView2)\r\n                textViewToChange.text = \"Clique no marcador para abrir os detalhes.\"\r\n            }\r\n            \"OPTION_2\" -> {\r\n                val view = findViewById<LinearLayout>(R.id.guardarCoords)\r\n                view.visibility = View.VISIBLE\r\n                val textViewToChange = findViewById<TextView>(R.id.textView2)\r\n                textViewToChange.text = \"Coloque o marcador na localização onde observou a ave.\"\r\n            }\r\n            \"OPTION_3\" -> {\r\n                val view = findViewById<LinearLayout>(R.id.guardarCoords)\r\n                view.visibility = View.VISIBLE\r\n                val textViewToChange = findViewById<TextView>(R.id.textView2)\r\n                textViewToChange.text = \"Coloque o marcador na localização onde observou a ave.\"\r\n\r\n            }\r\n        }\r\n\r\n        // obter a latitude e longitude que foram lidas na actividade de adicionar observações\r\n        latitude = intent.getStringExtra(\"latitude\")!!.toString()\r\n        longitude = intent.getStringExtra(\"longitude\")!!.toString()\r\n\r\n        Log.d(\"Latitude: \", latitude.toString())\r\n        Log.d(\"Longitude: \", longitude.toString())\r\n\r\n        val ctx = applicationContext\r\n        Configuration.getInstance().load(ctx, getSharedPreferences(\"osmdroid\", 0))\r\n\r\n        mapView = findViewById(R.id.mapView)\r\n        mapView.setTileSource(TileSourceFactory.MAPNIK)\r\n        mapView.setMultiTouchControls(true)\r\n        mapView.isClickable = true\r\n\r\n        val localizacao = GeoPoint(latitude.toDouble(), longitude.toDouble())\r\n\r\n        // adicionar o marcador com as posições recebidas da atividade anterior e centrar o mapa nesse ponto\r\n        atualizarMarcador(localizacao)\r\n        mapView.controller.setZoom(15.0)\r\n        mapView.controller.setCenter(localizacao)\r\n\r\n        if (checkPermissions()) {\r\n            setupLocationListener()\r\n        } else {\r\n            requestPermissions()\r\n        }\r\n\r\n        // colocar o marcador onde o utilizador clicar\r\n        mapEventsOverlay = MapEventsOverlay(object : MapEventsReceiver {\r\n            override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {\r\n                atualizarMarcador(p)\r\n                return false\r\n            }\r\n\r\n            override fun longPressHelper(p: GeoPoint): Boolean {\r\n                atualizarMarcador(p)\r\n                return false\r\n            }\r\n        })\r\n        mapView.overlays.add(mapEventsOverlay)\r\n\r\n        val btnObterCoordenadas = findViewById<Button>(R.id.btnObterCoordenadas)\r\n        btnObterCoordenadas.setOnClickListener {\r\n            // atualizar a latitude e longitude na atividade anterior\r\n            val intent = Intent()\r\n            intent.putExtra(\"latitudeAtualizada\", latitude)\r\n            intent.putExtra(\"longitudeAtualizada\", longitude)\r\n            setResult(Activity.RESULT_OK, intent)\r\n            finish()\r\n        }\r\n        if(option==\"OPTION_1\") populateMap(mapView,listaObservacoes)\r\n    }\r\n\r\n    private fun atualizarMarcador(posicao: GeoPoint) {\r\n        // atualizar a posição do marcador\r\n        val marcador = Marker(mapView)\r\n        marcador.position = posicao\r\n        marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)\r\n        latitude = marcador.position.latitude.toString()\r\n        longitude = marcador.position.longitude.toString()\r\n        Log.d(\"NOVA LATITUDE, LONGITUDE\",\"$latitude, $longitude\")\r\n        mapView.overlays.removeAll { it is Marker }  // limpar o marcador anterior\r\n        mapView.overlays.add(marcador)\r\n    }\r\n\r\n    private fun setupLocationListener() {\r\n        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager\r\n        locationListener = object : LocationListener {\r\n            override fun onLocationChanged(location: Location) {\r\n                mapView.controller.setCenter(GeoPoint(location.latitude, location.longitude))\r\n                locationManager.removeUpdates(this)\r\n            }\r\n\r\n            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}\r\n            override fun onProviderEnabled(provider: String) {}\r\n            override fun onProviderDisabled(provider: String) {}\r\n        }\r\n\r\n        if (ActivityCompat.checkSelfPermission(\r\n                this,\r\n                Manifest.permission.ACCESS_FINE_LOCATION\r\n            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(\r\n                this,\r\n                Manifest.permission.ACCESS_COARSE_LOCATION\r\n            ) != PackageManager.PERMISSION_GRANTED\r\n        ) {\r\n            // TODO: Consider calling\r\n            //    ActivityCompat#requestPermissions\r\n            // here to request the missing permissions, and then overriding\r\n            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,\r\n            //                                          int[] grantResults)\r\n            // to handle the case where the user grants the permission. See the documentation\r\n            // for ActivityCompat#requestPermissions for more details.\r\n            return\r\n        }\r\n        locationManager.requestLocationUpdates(\r\n            LocationManager.GPS_PROVIDER,\r\n            0,\r\n            0f,\r\n            locationListener\r\n        )\r\n    }\r\n\r\n    private fun checkPermissions(): Boolean {\r\n        val fineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED\r\n        val coarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED\r\n        return fineLocationPermission && coarseLocationPermission\r\n    }\r\n\r\n    private fun requestPermissions() {\r\n        ActivityCompat.requestPermissions(\r\n            this,\r\n            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),\r\n            REQUEST_PERMISSIONS_REQUEST_CODE\r\n        )\r\n    }\r\n\r\n    fun populateMap(mapView: MapView, observacoes: ArrayList<Observacao>) {\r\n        // Clear existing overlays on the map\r\n        mapView.overlays.clear()\r\n\r\n        // Get the map controller for zooming/panning\r\n        val mapController: IMapController = mapView.controller\r\n\r\n        // Iterate through the list of Observacao objects\r\n        for (observacao in observacoes) {\r\n            val latitude = observacao.lat\r\n            val longitude = observacao.long\r\n            val fotoPath = observacao.foto // Assuming 'foto' is the image path in Observacao\r\n            val nomeAve = observacao.especie\r\n            val descricao = observacao.descricao\r\n            val data = observacao.data\r\n\r\n            // Create a GeoPoint from the latitude and longitude\r\n            val geoPoint = latitude?.toDouble()?.let { longitude?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }\r\n\r\n            // Create a marker for each observation point\r\n            val marker = Marker(mapView)\r\n            marker.position = geoPoint\r\n            marker.title = nomeAve + \"\\n\" + descricao + \"\\n\" + data\r\n\r\n            val imageView = ImageView(this)\r\n            Picasso.get().load(fotoPath).into(imageView)\r\n            val drawable : Drawable? = imageView?.drawable\r\n            // Load and set the image using Picasso\r\n            if (fotoPath != null && fotoPath.isNotEmpty()) {\r\n                marker.image = drawable\r\n            }\r\n\r\n            // Add the marker to the map overlay\r\n            mapView.overlays.add(marker)\r\n        }\r\n\r\n        // Zoom and center the map on the first observation point\r\n        if (observacoes.isNotEmpty()) {\r\n            val firstObservation = observacoes[0]\r\n            val firstPoint = firstObservation.lat?.toDouble()?.let { firstObservation.long?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }\r\n            mapController.setCenter(firstPoint)\r\n            mapController.setZoom(12.0) // Adjust the zoom level as needed\r\n        }\r\n\r\n        // Refresh the map view\r\n        mapView.invalidate()\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt b/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt
+--- a/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt	(date 1706313782913)
+@@ -53,19 +53,19 @@
+             "OPTION_1" -> {
+                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
+                 view.visibility = View.GONE
+-                val textViewToChange = findViewById<TextView>(R.id.textView2)
++                val textViewToChange = findViewById<TextView>(R.id.textoInferior)
+                 textViewToChange.text = "Clique no marcador para abrir os detalhes."
+             }
+             "OPTION_2" -> {
+                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
+                 view.visibility = View.VISIBLE
+-                val textViewToChange = findViewById<TextView>(R.id.textView2)
++                val textViewToChange = findViewById<TextView>(R.id.textoInferior)
+                 textViewToChange.text = "Coloque o marcador na localização onde observou a ave."
+             }
+             "OPTION_3" -> {
+                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
+                 view.visibility = View.VISIBLE
+-                val textViewToChange = findViewById<TextView>(R.id.textView2)
++                val textViewToChange = findViewById<TextView>(R.id.textoInferior)
+                 textViewToChange.text = "Coloque o marcador na localização onde observou a ave."
+ 
+             }
+Index: app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class UtilizadorPOST (\r\n    @SerializedName(\"utilizador\")\r\n    val utilizador: Utilizador\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt b/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt
+--- a/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt	(date 1706309879609)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados do Utilizador para comunicar com o verbo POST
++ */
+ data class UtilizadorPOST (
+     @SerializedName("utilizador")
+     val utilizador: Utilizador
+Index: local.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>## This file must *NOT* be checked into Version Control Systems,\r\n# as it contains information specific to your local configuration.\r\n#\r\n# Location of the SDK. This is only used by Gradle.\r\n# For customization when using a Version Control System, please read the\r\n# header note.\r\n#Tue Dec 26 22:40:41 GMT 2023\r\nsdk.dir=C\\:\\\\Android\\\\Sdk\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/local.properties b/local.properties
+--- a/local.properties	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/local.properties	(date 1706307869621)
+@@ -5,4 +5,4 @@
+ # For customization when using a Version Control System, please read the
+ # header note.
+ #Tue Dec 26 22:40:41 GMT 2023
+-sdk.dir=C\:\\Android\\Sdk
++sdk.dir=C\:\\Users\\Administrator\\AppData\\Local\\Android\\Sdk
+Index: app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class RespostaAPI (\r\n    @SerializedName(\"code\") val code: String?,\r\n    @SerializedName(\"description\") val description: String?\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt b/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt
+--- a/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt	(date 1706309751877)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados da resposta da API Sheety
++ */
+ data class RespostaAPI (
+     @SerializedName("code") val code: String?,
+     @SerializedName("description") val description: String?
+Index: app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class ObservacaoPOST (\r\n    @SerializedName(\"observacao\")\r\n    val observacao: Observacao\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt b/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt
+--- a/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt	(date 1706309751881)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados da Observação para comunicar com o verbo POST
++ */
+ data class ObservacaoPOST (
+     @SerializedName("observacao")
+     val observacao: Observacao
+Index: app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.projetodam.avista.model\r\n\r\nimport com.google.gson.annotations.SerializedName\r\n\r\ndata class UtilizadorGET(\r\n    @SerializedName(\"utilizador\")\r\n    val listaUtilizadores: List<Utilizador>\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt b/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt
+--- a/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt	(revision 93500f590be77055bac3a3364983db7138537da1)
++++ b/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt	(date 1706309879596)
+@@ -2,6 +2,9 @@
+ 
+ import com.google.gson.annotations.SerializedName
+ 
++/*
++* Modelo de dados do Utilizador para comunicar com o verbo GET
++ */
+ data class UtilizadorGET(
+     @SerializedName("utilizador")
+     val listaUtilizadores: List<Utilizador>

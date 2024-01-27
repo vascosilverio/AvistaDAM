@@ -42,6 +42,8 @@ class MapActivity : BaseActivity() {
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var mapEventsOverlay: MapEventsOverlay
+    lateinit var latitude: String
+    lateinit var longitude: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,26 +60,26 @@ class MapActivity : BaseActivity() {
             "OPTION_1" -> {
                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
                 view.visibility = View.GONE
-                val textViewToChange = findViewById<TextView>(R.id.textView2)
+                val textViewToChange = findViewById<TextView>(R.id.textoInferior)
                 textViewToChange.text = "Clique no marcador para abrir os detalhes."
             }
             "OPTION_2" -> {
                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
                 view.visibility = View.VISIBLE
-                val textViewToChange = findViewById<TextView>(R.id.textView2)
+                val textViewToChange = findViewById<TextView>(R.id.textoInferior)
                 textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
             }
             "OPTION_3" -> {
                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
                 view.visibility = View.VISIBLE
-                val textViewToChange = findViewById<TextView>(R.id.textView2)
+                val textViewToChange = findViewById<TextView>(R.id.textoInferior)
                 textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
             }
         }
 
         // obter a latitude e longitude que foram lidas na actividade de adicionar observações
-        latitude = intent.getStringExtra("latitude")!!.toDouble()
-        longitude = intent.getStringExtra("longitude")!!.toDouble()
+        latitude = intent.getStringExtra("latitude")!!.toString()
+        longitude = intent.getStringExtra("longitude")!!.toString()
         val ctx = applicationContext
         Configuration.getInstance().load(ctx, getSharedPreferences("osmdroid", 0))
         mapView = findViewById(R.id.mapView)
@@ -130,8 +132,8 @@ class MapActivity : BaseActivity() {
         val marcador = Marker(mapView)
         marcador.position = posicao
         marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        latitude = marcador.position.latitude
-        longitude = marcador.position.longitude
+        latitude = marcador.position.latitude.toString()
+        longitude = marcador.position.longitude.toString()
         // limpar o marcador anterior
         mapView.overlays.removeAll { it is Marker }
         // adicionar o novo marcador

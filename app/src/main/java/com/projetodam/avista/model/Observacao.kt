@@ -4,6 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+/*
+* Modelo de dados da Observação para comunicar com a API Sheety
+* Este modelo é parcelable para leitura dos campos individuais em actividades
+ */
 data class Observacao(
     @SerializedName("id")
     val id: String?,

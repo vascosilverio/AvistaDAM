@@ -19,7 +19,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +44,10 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-
+/*
+* Classe Activity de Edição da Observação selecionada na RecyclerView de observações com verificação de campos e atualização
+* na API Sheety dos campos alterados
+ */
 class EditarObsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityEditarObsBinding
@@ -74,7 +76,7 @@ class EditarObsActivity : BaseActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
 
-        //receber os dados a editar
+        //recebe os dados a editar
         idObs = intent.getStringExtra("idObs").toString()
         utilizador = intent.getStringExtra("utilizador").toString()
         utilizador = intent.getStringExtra("utilizador").toString()
@@ -98,6 +100,7 @@ class EditarObsActivity : BaseActivity() {
             abrirGaleria()
         }
 
+        //abre o mapa na localizaçao do utilizador
         binding.btnMapa.setOnClickListener {
             listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
             var intent = Intent(this, MapActivity::class.java)
@@ -110,7 +113,8 @@ class EditarObsActivity : BaseActivity() {
             startActivityForResult(intent, PICK_MARKER_CODE)
         }
 
-        binding.btnGuardarObs.setOnClickListener {
+        // verificação de campos e alterações na imagem para atualizar observação
+        binding.btnEditarObs.setOnClickListener {
 
             especie = binding.txtEspecie.text.toString()
             data = binding.txtData.text.toString()
@@ -119,7 +123,7 @@ class EditarObsActivity : BaseActivity() {
 
             // verifica se a data está no formato dd/mm/aaaa
             if (validarData(data)) {
-                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
+                // cria um dialog para mostra o loading enquanto os dados são enviados para as APIs
                 val loading = Dialog(this)
                 loading.setContentView(R.layout.loading)
                 loading.window?.setLayout(
@@ -129,7 +133,7 @@ class EditarObsActivity : BaseActivity() {
                 loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 loading.setCancelable(false)
 
-                // usar o Glide para mostrar o GIF com movimento
+                // usa o Glide para mostra o GIF com movimento
                 val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
                 Glide.with(this)
                     .load(R.drawable.loading)
@@ -140,19 +144,19 @@ class EditarObsActivity : BaseActivity() {
                 if (especie == "") {
                     Toast.makeText(
                         applicationContext,
-                        "Não foi especificada a espécie.",
+                        R.string.n_o_foi_especificada_a_esp_cie,
                         Toast.LENGTH_SHORT
                     ).show()
                     loading.dismiss()
                 } else if (data == "") {
                     Toast.makeText(
                         applicationContext,
-                        "Não foi especificada a data.",
+                        R.string.n_o_foi_especificada_a_data,
                         Toast.LENGTH_SHORT
                     ).show()
                     loading.dismiss()
                 } else {
-                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
+                    //envia fotografia para o ImgBB e guarda o displayURL que vai ser retornado
                     if (!checkNullBitMap()) {
                         EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
                             EnvioFotografiaCallback {
@@ -178,7 +182,7 @@ class EditarObsActivity : BaseActivity() {
                                 )
                                 Toast.makeText(
                                     applicationContext,
-                                    "Erro ao obter o displayURL",
+                                    "Erro ao atualizar Observação.",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 loading.dismiss()
@@ -204,7 +208,9 @@ class EditarObsActivity : BaseActivity() {
         }
     }
 
-    // verificar se a imagem não foi alterada e é a original
+    /*
+    * verifica se a imagem não foi alterada e é a original
+     */
     private fun checkNullBitMap(): Boolean{
         try{
             if (imgBitmap != null)
@@ -215,7 +221,9 @@ class EditarObsActivity : BaseActivity() {
         return false
     }
 
-    // função para validar que a data inserida é válida
+     /*
+     * valida se a data está no formato inserid dd/MM/yyyy
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun validarData(data: String): Boolean {
         try {
@@ -232,11 +240,17 @@ class EditarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+     * envia um request de atividade para abrir a galeria do utilizador
+     */
     private fun abrirGaleria() {
         val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galeria, PICK_IMAGE_REQUEST)
     }
 
+    /*
+     * envia um request activity para capturar foto
+     */
     private fun tirarFoto() {
         // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
         val values = ContentValues()
@@ -248,6 +262,9 @@ class EditarObsActivity : BaseActivity() {
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
     }
 
+    /*
+     * Verifica a permissão para utilização de câmara para permitir a captura de foto
+     */
     private fun verificarPermissaoCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
@@ -256,6 +273,10 @@ class EditarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * inicia a atividade correspondente ao request code enviado
+    * as atividades são captura de foto e obtenção
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -269,6 +290,10 @@ class EditarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * atualiza a imagem consoante o request code enviado
+    * distingue se foto veio da galeria ou se veio da captura de foto
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -287,6 +312,10 @@ class EditarObsActivity : BaseActivity() {
             longitude = data?.getStringExtra("longitudeAtualizada")!!.toDouble()
         }
     }
+
+    /*
+    * conversão da imagem uri para bitmap
+     */
     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {
         try {
             val inputStream = contentResolver.openInputStream(uriImagem)
@@ -297,11 +326,14 @@ class EditarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+     * chamada de post da observação à API Sheety
+     */
     private fun editarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
-        // criar o objeto Observacao
+        // cria o objeto Observacao
         val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
 
-        // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar
+        // encapsula dentro de um objecto Observacao para construir corretamente o JSON a enviar
         val putObservacao = ObservacaoPUT(observacao = novaObservacao)
         Log.d("EditarObsActivity", "JSON enviado: ${Gson().toJson(putObservacao)}")
 
@@ -317,7 +349,7 @@ class EditarObsActivity : BaseActivity() {
                     ).show()
                     finish()
                     var intent = Intent(this@EditarObsActivity, MainActivity::class.java)
-                    // enviar para a atividade Main o utilizador autenticado
+                    // envia para a atividade Main o utilizador autenticado
                     intent.putExtra("utilizador", utilizador)
                     startActivity(intent)
                 } else {
@@ -339,7 +371,7 @@ class EditarObsActivity : BaseActivity() {
 
     }
 
-    // ao retroceder, para a aplicação não fechar, voltar à MainActivity
+    // volta à MainActivity ao retroceder
     override fun onBackPressed() {
         super.onBackPressed()
         var intent = Intent(this@EditarObsActivity, MainActivity::class.java)

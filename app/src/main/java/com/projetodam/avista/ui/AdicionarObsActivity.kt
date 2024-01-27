@@ -48,7 +48,10 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-
+/*
+* Classe Activity que adiciona uma observação pelo utilizador autenticado na API com validação de campos, captura de foto e localização
+* Permite escolher uma localização nova no mapa ou escolher uma foto da galeria do utilizador
+ */
 class AdicionarObsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAdicionarObsBinding
@@ -82,16 +85,20 @@ class AdicionarObsActivity : BaseActivity() {
         val currentDate = dataFormatada.format(Date())
         binding.txtData.setText(currentDate)
 
+        //verifica se é necessários permissões de localização e pede-as caso não existam
         verificarPermissaoLocalizacao()
 
+        //abre camara para captura de foto
         binding.btnCamera.setOnClickListener{
             verificarPermissaoCamera()
         }
 
+        //abre a galeria de fotos do utilizador
         binding.btnGaleria.setOnClickListener{
             abrirGaleria()
         }
 
+        //abre a atividade do mapa na localização atual do utilizador
         binding.btnMapa.setOnClickListener {
             listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
             var intent = Intent(this, MapActivity::class.java)
@@ -104,6 +111,7 @@ class AdicionarObsActivity : BaseActivity() {
             startActivityForResult(intent, PICK_MARKER_CODE)
         }
 
+        //adiciona a observacao na api após verificação de campos e permissões
         binding.btnAdicionarObs.setOnClickListener {
 
             var especie = binding.txtEspecie.text.toString()
@@ -113,7 +121,7 @@ class AdicionarObsActivity : BaseActivity() {
 
             // verifica se a data está no formato dd/mm/aaaa
             if (validarData(data)) {
-                // criar um dialog para mostrar o loading enquanto os dados são enviados para as APIs
+                // cria um dialog para mostrar o loading enquanto os dados são enviados para as APIs
                 val loading = Dialog(this)
                 loading.setContentView(R.layout.loading)
                 loading.window?.setLayout(
@@ -123,7 +131,7 @@ class AdicionarObsActivity : BaseActivity() {
                 loading.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 loading.setCancelable(false)
 
-                // usar o Glide para mostrar o GIF com movimento
+                // usa o Glide para mostrar o GIF com movimento
                 val loadingImageView = loading.findViewById<ImageView>(R.id.loadingImageView)
                 Glide.with(this)
                     .load(R.drawable.loading)
@@ -131,30 +139,30 @@ class AdicionarObsActivity : BaseActivity() {
                 loading.show()
 
 
-                // verificar se foi selecionada alguma fotografia
+                // verifica se foi selecionada alguma fotografia
                 if (!::imgBitmap.isInitialized) {
                     Toast.makeText(
                         applicationContext,
-                        "Não foi selecionada nenhuma fotografia.",
+                        getString(R.string.n_o_foi_selecionada_nenhuma_fotografia),
                         Toast.LENGTH_SHORT
                     ).show()
                     loading.dismiss()
                 } else if (especie == "") {
                     Toast.makeText(
                         applicationContext,
-                        "Não foi especificada a espécie.",
+                        getString(R.string.n_o_foi_especificada_a_esp_cie),
                         Toast.LENGTH_SHORT
                     ).show()
                     loading.dismiss()
                 } else if (data == "") {
                     Toast.makeText(
                         applicationContext,
-                        "Não foi especificada a data.",
+                        getString(R.string.n_o_foi_especificada_a_data),
                         Toast.LENGTH_SHORT
                     ).show()
                     loading.dismiss()
                 } else {
-                    // enviar fotografia para o ImgBB e guardar o displayURL que vai ser retornado
+                    // envia fotografia para o ImgBB e guarda o displayURL que vai ser retornado
                     EnvioFotografia.enviarFoto(imgBitmap, applicationContext, object :
                         EnvioFotografiaCallback {
                         override fun onSucess(url: String) {
@@ -191,7 +199,9 @@ class AdicionarObsActivity : BaseActivity() {
         }
     }
 
-    // função para validar que a data inserida é válida
+    /*
+    * valida se a data está no formato inserid dd/MM/yyyy
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun validarData(data: String): Boolean {
         try {
@@ -201,13 +211,16 @@ class AdicionarObsActivity : BaseActivity() {
         } catch (e: DateTimeParseException) {
             Toast.makeText(
                 applicationContext,
-                "Data inválida. O formato da data deve ser dd/MM/aaaa.",
+                getString(R.string.data_inv_lida_o_formato_da_data_deve_ser_dd_mm_aaaa),
                 Toast.LENGTH_SHORT
             ).show()
             return false
         }
     }
 
+    /*
+    * Verifica permissões para acesso a localização para atualizar a localização atual
+     */
     private fun verificarPermissaoLocalizacao() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE)
@@ -216,11 +229,17 @@ class AdicionarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * envia um request activity para abrir a galeria de fotos
+     */
     private fun abrirGaleria() {
         val galeria = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galeria, PICK_IMAGE_REQUEST)
     }
 
+    /*
+    * envia um request activity para capturar foto
+     */
     private fun tirarFoto() {
         // com recurso ao artigo https://hamzaasif-mobileml.medium.com/android-capturing-images-from-camera-or-gallery-as-bitmaps-d3eb1d68aeb2
         val values = ContentValues()
@@ -232,6 +251,9 @@ class AdicionarObsActivity : BaseActivity() {
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
     }
 
+    /*
+     * Verifica a permissão para utilização de câmara para permitir a captura de foto
+     */
     private fun verificarPermissaoCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
@@ -240,6 +262,10 @@ class AdicionarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * inicia a atividade correspondente ao request code enviado
+    * as atividades são captura de foto e obtenção
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -261,6 +287,9 @@ class AdicionarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * obtém e atualiza a localização atual do gps
+     */
     @SuppressLint("ServiceCast")
     private fun localizacaoAtual() {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
@@ -279,6 +308,10 @@ class AdicionarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * atualiza a imagem consoante o request code enviado
+    * distingue se foto veio da galeria ou se veio da captura de foto
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -297,6 +330,10 @@ class AdicionarObsActivity : BaseActivity() {
             longitude = data?.getStringExtra("longitudeAtualizada")!!.toDouble()
         }
     }
+
+    /*
+    * conversão da imagem uri para bitmap
+     */
     private fun converterParaBitmap(uriImagem: Uri): Bitmap? {
         try {
             val inputStream = contentResolver.openInputStream(uriImagem)
@@ -307,11 +344,14 @@ class AdicionarObsActivity : BaseActivity() {
         }
     }
 
+    /*
+    * chamada de post da observação à API Sheety
+     */
     private fun adicionarObs(id: String, utilizador: String, lat: Double, long: Double, foto: String, descricao: String, data: String, especie: String, loading: Dialog){
-        // criar o objeto Observacao
+        // cria o objeto Observacao
         val novaObservacao = Observacao(id = id, utilizador = utilizador, lat = lat.toString(), long = long.toString(), foto = foto, descricao = descricao, data = data, especie = especie)
 
-        // encapsular dentro de um objecto Observacao para construir corretamente o JSON a enviar
+        // encapsula dentro de um objecto Observacao para construir corretamente o JSON a enviar
         val postObservacao = ObservacaoPOST(observacao = novaObservacao)
         Log.d("AdicionarObsActivity", "JSON enviado: ${Gson().toJson(postObservacao)}")
 
