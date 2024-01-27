@@ -11,7 +11,6 @@ import com.projetodam.avista.model.Utilizador
 import com.projetodam.avista.model.UtilizadorPOST
 import com.projetodam.avista.retrofit.RetrofitInitializer
 import com.projetodam.avista.retrofit.service.ServicoAPI
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,7 +60,8 @@ class SignupActivity : AppCompatActivity() {
     }
 
     /*
-    * 
+    * verifica se a password cumpre os requisitos mínimos: 8 caracteres, pelo menos uma letra maiúscula,
+    * pelo menos uma letra minúscula, pelo menos um número e pelo menos um caracter especial
      */
     private fun isValidPassword(password: String): Boolean {
         if (password.length < 8) return false
@@ -73,33 +73,36 @@ class SignupActivity : AppCompatActivity() {
         return true
     }
 
+    /*
+    * se forem cumpridos todos os requisitos, adiciona o novo utilizador na API
+     */
     private fun adicionaUtilizador(utilizador: String, palavraPasse: String) {
+        // verifica se o email introduzido corresponde ao padrão de uma conta de email
         if(utilizador.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(utilizador).matches()){
         Toast.makeText(
             applicationContext,
             "Email Inválido.",
             Toast.LENGTH_SHORT
         ).show()}
+        // verifica se a password cumpre os requisitos de segurança
         else if(!isValidPassword(palavraPasse)){
             Toast.makeText(
                 applicationContext,
                 "A palavra passe deve ter pelo menos 8 caracteres, um dígito, um caráter maiúsculo, um minúsculo e um caráter especial.",
                 Toast.LENGTH_LONG
             ).show()
-        }else {
+        } else {
             // criar o objeto utilizador
             val novoUtilizador =
                 Utilizador(id = "", userId = utilizador, password = encriptarPalavraPasse(palavraPasse))
 
             // encapsular dentro de um objecto Utilizador para construir corretamente o JSON a enviar
             val postUtilizador = UtilizadorPOST(utilizador = novoUtilizador)
-            Log.d("LoginActivity", "JSON enviado: ${Gson().toJson(postUtilizador)}")
-
             val call = servicoAPI.adicionarUtilizador(postUtilizador)
+            // enviar o utilizador para a API
             call.enqueue(object : Callback<RespostaAPI> {
                 override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
                     if (response.isSuccessful) {
-                        Log.d("LoginActivity", "onSucessful: ${response.body()}")
                         Toast.makeText(
                             applicationContext,
                             "Registado com sucesso.",
@@ -123,19 +126,20 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    * verifica se o nome de utilizador (email) já existe registado
+     */
     private fun verificarUtilizador(utilizador: String, palavraPasse: String) {
         val call = servicoAPI.listarUtilizadores()
 
-        Log.d("LoginActivity", "utilizador: ${utilizador}")
+        // ontem a lista de utilizadores da API
         call.enqueue(object : Callback<UtilizadorGET> {
             override fun onResponse(call: Call<UtilizadorGET>, response: Response<UtilizadorGET>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     responseBody?.let {
-
+                        // para cada utilizador obtido da API, verifica se a conta de email coincide com a que está a tentar registar
                         for (utilizadorIterado in it.listaUtilizadores) {
-                            Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}")
-
                             if (utilizadorIterado.userId == utilizador) {
                                 Toast.makeText(
                                     applicationContext,
@@ -145,19 +149,20 @@ class SignupActivity : AppCompatActivity() {
                                 return
                             }
                         }
+                        // se a conta de email for nova, adicionar o utilizador
                         adicionaUtilizador(utilizador, palavraPasse)
                     }
                 }
-
             }
-
             override fun onFailure(call: Call<UtilizadorGET>, t: Throwable) {
-                Log.d("LoginActivity", "onFailure: ${t.message}")
+                Log.d("LoginActivity", "Erro ao verificar se o utilizador já existe registado.")
             }
         })
     }
 
-    // encriptar a palavra-passe com o BCrypt
+    /*
+    * encriptar a palavra-passe com o BCrypt
+     */
     private fun encriptarPalavraPasse(palavraPasse: String): String {
         val bcrypt = BCrypt.withDefaults()
         return bcrypt.hashToString(10, palavraPasse.toCharArray())

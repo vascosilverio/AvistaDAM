@@ -14,6 +14,10 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
+/*
+* Interface com os verbos HTTP usados para a API do Sheety:
+* GET, POST, e DELETE de utilizadores e adicionalmente PUT para a observação
+ */
 interface ServicoAPI {
     @GET("utilizador/")
     fun listarUtilizadores(): Call<UtilizadorGET>

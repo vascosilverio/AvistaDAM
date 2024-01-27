@@ -30,7 +30,11 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 
-
+/*
+* Classe usada para construir o mapa.
+* Esta classe é usada para o mapa de adicionar e editar novas observações, como também no mapa
+* de visualizar todas as observações do utilizador.
+ */
 class MapActivity : BaseActivity() {
     private lateinit var mapView: MapView
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
@@ -43,10 +47,13 @@ class MapActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mapview)
 
+        // obter a lista de observações enviada por extra no intent
         listaObservacoes = intent.getSerializableExtra("listaObservacoes") as ArrayList<Observacao>
 
+        // verificar através da chave "option" recebida por extra no intent, se esta classe
+        // foi chamada através da atividade de adicionar observações, da classe de editar observações,
+        // ou da classe de listagem de todos os marcadores do utilizador
         val option = intent.getStringExtra("option")
-
         when (option) {
             "OPTION_1" -> {
                 val view = findViewById<LinearLayout>(R.id.guardarCoords)
@@ -65,32 +72,26 @@ class MapActivity : BaseActivity() {
                 view.visibility = View.VISIBLE
                 val textViewToChange = findViewById<TextView>(R.id.textView2)
                 textViewToChange.text = "Coloque o marcador no sítion onde observou a ave."
-
             }
         }
 
         // obter a latitude e longitude que foram lidas na actividade de adicionar observações
         latitude = intent.getStringExtra("latitude")!!.toDouble()
         longitude = intent.getStringExtra("longitude")!!.toDouble()
-
-        Log.d("Latitude: ", latitude.toString())
-        Log.d("Longitude: ", longitude.toString())
-
         val ctx = applicationContext
         Configuration.getInstance().load(ctx, getSharedPreferences("osmdroid", 0))
-
         mapView = findViewById(R.id.mapView)
         mapView.setTileSource(TileSourceFactory.MAPNIK)
         mapView.setMultiTouchControls(true)
         mapView.isClickable = true
 
-        val localizacao = GeoPoint(latitude.toDouble(), longitude.toDouble())
-
         // adicionar o marcador com as posições recebidas da atividade anterior e centrar o mapa nesse ponto
+        val localizacao = GeoPoint(latitude.toDouble(), longitude.toDouble())
         atualizarMarcador(localizacao)
         mapView.controller.setZoom(15.0)
         mapView.controller.setCenter(localizacao)
 
+        // verificar se existem permissões para aceder à localização do utilizador
         if (checkPermissions()) {
             setupLocationListener()
         } else {
@@ -103,7 +104,6 @@ class MapActivity : BaseActivity() {
                 atualizarMarcador(p)
                 return false
             }
-
             override fun longPressHelper(p: GeoPoint): Boolean {
                 atualizarMarcador(p)
                 return false
@@ -111,9 +111,9 @@ class MapActivity : BaseActivity() {
         })
         mapView.overlays.add(mapEventsOverlay)
 
+        // adicionar o marcador com as posições recebidas da atividade anterior e centrar o mapa nesse ponto
         val btnObterCoordenadas = findViewById<Button>(R.id.btnObterCoordenadas)
         btnObterCoordenadas.setOnClickListener {
-            // atualizar a latitude e longitude na atividade anterior
             val intent = Intent()
             intent.putExtra("latitudeAtualizada", latitude)
             intent.putExtra("longitudeAtualizada", longitude)
@@ -123,18 +123,24 @@ class MapActivity : BaseActivity() {
         if(option=="OPTION_1") populateMap(mapView,listaObservacoes)
     }
 
+    /*
+    *   Função para atualizar a posição do novo marcador
+     */
     private fun atualizarMarcador(posicao: GeoPoint) {
-        // atualizar a posição do marcador
         val marcador = Marker(mapView)
         marcador.position = posicao
         marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         latitude = marcador.position.latitude
         longitude = marcador.position.longitude
-        Log.d("NOVA LATITUDE, LONGITUDE","$latitude, $longitude")
-        mapView.overlays.removeAll { it is Marker }  // limpar o marcador anterior
+        // limpar o marcador anterior
+        mapView.overlays.removeAll { it is Marker }
+        // adicionar o novo marcador
         mapView.overlays.add(marcador)
     }
 
+    /*
+    * Obter as coordenadas atuais de GPS
+     */
     private fun setupLocationListener() {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
         locationListener = object : LocationListener {
@@ -142,12 +148,12 @@ class MapActivity : BaseActivity() {
                 mapView.controller.setCenter(GeoPoint(location.latitude, location.longitude))
                 locationManager.removeUpdates(this)
             }
-
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
             override fun onProviderEnabled(provider: String) {}
             override fun onProviderDisabled(provider: String) {}
         }
 
+        // verificar se existem permissões para usar o GPS
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -155,16 +161,7 @@ class MapActivity : BaseActivity() {
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
+        )
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
             0,
@@ -173,12 +170,18 @@ class MapActivity : BaseActivity() {
         )
     }
 
+    /*
+    *   Verificar as permissões para o GPS
+     */
     private fun checkPermissions(): Boolean {
         val fineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         val coarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
         return fineLocationPermission && coarseLocationPermission
     }
 
+    /*
+    * Solicitar permissões ao utilizador
+     */
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
             this,
@@ -187,51 +190,41 @@ class MapActivity : BaseActivity() {
         )
     }
 
+    /*
+    * popular o mapa com todas as observações do utilizador
+     */
     fun populateMap(mapView: MapView, observacoes: ArrayList<Observacao>) {
-        // Clear existing overlays on the map
+        // limpar marcadores que possam existir no mapa
         mapView.overlays.clear()
 
-        // Get the map controller for zooming/panning
+        // obter o controller do mapa para poder efetuar zoom
         val mapController: IMapController = mapView.controller
 
-        // Iterate through the list of Observacao objects
+        // iterar todas as observações para colocar todos os marcadores
         for (observacao in observacoes) {
             val latitude = observacao.lat
             val longitude = observacao.long
-            val fotoPath = observacao.foto // Assuming 'foto' is the image path in Observacao
+            val fotoPath = observacao.foto
             val nomeAve = observacao.especie
             val descricao = observacao.descricao
             val data = observacao.data
-
-            // Create a GeoPoint from the latitude and longitude
             val geoPoint = latitude?.toDouble()?.let { longitude?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }
 
-            // Create a marker for each observation point
+            // criar um marcador para cada observação
             val marker = Marker(mapView)
             marker.position = geoPoint
             marker.title = nomeAve + "\n" + descricao + "\n" + data
-
             val imageView = ImageView(this)
             Picasso.get().load(fotoPath).into(imageView)
             val drawable : Drawable? = imageView?.drawable
-            // Load and set the image using Picasso
             if (fotoPath != null && fotoPath.isNotEmpty()) {
                 marker.image = drawable
             }
-
-            // Add the marker to the map overlay
+            // colocar o marcador no mapa
             mapView.overlays.add(marker)
         }
 
-        // Zoom and center the map on the first observation point
-        if (observacoes.isNotEmpty()) {
-            val firstObservation = observacoes[0]
-            val firstPoint = firstObservation.lat?.toDouble()?.let { firstObservation.long?.toDouble()?.let { it1 -> GeoPoint(it, it1) } }
-            mapController.setCenter(firstPoint)
-            mapController.setZoom(12.0) // Adjust the zoom level as needed
-        }
-
-        // Refresh the map view
+        // atualizar o mapa
         mapView.invalidate()
     }
 

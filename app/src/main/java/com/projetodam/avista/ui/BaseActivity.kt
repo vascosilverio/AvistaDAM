@@ -34,6 +34,7 @@ open class BaseActivity : AppCompatActivity() {
         val menuInflater: MenuInflater = menuInflater
         menuInflater.inflate(R.menu.bottom_nav, menu)
         viewModel = ViewModelProvider(this).get(ObservacaoSharedModel::class.java)
+        localizacaoAtual()
         return true
     }
 

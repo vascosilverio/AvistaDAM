@@ -9,7 +9,11 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 
-// código com recurso ao artigo do StackOverflow: https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
+/*
+* Interface para o envio de imagens através da API do ImgBB
+* código com recurso ao artigo do StackOverflow:
+* https://stackoverflow.com/questions/59252255/how-to-upload-photo-via-retrofit-from-android-device
+ */
 public interface ServicoFotografia {
     @Multipart()
     @POST("/1/upload")
