@@ -55,7 +55,7 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/filtros_observacao.xml">
         <config>
-          <theme>@style/Theme.AppCompat.Light.DarkActionBar</theme>
+          <theme>@style/Theme.Avista</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fullscreen_observacao.xml">
@@ -81,6 +81,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8b392a16-d667-47cf-811e-c86c73c2d843" name="Changes" comment="-correções">
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
@@ -90,29 +91,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_26_2024_10_22_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_26_2024_10_22_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_26_2024_10_22_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_26_2024_10_22_PM__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_27_2024_12_03_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_27_2024_12_03_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/adapter/ObservacaoListAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Observacao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoGET.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPOST.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoPUT.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/ObservacaoSharedModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/RespostaAPI.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/Utilizador.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorGET.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/model/UtilizadorPOST.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AboutActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/AdicionarObsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/BaseActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/EditarObsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/FullscreenActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MapActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_obs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_obs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/mapview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/mapview.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +108,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Administrator\.android\avd\Pixel_7_Pro_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Rúben\.android\avd\Pixel_Tablet_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -331,12 +316,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt</url>
-          <line>74</line>
+          <line>77</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/projetodam/avista/ui/LoginActivity.kt</url>
-          <line>80</line>
+          <line>83</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

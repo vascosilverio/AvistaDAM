@@ -15,8 +15,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/*
+*   Classe que permite que o utilizador se autentique
+ */
 class LoginActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityLoginBinding
     val servicoAPI: ServicoAPI = RetrofitInitializer().servicoAPI()
 
@@ -25,10 +27,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // listener que recebe o username e a password do utilizador,
+        // verifica se os campos não estão vazios, e posteriormente
+        // chama a função que irá validar com a API se os dados são válidos
         binding.buttonLogin.setOnClickListener {
             val utilizador = binding.editUsername.text.toString()
             val palavraPasse = binding.editarPassword.text.toString()
-
             if(utilizador != "" && palavraPasse != "") {
                 verificarUtilizador(utilizador, palavraPasse)
             } else {
@@ -40,30 +44,29 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        // Se o utilizador não tiver conta, pode clicar nesta opção para
+        // ser redirecionado para a página de registo
         binding.textoRegistar.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
-
-        binding.textoRecuperar.setOnClickListener {
-            //recuperar password
-        }
-
     }
-    private fun verificarUtilizador(utilizador: String, palavraPasse: String) {
-        val call = servicoAPI.listarUtilizadores()
 
-        Log.d("LoginActivity", "utilizador: ${utilizador}")
+    /*
+    *   Função que obtém os utilizadores da API, verifica qual deles coincide com o que está a se autenticar,
+    *   encripta novamente a password utilizada e verifica se coincide com a hash armazenada na API
+     */
+    private fun verificarUtilizador(utilizador: String, palavraPasse: String) {
+        // obter todos os utilizadores da API
+        val call = servicoAPI.listarUtilizadores()
         call.enqueue(object : Callback<UtilizadorGET> {
             override fun onResponse(call: Call<UtilizadorGET>, response: Response<UtilizadorGET>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     responseBody?.let {
-
+                        // verifica qual dos utilizadores é o que se está a autenticar, e verifica se a hash gerada da password coincide com a da API
                         for (utilizadorIterado in it.listaUtilizadores) {
-                            Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.userId} - ${utilizador}")
-                            Log.d("LoginActivity", "utilizador na lista: ${utilizadorIterado.password} - ${palavraPasse}")
-
                             if (utilizadorIterado.userId == utilizador && verificarPalavraPasse(palavraPasse, utilizadorIterado.password)) {
+                                // se o utilizador clicar na opção para manter sessão iniciada, é usada a sharedPreferences para armazenar os dados
                                 if(binding.checkboxLogged.isChecked) {
                                     val sharedPref = getSharedPreferences("utilizadorAutenticado", MODE_PRIVATE)
                                     val editor = sharedPref.edit()
@@ -71,8 +74,8 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString("pwEncriptada", utilizadorIterado.password)
                                     editor.apply()
                                 }
-                                var intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 // enviar para a atividade Main o utilizador autenticado
+                                var intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 intent.putExtra("utilizador", utilizador)
                                 startActivity(intent)
                                 return
@@ -85,7 +88,6 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-
             }
 
             override fun onFailure(call: Call<UtilizadorGET>, t: Throwable) {
@@ -94,7 +96,9 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    // usar o BCrypt para confirmar que a hash é a mesma da base de dados
+    /*
+    * usar o BCrypt para confirmar que a hash é a mesma da base de dados
+    */
     private fun verificarPalavraPasse(palavraPasse: String, hashPalavraPasse: String?): Boolean {
         val bcrypt = BCrypt.verifyer()
         return bcrypt.verify(palavraPasse.toCharArray(), hashPalavraPasse).verified

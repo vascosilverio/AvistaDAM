@@ -3,6 +3,7 @@ package com.projetodam.avista.adapter;
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -24,6 +25,7 @@ import com.projetodam.avista.ui.EditarObsActivity
 import com.projetodam.avista.ui.FullscreenObservacaoActivity
 import com.projetodam.avista.ui.MainActivity
 import com.squareup.picasso.Picasso
+import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
@@ -42,6 +44,7 @@ import retrofit2.Response
  */
 class ObservacaoListAdapter(
     var listaObservacoes: ArrayList<Observacao>,
+    val context: Context
 ) :
     RecyclerView.Adapter<ObservacaoListAdapter.ObservacaoViewHolder>() {
 
@@ -147,6 +150,11 @@ class ObservacaoListAdapter(
             val mapView = detalhes.findViewById<MapView>(R.id.mapa)
             mapView.setTileSource(TileSourceFactory.MAPNIK)
             mapView.setMultiTouchControls(true)
+            val ctx = context.applicationContext
+            Configuration.getInstance().load(ctx, ctx.getSharedPreferences("osmdroid", 0))
+            mapView.setTileSource(TileSourceFactory.MAPNIK)
+            mapView.setMultiTouchControls(true)
+            mapView.isClickable = true
 
             // adiciona um marker no mapa e centra o mapa na localização atual do utilizador
             val marcador = Marker(mapView)
