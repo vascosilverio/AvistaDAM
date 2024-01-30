@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
     <TextView
         android:id="@+id/textViewCourse"
@@ -122,4 +127,5 @@
         android:layout_marginTop="20dp"
         android:layout_below="@id/textUrlRecursoUpload"
         android:text="@string/remover_conta_de_utilizador" />
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
